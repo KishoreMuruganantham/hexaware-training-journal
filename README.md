@@ -24,6 +24,12 @@ src/
 └── com/
     ├── main/
     │   └── App.java
+    ├── model/
+    │   └── Employee.java
+    ├── dao/
+    │   └── CustomerDao.java
+    ├── service/
+    │   └── CustomerService.java
     └── utility/
         └── DBConnection.java
 lib/
@@ -48,6 +54,8 @@ javac -cp ".\lib\mysql-connector-j-9.1.0.jar" -d .\out .\src\com\utility\DBConne
 java -cp ".\out;.\lib\mysql-connector-j-9.1.0.jar" com.main.App
 ```
 
+The application calls the MySQL stored procedure `all_emp()`, maps each returned row to an `Employee`, and prints the employee list through the service layer.
+
 Before running, create the database:
 
 ```sql
@@ -57,6 +65,14 @@ CREATE DATABASE fsd_hex_sept_2026;
 ## Training History
 
 Daily training notes, schedules, exercises, and milestones will be added over time. Each meaningful learning milestone should be recorded with its date, topic, work completed, and follow-up action.
+
+### 2026-09-21: Stored Procedure Employee Retrieval
+
+- Added the `Employee` model with fields for ID, name, branch, city, and department.
+- Added the `CustomerDao` data-access layer for calling `all_emp()`.
+- Added the `CustomerService` layer for employee retrieval.
+- Updated the application entry point to print all returned employees.
+- Updated `DBConnection.dbConnect()` to return the active JDBC connection.
 
 ## Repository Information
 

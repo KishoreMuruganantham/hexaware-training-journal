@@ -1,5 +1,19 @@
 # Release Notes
 
+## 0.2.0 - 2026-09-21
+
+### Added
+
+- Employee model with database field mapping and string representation.
+- Customer DAO for calling the `all_emp()` MySQL stored procedure.
+- Customer service layer for employee retrieval.
+
+### Changed
+
+- Updated the application entry point to retrieve and print employees.
+- Updated `DBConnection.dbConnect()` to return the active JDBC connection.
+- Updated project documentation and training history.
+
 ## 0.1.0 - 2026-09-21
 
 ### Added
