@@ -62,6 +62,8 @@ It also supports parameterized department procedures:
 - `emp_by_department(?)` returns complete employee records for a department.
 - `emp_name_by_department(?)` is the trainer's next DAO exercise and remains a placeholder in the Java code.
 - `cnt_emp_by_dept(?, ?)` returns the employee count through an OUT parameter.
+- `trg_check_stock_qty` validates stock before an order is inserted.
+- `trg_update_product_stock_qty` decreases product stock after an order is inserted.
 
 Run `pl-sql.sql` in the `fsd_hex_sept_2026` database before using these procedures.
 
@@ -97,6 +99,13 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Updated the application to display the employee count for the DEV department.
 - Added the trainer's `v_emp` and `v_emp_dev` view examples with `WITH CHECK OPTION`.
 - Commented the database connection status messages as shown in the trainer's commit.
+
+### 2026-09-22: E-commerce Triggers
+
+- Added the `product` and `orders` tables from the trainer's trigger case study.
+- Added `trg_check_stock_qty` to reject invalid products and orders exceeding available stock.
+- Added `trg_update_product_stock_qty` to reduce stock after a valid order.
+- Added a valid sample order for product `1` with quantity `2`.
 
 ## Repository Information
 

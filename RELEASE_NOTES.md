@@ -1,5 +1,18 @@
 # Release Notes
 
+## 0.6.0 - 2026-09-22
+
+### Added
+
+- Product and order tables for the e-commerce trigger case study.
+- `trg_check_stock_qty` for pre-insert product and stock validation.
+- `trg_update_product_stock_qty` for post-insert stock updates.
+- A valid sample order demonstrating the trigger flow.
+
+### Fixed
+
+- Ordered the trigger setup so tables and triggers can execute without duplicate-key or delimiter errors.
+
 ## 0.5.0 - 2026-09-22
 
 ### Added

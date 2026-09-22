@@ -135,3 +135,60 @@ WHERE department = 'DEV'
 WITH CHECK OPTION;
 
 DROP VIEW v_emp_dev;
+
+-- Trigger Case study : Ecom proj
+
+CREATE TABLE product(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255),
+    price DOUBLE,
+    stock_qty INT
+);
+
+CREATE TABLE orders(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT,
+    order_qty INT
+);
+
+INSERT INTO product(id, title, price, stock_qty) VALUES
+    (1, 'Some headphones', 540, 3),
+    (2, 'Some laptop', 45540, 1);
+
+-- Trigger 1: Check stock quantity before inserting into orders.
+DELIMITER $$
+CREATE TRIGGER trg_check_stock_qty
+BEFORE INSERT ON orders
+FOR EACH ROW
+BEGIN
+    DECLARE v_stock_qty INT;
+
+    IF NOT EXISTS (SELECT 1 FROM product WHERE id = NEW.product_id) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Product id invalid';
+    END IF;
+
+    SELECT stock_qty INTO v_stock_qty
+    FROM product
+    WHERE id = NEW.product_id;
+
+    IF v_stock_qty < NEW.order_qty THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Stock not available';
+    END IF;
+END$$
+DELIMITER ;
+
+-- Trigger 2: Update the available product stock after an order.
+DELIMITER $$
+CREATE TRIGGER trg_update_product_stock_qty
+AFTER INSERT ON orders
+FOR EACH ROW
+BEGIN
+    UPDATE product
+    SET stock_qty = stock_qty - NEW.order_qty
+    WHERE id = NEW.product_id;
+END$$
+DELIMITER ;
+
+INSERT INTO orders(product_id, order_qty) VALUES (1, 2);
