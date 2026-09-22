@@ -32,6 +32,7 @@ src/
     │   └── CustomerService.java
     └── utility/
         └── DBConnection.java
+pl-sql.sql
 lib/
 └── mysql-connector-j-9.1.0.jar
 ```
@@ -56,6 +57,13 @@ java -cp ".\out;.\lib\mysql-connector-j-9.1.0.jar" com.main.App
 
 The application calls the MySQL stored procedure `all_emp()`, maps each returned row to an `Employee`, and prints the employee list through the service layer.
 
+It also supports parameterized department procedures:
+
+- `emp_by_department(?)` returns complete employee records for a department.
+- `emp_name_by_department(?)` returns only employee names for a department.
+
+Run `pl-sql.sql` in the `fsd_hex_sept_2026` database before using these procedures.
+
 Before running, create the database:
 
 ```sql
@@ -73,6 +81,13 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Added the `CustomerService` layer for employee retrieval.
 - Updated the application entry point to print all returned employees.
 - Updated `DBConnection.dbConnect()` to return the active JDBC connection.
+
+### 2026-09-22: Parameterized Department Procedures
+
+- Added validated `emp_by_department` and `emp_name_by_department` procedures.
+- Added parameterized JDBC calls using `CallableStatement`.
+- Added department employee and employee-name methods to the DAO and service layers.
+- Updated the application to demonstrate department-based retrieval.
 
 ## Repository Information
 

@@ -42,4 +42,45 @@ public class CustomerDao {
         dbConnection.dbClose();
         return list;
     }
+
+    public List<Employee> getEmployeeByDepartment(String dept) throws SQLException {
+        Connection conn = dbConnection.dbConnect();
+        String sql = "{CALL emp_by_department(?)}";
+        List<Employee> employees = new ArrayList<>();
+
+        CallableStatement callableStatement = conn.prepareCall(sql);
+        callableStatement.setString(1, dept);
+
+        ResultSet rst = callableStatement.executeQuery();
+        while (rst.next()) {
+            Employee employee = new Employee(
+                    rst.getInt("id"),
+                    rst.getString("name"),
+                    rst.getString("branch"),
+                    rst.getString("city"),
+                    rst.getString("department")
+            );
+            employees.add(employee);
+        }
+
+        dbConnection.dbClose();
+        return employees;
+    }
+
+    public List<String> getEmployeeNamesByDepartment(String dept) throws SQLException {
+        Connection conn = dbConnection.dbConnect();
+        String sql = "{CALL emp_name_by_department(?)}";
+        List<String> names = new ArrayList<>();
+
+        CallableStatement callableStatement = conn.prepareCall(sql);
+        callableStatement.setString(1, dept);
+
+        ResultSet rst = callableStatement.executeQuery();
+        while (rst.next()) {
+            names.add(rst.getString("name"));
+        }
+
+        dbConnection.dbClose();
+        return names;
+    }
 }

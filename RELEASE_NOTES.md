@@ -1,5 +1,18 @@
 # Release Notes
 
+## 0.3.0 - 2026-09-22
+
+### Added
+
+- `pl-sql.sql` with validated department and employee-name stored procedures.
+- Parameterized department retrieval in the DAO and service layers.
+- Employee-name retrieval support for a department.
+
+### Changed
+
+- Updated the application to demonstrate department-based employee retrieval.
+- Updated the README with the PL/SQL workflow.
+
 ## 0.2.0 - 2026-09-21
 
 ### Added
