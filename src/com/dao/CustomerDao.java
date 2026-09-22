@@ -46,7 +46,7 @@ public class CustomerDao {
     public List<Employee> getEmployeeByDepartment(String dept) throws SQLException {
         Connection conn = dbConnection.dbConnect();
         String sql = "{CALL emp_by_department(?)}";
-        List<Employee> employees = new ArrayList<>();
+        List<Employee> list = new ArrayList<>();
 
         CallableStatement callableStatement = conn.prepareCall(sql);
         callableStatement.setString(1, dept);
@@ -60,27 +60,17 @@ public class CustomerDao {
                     rst.getString("city"),
                     rst.getString("department")
             );
-            employees.add(employee);
+            list.add(employee);
         }
 
         dbConnection.dbClose();
-        return employees;
+        return list;
     }
 
-    public List<String> getEmployeeNamesByDepartment(String dept) throws SQLException {
+    public List<String> getEmployeeNamesByDepartment(String dept) {
         Connection conn = dbConnection.dbConnect();
-        String sql = "{CALL emp_name_by_department(?)}";
-        List<String> names = new ArrayList<>();
-
-        CallableStatement callableStatement = conn.prepareCall(sql);
-        callableStatement.setString(1, dept);
-
-        ResultSet rst = callableStatement.executeQuery();
-        while (rst.next()) {
-            names.add(rst.getString("name"));
-        }
-
+        // call new proc from here
         dbConnection.dbClose();
-        return names;
+        return null;
     }
 }

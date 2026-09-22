@@ -17,7 +17,7 @@ public class CustomerService {
         return customerDao.getEmployeeByDepartment(dept);
     }
 
-    public List<String> getEmployeeNamesByDepartment(String dept) throws SQLException {
+    public List<String> getEmployeeNamesByDepartment(String dept) {
         return customerDao.getEmployeeNamesByDepartment(dept);
     }
 }

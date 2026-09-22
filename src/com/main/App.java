@@ -21,5 +21,11 @@ public class App {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+
+    /*
+        List<String> empNames = customerService.getEmployeeNamesByDepartment(dept);
+        list.forEach(System.out :: println);
+    */
     }
 }

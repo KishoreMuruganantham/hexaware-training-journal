@@ -1,5 +1,14 @@
 # Release Notes
 
+## 0.4.0 - 2026-09-22
+
+### Changed
+
+- Aligned DAO, service, application, and PL/SQL names with the trainer's commits.
+- Restored `getEmployeeNamesByDepartment` as the trainer's placeholder method.
+- Added the missing schema, sample data, `update_emp_branch`, and `cnt_emp_by_dept` exercises.
+- Removed the completed employee-name implementation that was not present in the trainer's commit.
+
 ## 0.3.0 - 2026-09-22
 
 ### Added

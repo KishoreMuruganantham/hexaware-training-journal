@@ -60,7 +60,7 @@ The application calls the MySQL stored procedure `all_emp()`, maps each returned
 It also supports parameterized department procedures:
 
 - `emp_by_department(?)` returns complete employee records for a department.
-- `emp_name_by_department(?)` returns only employee names for a department.
+- `emp_name_by_department(?)` is the trainer's next DAO exercise and remains a placeholder in the Java code.
 
 Run `pl-sql.sql` in the `fsd_hex_sept_2026` database before using these procedures.
 
@@ -84,9 +84,10 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 
 ### 2026-09-22: Parameterized Department Procedures
 
-- Added validated `emp_by_department` and `emp_name_by_department` procedures.
-- Added parameterized JDBC calls using `CallableStatement`.
-- Added department employee and employee-name methods to the DAO and service layers.
+- Added the trainer's validated `emp_by_department` and `emp_name_by_department` procedures.
+- Added the trainer's parameterized `emp_by_department` JDBC call using `CallableStatement`.
+- Added the trainer's `update_emp_branch` and `cnt_emp_by_dept` PL/SQL exercises.
+- Kept `getEmployeeNamesByDepartment` as the trainer's placeholder method.
 - Updated the application to demonstrate department-based retrieval.
 
 ## Repository Information

@@ -1,4 +1,21 @@
+CREATE DATABASE fsd_hex_sept_2026;
 USE fsd_hex_sept_2026;
+
+CREATE TABLE employee(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    branch ENUM('CHENNAI', 'MUMBAI', 'NEW YORK'),
+    city VARCHAR(255),
+    department ENUM('ADMIN', 'DEV', 'FINANCE')
+);
+
+INSERT INTO employee(name, branch, city, department) VALUES
+    ('harry potter', 'MUMBAI', 'london', 'DEV'),
+    ('ronald weasley', 'MUMBAI', 'london', 'ADMIN'),
+    ('hermione granger', 'CHENNAI', 'surrey', 'FINANCE');
+
+ALTER TABLE employee
+MODIFY department ENUM('ADMIN', 'DEV', 'FINANCE');
 
 DROP PROCEDURE IF EXISTS all_emp;
 DELIMITER $$
@@ -49,4 +66,46 @@ END$$
 DELIMITER ;
 
 CALL emp_by_department('ADMIN');
-CALL emp_name_by_department('ADMIN');
+CALL emp_by_department('HR');
+CALL emp_by_department('');
+
+DELIMITER $$
+CREATE PROCEDURE update_emp_branch(IN p_id INT, IN p_branch VARCHAR(255))
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM employee WHERE id = p_id) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Please provide valid id';
+    END IF;
+
+    IF p_branch = '' OR p_branch IS NULL THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Please provide branch value';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM employee WHERE p_branch IN ('CHENNAI', 'MUMBAI', 'NEW YORK')) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Please provide valid branch value';
+    END IF;
+
+    UPDATE employee
+    SET branch = p_branch
+    WHERE id = p_id;
+END$$
+DELIMITER ;
+
+CALL update_emp_branch(8, 'NEW YORK');
+CALL update_emp_branch(8, NULL);
+CALL update_emp_branch(10, 'LONDON');
+
+DELIMITER $$
+CREATE PROCEDURE cnt_emp_by_dept(IN p_dept VARCHAR(255), OUT p_cnt INT)
+BEGIN
+    SELECT COUNT(id)
+    INTO p_cnt
+    FROM employee
+    WHERE department = p_dept;
+END$$
+DELIMITER ;
+
+CALL cnt_emp_by_dept('ADMIN', @count_num);
+SELECT @count_num;
