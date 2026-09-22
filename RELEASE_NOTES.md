@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.7.0 - 2026-09-22
+
+### Added
+
+- MySQL Workbench ER model `ecom_sample.mwb`.
+- E-commerce schema with six tables and six foreign-key relationships.
+
+### Verified
+
+- Forward-engineered schema `ecom_sample_db` successfully.
+- Confirmed `users`, `customer`, `vendor`, `category`, `product`, and `customer_product` exist.
+
 ## 0.6.0 - 2026-09-22
 
 ### Added

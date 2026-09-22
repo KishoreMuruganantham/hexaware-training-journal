@@ -107,6 +107,13 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Added `trg_update_product_stock_qty` to reduce stock after a valid order.
 - Added a valid sample order for product `1` with quantity `2`.
 
+### 2026-09-22: E-commerce ER Model
+
+- Added the MySQL Workbench model `ecom_sample.mwb`.
+- Forward-engineered the `ecom_sample_db` schema with `users`, `customer`, `vendor`, `category`, `product`, and `customer_product`.
+- Verified the six foreign-key relationships shown in the trainer's ER diagram.
+- Prepared the forward-engineered SQL without the generated first three lines, last three lines, or `VISIBLE` keyword.
+
 ## Repository Information
 
 - Owner: Kishore Muruganantham
