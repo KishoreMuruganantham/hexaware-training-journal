@@ -61,6 +61,7 @@ It also supports parameterized department procedures:
 
 - `emp_by_department(?)` returns complete employee records for a department.
 - `emp_name_by_department(?)` is the trainer's next DAO exercise and remains a placeholder in the Java code.
+- `cnt_emp_by_dept(?, ?)` returns the employee count through an OUT parameter.
 
 Run `pl-sql.sql` in the `fsd_hex_sept_2026` database before using these procedures.
 
@@ -89,6 +90,13 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Added the trainer's `update_emp_branch` and `cnt_emp_by_dept` PL/SQL exercises.
 - Kept `getEmployeeNamesByDepartment` as the trainer's placeholder method.
 - Updated the application to demonstrate department-based retrieval.
+
+### 2026-09-22: OUT Parameter and Views
+
+- Added `getEmpCountByDept` using `CallableStatement` and an integer OUT parameter.
+- Updated the application to display the employee count for the DEV department.
+- Added the trainer's `v_emp` and `v_emp_dev` view examples with `WITH CHECK OPTION`.
+- Commented the database connection status messages as shown in the trainer's commit.
 
 ## Repository Information
 

@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.5.0 - 2026-09-22
+
+### Added
+
+- Java support for the `cnt_emp_by_dept` stored procedure and its OUT parameter.
+- SQL view examples `v_emp` and `v_emp_dev` with `WITH CHECK OPTION`.
+
+### Changed
+
+- Updated the application to use the DEV department and display its employee count.
+- Commented database connection status output to match the trainer's implementation.
+
 ## 0.4.0 - 2026-09-22
 
 ### Changed

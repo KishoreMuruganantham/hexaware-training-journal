@@ -109,3 +109,29 @@ DELIMITER ;
 
 CALL cnt_emp_by_dept('ADMIN', @count_num);
 SELECT @count_num;
+
+SELECT * FROM employee;
+
+-- views (hide attributes / columns & rows/records)
+
+CREATE VIEW v_emp AS
+SELECT id, name, branch, department
+FROM employee
+WHERE department NOT IN ('ADMIN')
+WITH CHECK OPTION;
+
+SHOW TABLES;
+
+DROP VIEW v_emp;
+
+UPDATE v_emp_dev
+SET department = 'FINANCE'
+WHERE id = 7;
+
+CREATE VIEW v_emp_dev AS
+SELECT *
+FROM employee
+WHERE department = 'DEV'
+WITH CHECK OPTION;
+
+DROP VIEW v_emp_dev;
