@@ -68,7 +68,7 @@ public class CustomerDao {
     }
 
     public List<String> getEmployeeNamesByDepartment(String dept) {
-        Connection conn = dbConnection.dbConnect();
+        dbConnection.dbConnect();
         // call new proc from here
         dbConnection.dbClose();
         return null;
