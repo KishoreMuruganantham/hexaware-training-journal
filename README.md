@@ -9,7 +9,8 @@ flowchart LR
     A[Training Schedule] --> B[Daily Learning]
     B --> C[Hands-on Exercises]
     C --> D[Java Applications]
-    D --> E[Database Integration]
+    D --> H[Java Fundamentals]
+    H --> E[Database Integration]
     E --> F[Reviews and Improvements]
     F --> G[Training Milestones]
     G --> B
@@ -18,6 +19,8 @@ flowchart LR
 ## Current Project
 
 This repository currently contains a Java 21 application that connects to MySQL using MySQL Connector/J.
+
+The `JavaFundamentals` project contains the trainer's Java collections exercise. It uses enums for branch, department, and sort direction, stores sample employees in a DAO, sorts the list by salary with a lambda expression, filters by department and branch with streams, and maps the model to a response DTO.
 
 ```text
 src/
@@ -32,6 +35,25 @@ src/
     │   └── CustomerService.java
     └── utility/
         └── DBConnection.java
+JavaFundamentals/
+└── src/
+    └── com/
+        ├── main/
+        │   └── App.java
+        ├── model/
+        │   └── Employee.java
+        ├── dao/
+        │   └── EmployeeDao.java
+        ├── service/
+        │   └── EmployeeService.java
+        ├── enums/
+        │   ├── Branch.java
+        │   ├── Department.java
+        │   └── SortDirection.java
+        ├── dto/
+        │   └── EmployeeRespDto.java
+        └── mapper/
+            └── EmployeeMapper.java
 pl-sql.sql
 lib/
 └── mysql-connector-j-9.1.0.jar
@@ -66,6 +88,17 @@ It also supports parameterized department procedures:
 - `trg_update_product_stock_qty` decreases product stock after an order is inserted.
 
 Run `pl-sql.sql` in the `fsd_hex_sept_2026` database before using these procedures.
+
+To run the Java fundamentals exercise (no database needed):
+
+```powershell
+Remove-Item -Recurse -Force .\out-fund -ErrorAction SilentlyContinue
+New-Item -ItemType Directory .\out-fund
+javac -d .\out-fund .\JavaFundamentals\src\com\enums\*.java .\JavaFundamentals\src\com\model\*.java .\JavaFundamentals\src\com\dao\*.java .\JavaFundamentals\src\com\dto\*.java .\JavaFundamentals\src\com\mapper\*.java .\JavaFundamentals\src\com\service\*.java .\JavaFundamentals\src\com\main\*.java
+java -cp .\out-fund com.main.App
+```
+
+The application loads the sample employees from `EmployeeDao`, maps each one to an `EmployeeRespDto` with `EmployeeMapper`, and prints the DTO list. Sorting by salary, filtering by department and branch, and listing employee names are kept in the commented block in `App.java` as shown in the trainer's commit.
 
 Before running, create the database:
 
@@ -113,6 +146,19 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Forward-engineered the `ecom_sample_db` schema with `users`, `customer`, `vendor`, `category`, `product`, and `customer_product`.
 - Verified the six foreign-key relationships shown in the trainer's ER diagram.
 - Prepared the forward-engineered SQL without the generated first three lines, last three lines, or `VISIBLE` keyword.
+
+### 2026-09-23: Java Fundamentals Collections and DTO Mapping
+
+- Added the `JavaFundamentals` project with `Branch`, `Department`, and `SortDirection` enums.
+- Added the `Employee` model with branch, department, joining date, and salary fields.
+- Added `EmployeeDao` with 20 sample employees.
+- Added `EmployeeService` with salary sorting using a lambda expression, stream filters by department and branch, employee name listing, and model-to-DTO mapping.
+- Added the `EmployeeRespDto` record and `EmployeeMapper` for model-to-DTO conversion.
+- Added the `App` starter class which prints the DTO list; sorting, filtering, and name listing are kept in the commented block as shown in the trainer's commit.
+- Added Java project metadata (`JavaFundamentals.iml`, `.idea` files, `.gitignore`) so `JavaFundamentals` opens as its own IntelliJ project.
+- Verified with `javac` on Java 21 (BUILD_EXIT=0) and `java com.main.App` (RUN_EXIT=0); the app printed all 20 `EmployeeRespDto` records.
+- MySQL server on `localhost:3306` was reachable; the fundamentals exercise itself does not need a database.
+- Known issue: none; the salary sort uses the trainer's `(int)` cast comparison.
 
 ## Repository Information
 

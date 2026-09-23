@@ -1,5 +1,25 @@
 # Release Notes
 
+## 0.8.0 - 2026-09-23
+
+### Added
+
+- Java fundamentals collections exercise (`JavaFundamentals` project).
+- `Branch`, `Department`, and `SortDirection` enums.
+- `Employee` model with salary field.
+- `EmployeeDao` with 20 sample employees.
+- `EmployeeService` with lambda salary sorting, stream filters, name listing, and DTO mapping.
+- `EmployeeRespDto` record and `EmployeeMapper`.
+- `App` entry point printing the DTO list.
+- IntelliJ project metadata for `JavaFundamentals`.
+
+### Verified
+
+- `javac` on Java 21: BUILD_EXIT=0.
+- `java com.main.App`: RUN_EXIT=0, printed 20 `EmployeeRespDto` records.
+- Existing JDBC project still compiles: JDBC_BUILD_EXIT=0.
+- MySQL reachable on `localhost:3306`; fundamentals run needs no database.
+
 ## 0.7.0 - 2026-09-22
 
 ### Added
