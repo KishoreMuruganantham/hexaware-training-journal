@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.8.2 - 2026-09-23
+
+### Fixed
+
+- Added Java project metadata for `JavaFundamentals` to prevent duplicate `com.model.Employee` resolution when the parent folder contains both projects.
+
+### Verified
+
+- Java 21 compilation passed.
+- The salary-sorting application ran successfully.
+
 ## 0.8.1 - 2026-09-23
 
 ### Fixed

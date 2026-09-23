@@ -125,6 +125,7 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Added the `CollectionsApp` starter class from the trainer's exercise.
 - Corrected the salary output heading to show descending order.
 - Used precise `Double.compare` salary comparisons for ascending and descending sorting.
+- Added Java project metadata so `JavaFundamentals` can be opened independently from the e-commerce project.
 
 ## Repository Information
 
