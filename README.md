@@ -19,6 +19,8 @@ flowchart LR
 
 This repository currently contains a Java 21 application that connects to MySQL using MySQL Connector/J.
 
+The `JavaFundamentals` project contains the trainer's Java collections exercise. It uses enums for branch, department, and sort direction, stores sample employees in a DAO, and sorts the list by salary with a lambda expression.
+
 ```text
 src/
 └── com/
@@ -113,6 +115,14 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Forward-engineered the `ecom_sample_db` schema with `users`, `customer`, `vendor`, `category`, `product`, and `customer_product`.
 - Verified the six foreign-key relationships shown in the trainer's ER diagram.
 - Prepared the forward-engineered SQL without the generated first three lines, last three lines, or `VISIBLE` keyword.
+
+### 2026-09-23: Java Fundamentals Salary Sorting
+
+- Added the separate `JavaFundamentals` IntelliJ project.
+- Added the `Employee` model with branch, department, joining date, and salary fields.
+- Added `EmployeeDao` with sample employee data.
+- Added `EmployeeService` with salary sorting using a lambda expression and `SortDirection`.
+- Added the `CollectionsApp` starter class from the trainer's exercise.
 
 ## Repository Information
 

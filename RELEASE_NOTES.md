@@ -1,5 +1,20 @@
 # Release Notes
 
+## 0.8.0 - 2026-09-23
+
+### Added
+
+- Separate `JavaFundamentals` project for the trainer's collections exercise.
+- Employee model, DAO, service, and enum classes.
+- Salary sorting with ascending and descending directions using a lambda expression.
+- Empty `CollectionsApp` starter class from the trainer's exercise.
+
+### Verified
+
+- Java Fundamentals project compiled with Java 21.
+- Application printed all 20 employees and sorted them by salary in descending order.
+- Existing e-commerce Java project continued to compile successfully.
+
 ## 0.7.0 - 2026-09-22
 
 ### Added
