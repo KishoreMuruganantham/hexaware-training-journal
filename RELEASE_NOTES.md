@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.8.1 - 2026-09-23
+
+### Fixed
+
+- Corrected the salary sort output heading from ASC to DESC.
+- Replaced subtraction-based salary comparison with `Double.compare`.
+
+### Verified
+
+- Java Fundamentals compiled and ran successfully with Java 21.
+- Descending output starts at `140000.0` and ends at `51000.0`.
+
 ## 0.8.0 - 2026-09-23
 
 ### Added

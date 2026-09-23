@@ -123,6 +123,8 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Added `EmployeeDao` with sample employee data.
 - Added `EmployeeService` with salary sorting using a lambda expression and `SortDirection`.
 - Added the `CollectionsApp` starter class from the trainer's exercise.
+- Corrected the salary output heading to show descending order.
+- Used precise `Double.compare` salary comparisons for ascending and descending sorting.
 
 ## Repository Information
 

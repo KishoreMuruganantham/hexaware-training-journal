@@ -13,7 +13,7 @@ public class App {
         List<Employee> list =  employeeService.getAllEmployees();
         list.forEach(System.out :: println);
 
-        System.out.println("--Sort Employee by Salary ASC---");
+        System.out.println("--Sort Employee by Salary DESC---");
         List<Employee> listSortedBySalaryAsc =  employeeService.sortEmployeeBySalary(list, SortDirection.DESC);
         listSortedBySalaryAsc.forEach(System.out :: println);
     }
