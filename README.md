@@ -127,6 +127,12 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Used precise `Double.compare` salary comparisons for ascending and descending sorting.
 - Added Java project metadata so `JavaFundamentals` can be opened independently from the e-commerce project.
 
+## Release v0.8.4 — DTO Mapping
+- Added `EmployeeRespDto`, `EmployeeMapper`
+- Service filters and info methods
+- Verified: BUILD_EXIT=0, RUN_EXIT=0
+- Author: Kishore Muruganantham
+
 ## Repository Information
 
 - Owner: Kishore Muruganantham
