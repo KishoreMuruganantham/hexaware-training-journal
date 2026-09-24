@@ -4,9 +4,11 @@ import com.dao.EmployeeDao;
 import com.enums.SortDirection;
 import com.model.Employee;
 
+import java.util.Collections;
 import java.util.List;
 import com.dto.EmpDeptStatDto;
 import com.dto.EmployeeRespDto;
+import com.dto.EmployeeSalaryStatDto;
 import com.enums.Branch;
 import com.enums.Department;
 import com.mapper.EmployeeMapper;
@@ -15,14 +17,16 @@ public class EmployeeService {
     private EmployeeDao employeeDao = new EmployeeDao();
 
     public List<Employee> getAllEmployees() {
-        return employeeDao.getALlEmployees();
+        List<Employee> list = employeeDao.getALlEmployees(); //unsorted list
+        Collections.sort(list); //sorting with default sort - check model class for logic of sort
+        return list;
 
     }
 
     public List<Employee> sortEmployeeBySalary(List<Employee> list, SortDirection direction) {
 
       if(direction.equals(SortDirection.ASC))
-          list.sort((e1, e2) -> (int) (e1.getSalary() - e2.getSalary())); //[50,80]
+          list.sort((e1, e2) -> (int) (e1.getSalary() - e2.getSalary())); //[80,50] //Comparator
        else
           list.sort((e1,e2)-> (int)(e2.getSalary() - e1.getSalary()));
 
@@ -59,5 +63,26 @@ public class EmployeeService {
                        .stream()
                        .map(entry-> new EmpDeptStatDto(entry.getKey(), entry.getValue()))
                        .toList();
+    }
+
+    public List<EmployeeSalaryStatDto> getSalaryOfEachEmpByBranch(List<Employee> list) {
+        return list
+                .stream()
+                .collect(java.util.stream.Collectors.groupingBy(
+                        Employee :: getBranch,
+                        java.util.stream.Collectors.summingDouble(Employee :: getSalary)
+                ))
+                .entrySet()
+                .stream()
+                .map(entry -> new EmployeeSalaryStatDto(entry.getKey(), entry.getValue()))
+                .toList();
+    }
+
+    public double computeTotalSalary(List<EmployeeSalaryStatDto> listBranchStatDto) {
+        return ((Double) listBranchStatDto
+                .stream()
+                .mapToDouble(EmployeeSalaryStatDto::salary)
+                .sum());
+
     }
 }

@@ -2,6 +2,7 @@ package com.main;
 
 import com.dto.EmpDeptStatDto;
 import com.dto.EmployeeRespDto;
+import com.dto.EmployeeSalaryStatDto;
 import com.enums.Branch;
 import com.enums.Department;
 import com.enums.SortDirection;
@@ -15,8 +16,9 @@ public class App {
     public static void main(String[] args) {
         EmployeeService employeeService = new EmployeeService();
 
-        List<Employee> list =  employeeService.getAllEmployees();
-         /*
+        List<Employee> list = employeeService.getAllEmployees();
+
+        list.forEach(System.out::println);
         list.forEach(System.out :: println);
 
 
@@ -43,9 +45,14 @@ filteredListByBranch =  employeeService.filterEmployeeByBranch(list, Branch.CHEN
         List<String>
 listNames =  employeeService.getEmployeeNames(list);
        listNames.forEach(System.out :: println);
- */
         List<EmpDeptStatDto> listDto = employeeService.getEmpCountForEachDepartment(list);
          listDto.forEach(System.out :: println);
+
+         // Compute the total salary of employees for each branch
+        List<EmployeeSalaryStatDto> listBranchStatDto = employeeService.getSalaryOfEachEmpByBranch(list);
+            listBranchStatDto.forEach(System.out :: println);
+        double total = employeeService.computeTotalSalary(listBranchStatDto);
+        System.out.println("Total Salary " + total);
 
     }
 }
