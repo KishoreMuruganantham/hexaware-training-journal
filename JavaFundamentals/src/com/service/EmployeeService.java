@@ -1,6 +1,7 @@
 package com.service;
 
 import com.dao.EmployeeDao;
+import com.dto.EmpDeptStatDto;
 import com.dto.EmployeeRespDto;
 import com.enums.Branch;
 import com.enums.Department;
@@ -9,6 +10,8 @@ import com.mapper.EmployeeMapper;
 import com.model.Employee;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class EmployeeService {
@@ -22,7 +25,7 @@ public class EmployeeService {
     public List<Employee> sortEmployeeBySalary(List<Employee> list, SortDirection direction) {
 
       if(direction.equals(SortDirection.ASC))
-          list.sort((e1, e2) -> (int) (e1.getSalary() - e2.getSalary())); //[50,80]
+          list.sort((e1, e2) -> (int) (e1.getSalary() - e2.getSalary())); //[80,50]
        else
           list.sort((e1,e2)-> (int)(e2.getSalary() - e1.getSalary()));
 
@@ -39,16 +42,17 @@ public class EmployeeService {
 
     public List<Employee> filterEmployeeByBranch(List<Employee> list, Branch branch) {
 
-        return list.stream()
-                .filter(e-> e.getBranch().equals(branch))
-                .toList();
+            return  list
+                    .stream()
+                    .filter(e-> e.getBranch().equals(branch))
+                    .toList();
     }
 
 
     public List<String> getEmployeeNames(List<Employee> list) {
        return   list
                     .stream()
-                    .map(Employee :: getName)
+                    .map(Employee::getName)
                     .toList();
     }
 
@@ -57,6 +61,19 @@ public class EmployeeService {
             return list.stream()
                     .map(EmployeeMapper::mapModelToDto)
                     .toList();
+
+    }
+
+    public Map<Department, Long> getEmpCountForEachDepartment(List<Employee> list) {
+
+         Map<Department, Long> map
+                =  list
+                    .stream()
+                    .collect(
+                            Collectors.groupingBy(Employee :: getDepartment,
+                                                  Collectors.counting()));
+
+         return map;
 
     }
 }
