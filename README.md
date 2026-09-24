@@ -10,7 +10,8 @@ flowchart LR
     B --> C[Hands-on Exercises]
     C --> D[Java Applications]
     D --> H[Java Fundamentals]
-    H --> E[Database Integration]
+    H --> I[OOPs and Design Patterns]
+    I --> E[Database Integration]
     E --> F[Reviews and Improvements]
     F --> G[Training Milestones]
     G --> B
@@ -20,7 +21,7 @@ flowchart LR
 
 This repository currently contains a Java 21 application that connects to MySQL using MySQL Connector/J.
 
-The `JavaFundamentals` project contains the trainer's Java collections exercise. It uses enums for branch, department, and sort direction, stores sample employees in a DAO, sorts the list by salary with a lambda expression, filters by department and branch with streams, and maps the model to a response DTO.
+The `JavaFundamentals` project contains the trainer's Java collections exercise. It uses enums for branch, department, and sort direction, stores sample employees in a DAO, sorts the list by salary with a lambda expression, filters by department and branch with streams, maps the model to response DTOs, groups employees by department and branch salary totals, and sorts with a default `Comparable` order. It also has the trainer's OOPs payment hierarchy demos.
 
 ```text
 src/
@@ -39,9 +40,21 @@ JavaFundamentals/
 └── src/
     └── com/
         ├── main/
-        │   └── App.java
+        │   ├── App.java
+        │   ├── MapDemo.java
+        │   ├── IsADemo.java
+        │   ├── NEFTPayment.java
+        │   └── OOPDemo.java
         ├── model/
         │   └── Employee.java
+        ├── beans/
+        │   ├── Account.java
+        │   ├── Current.java
+        │   ├── Dmat.java
+        │   ├── Savings.java
+        │   ├── Payment.java
+        │   ├── Neft.java
+        │   └── Upi.java
         ├── dao/
         │   └── EmployeeDao.java
         ├── service/
@@ -49,11 +62,16 @@ JavaFundamentals/
         ├── enums/
         │   ├── Branch.java
         │   ├── Department.java
-        │   └── SortDirection.java
+        │   ├── SortDirection.java
+        │   └── PaymentMode.java
         ├── dto/
-        │   └── EmployeeRespDto.java
-        └── mapper/
-            └── EmployeeMapper.java
+        │   ├── EmployeeRespDto.java
+        │   ├── EmpDeptStatDto.java
+        │   └── EmployeeSalaryStatDto.java
+        ├── mapper/
+        │   └── EmployeeMapper.java
+        └── utility/
+            └── PaymentUtil.java
 pl-sql.sql
 lib/
 └── mysql-connector-j-9.1.0.jar
@@ -99,6 +117,16 @@ java -cp .\out-fund com.main.App
 ```
 
 The application loads the sample employees from `EmployeeDao`, maps each one to an `EmployeeRespDto` with `EmployeeMapper`, and prints the DTO list. Sorting by salary, filtering by department and branch, and listing employee names are kept in the commented block in `App.java` as shown in the trainer's commit.
+
+Other demo entry points in the same project:
+
+```powershell
+java -cp .\out-fund com.main.MapDemo
+java -cp .\out-fund com.main.OOPDemo
+java -cp .\out-fund com.main.IsADemo
+```
+
+`MapDemo` shows basic `HashMap` put, get, and entry-set printing. `OOPDemo` and `IsADemo` show the trainer's polymorphism and payment examples.
 
 Before running, create the database:
 
@@ -159,6 +187,17 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Verified with `javac` on Java 21 (BUILD_EXIT=0) and `java com.main.App` (RUN_EXIT=0); the app printed all 20 `EmployeeRespDto` records.
 - MySQL server on `localhost:3306` was reachable; the fundamentals exercise itself does not need a database.
 - Known issue: none; the salary sort uses the trainer's `(int)` cast comparison.
+
+### 2026-09-24: Grouping, DTO Stats, Comparable, and OOPs
+
+- Added `EmpDeptStatDto` and `getEmpCountForEachDepartment` grouping with `Collectors.groupingBy` and `Collectors.counting`.
+- Added `MapDemo` with the trainer's `HashMap` login example.
+- Converted the department count to a `List<EmpDeptStatDto>` through entry-set mapping.
+- Added `EmployeeSalaryStatDto`, `getSalaryOfEachEmpByBranch` with `Collectors.summingDouble`, and `computeTotalSalary`.
+- Added `Comparable` to `Employee` with joining-date default sort and sorted retrieval in `getAllEmployees`.
+- Added the trainer's OOPs payment hierarchy (`Account`, `Savings`, `Current`, `Dmat`, `Payment`, `Neft`, `Upi`), `PaymentMode` enum, `PaymentUtil`, and the `OOPDemo`, `IsADemo`, and `NEFTPayment` starters.
+- Verified with `javac` on Java 21 (BUILD_EXIT=0); `App` printed the department stats, branch salary stats, and total salary 1680000.0; `MapDemo`, `OOPDemo`, and `IsADemo` ran (RUN_EXIT=0).
+- Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information
 

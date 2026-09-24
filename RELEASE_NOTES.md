@@ -1,5 +1,22 @@
 # Release Notes
 
+## 0.9.0 - 2026-09-24
+
+### Added
+
+- Department employee-count grouping (`EmpDeptStatDto`, `Collectors.groupingBy`).
+- `MapDemo` HashMap example.
+- Department count mapped to DTO list.
+- Branch salary totals (`EmployeeSalaryStatDto`, `Collectors.summingDouble`) and total salary computation.
+- `Comparable` default sort by joining date on `Employee`.
+- OOPs payment hierarchy with `PaymentMode`, `PaymentUtil`, and demo starters.
+
+### Verified
+
+- `javac` on Java 21: BUILD_EXIT=0.
+- `java com.main.App`: RUN_EXIT=0, department stats, branch salary stats, total salary 1680000.0.
+- `MapDemo`, `OOPDemo`, `IsADemo`: RUN_EXIT=0.
+
 ## 0.8.9 - 2026-09-23
 
 ### Added
