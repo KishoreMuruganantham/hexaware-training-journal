@@ -5,6 +5,7 @@ import com.enums.SortDirection;
 import com.model.Employee;
 
 import java.util.List;
+import com.dto.EmpDeptStatDto;
 import com.dto.EmployeeRespDto;
 import com.enums.Branch;
 import com.enums.Department;
@@ -46,5 +47,17 @@ public class EmployeeService {
     public List<EmployeeRespDto> getEmployeeInfo(List<Employee> list) {
         return list.stream().map(EmployeeMapper::mapModelToDto).toList();
     }
+
+    public List<EmpDeptStatDto> getEmpCountForEachDepartment(List<Employee> list) {
+
+               return list
+                    .stream()
+                    .collect(
+                            java.util.stream.Collectors.groupingBy(Employee :: getDepartment,
+                                                  java.util.stream.Collectors.counting()))
+                       .entrySet()
+                       .stream()
+                       .map(entry-> new EmpDeptStatDto(entry.getKey(), entry.getValue()))
+                       .toList();
+    }
 }
-// List: [ml1, ml 2, ml3, ml4 ]

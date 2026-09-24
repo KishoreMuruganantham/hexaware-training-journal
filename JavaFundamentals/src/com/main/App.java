@@ -1,5 +1,6 @@
 package com.main;
 
+import com.dto.EmpDeptStatDto;
 import com.dto.EmployeeRespDto;
 import com.enums.Branch;
 import com.enums.Department;
@@ -43,8 +44,8 @@ filteredListByBranch =  employeeService.filterEmployeeByBranch(list, Branch.CHEN
 listNames =  employeeService.getEmployeeNames(list);
        listNames.forEach(System.out :: println);
  */
-        List<EmployeeRespDto> listInfo = employeeService.getEmployeeInfo(list);
-        listInfo.forEach(System.out :: println);
+        List<EmpDeptStatDto> listDto = employeeService.getEmpCountForEachDepartment(list);
+         listDto.forEach(System.out :: println);
 
     }
 }
