@@ -127,6 +127,33 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Used precise `Double.compare` salary comparisons for ascending and descending sorting.
 - Added Java project metadata so `JavaFundamentals` can be opened independently from the e-commerce project.
 
+## Release History
+
+### v0.8.8 — 2026-09-24 (commit 6da8e9a)
+- Salary grouping by branch to DTO (`EmployeeSalaryStatDto`)
+- Added `Comparable` interface to `Employee`
+- Added `getSalaryOfEachEmpByBranch()` and `computeTotalSalary()`
+- Author: Kishore Muruganantham
+
+### v0.8.7 — 2026-09-24 (commit af5578d)
+- Map to DTO conversion (`EmpDeptStatDto`)
+- Added `getEmpCountForEachDepartment()`
+- Added `MapDemo.java`
+- Author: Kishore Muruganantham
+
+### v0.8.6 — 2026-09-24 (commit bda7ef0)
+- Grouping by op (`.idea/workspace.xml` update)
+- Author: Kishore Muruganantham
+
+### v0.8.5 — 2026-09-24 (commit 52b1f70)
+- Grouping by (`.idea/workspace.xml`)
+- Author: Kishore Muruganantham
+
+### v0.8.4 — 2026-09-24 (commit 189360e)
+- DTO mapping (`EmployeeRespDto`, `EmployeeMapper`)
+- Service filters and info methods
+- Author: Kishore Muruganantham
+
 ## Release v0.8.4 — DTO Mapping
 - Added `EmployeeRespDto`, `EmployeeMapper`
 - Service filters and info methods
