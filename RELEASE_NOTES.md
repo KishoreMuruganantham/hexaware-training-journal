@@ -1,5 +1,19 @@
 # Release Notes
 
+## 0.10.0 - 2026-09-25
+
+### Added
+
+- Singleton `DBConnection` shared by `CustomerDao`, `OrderDao`, and `ProductDao`.
+- `Customer` bean and `HeapDemo` heap/stack demo.
+- Factory pattern payments (`PaymentFactory` with Neft, RTGS, UPI, PhonePe, GooglePay, PayTM).
+
+### Verified
+
+- `javac` on Java 21: BUILD_EXIT=0.
+- `HeapDemo`, `com.design_pattern.App`, `com.factory.design_pattern.App`: RUN_EXIT=0.
+- Existing JDBC project still compiles: JDBC_BUILD_EXIT=0.
+
 ## 0.9.0 - 2026-09-24
 
 ### Added

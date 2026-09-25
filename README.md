@@ -21,7 +21,7 @@ flowchart LR
 
 This repository currently contains a Java 21 application that connects to MySQL using MySQL Connector/J.
 
-The `JavaFundamentals` project contains the trainer's Java collections exercise. It uses enums for branch, department, and sort direction, stores sample employees in a DAO, sorts the list by salary with a lambda expression, filters by department and branch with streams, maps the model to response DTOs, groups employees by department and branch salary totals, and sorts with a default `Comparable` order. It also has the trainer's OOPs payment hierarchy demos.
+The `JavaFundamentals` project contains the trainer's Java collections exercise. It uses enums for branch, department, and sort direction, stores sample employees in a DAO, sorts the list by salary with a lambda expression, filters by department and branch with streams, maps the model to response DTOs, groups employees by department and branch salary totals, and sorts with a default `Comparable` order. It also has the trainer's OOPs payment hierarchy demos, a singleton `DBConnection` shared by DAOs with a heap/stack demo, and a factory pattern payment demo.
 
 ```text
 src/
@@ -42,6 +42,7 @@ JavaFundamentals/
         ├── main/
         │   ├── App.java
         │   ├── MapDemo.java
+        │   ├── HeapDemo.java
         │   ├── IsADemo.java
         │   ├── NEFTPayment.java
         │   └── OOPDemo.java
@@ -54,7 +55,8 @@ JavaFundamentals/
         │   ├── Savings.java
         │   ├── Payment.java
         │   ├── Neft.java
-        │   └── Upi.java
+        │   ├── Upi.java
+        │   └── Customer.java
         ├── dao/
         │   └── EmployeeDao.java
         ├── service/
@@ -70,8 +72,26 @@ JavaFundamentals/
         │   └── EmployeeSalaryStatDto.java
         ├── mapper/
         │   └── EmployeeMapper.java
-        └── utility/
-            └── PaymentUtil.java
+        ├── utility/
+        │   └── PaymentUtil.java
+        ├── design_pattern/
+        │   ├── App.java
+        │   ├── DBConnection.java
+        │   ├── CustomerDao.java
+        │   ├── OrderDao.java
+        │   └── ProductDao.java
+        └── factory/
+            └── design_pattern/
+                ├── App.java
+                ├── Payment.java
+                ├── PaymentMode.java
+                ├── PaymentFactory.java
+                ├── Neft.java
+                ├── RTGS.java
+                ├── UPI.java
+                ├── PhonePe.java
+                ├── GooglePay.java
+                └── PayTM.java
 pl-sql.sql
 lib/
 └── mysql-connector-j-9.1.0.jar
@@ -124,9 +144,12 @@ Other demo entry points in the same project:
 java -cp .\out-fund com.main.MapDemo
 java -cp .\out-fund com.main.OOPDemo
 java -cp .\out-fund com.main.IsADemo
+java -cp .\out-fund com.main.HeapDemo
+java -cp .\out-fund com.design_pattern.App
+java -cp .\out-fund com.factory.design_pattern.App
 ```
 
-`MapDemo` shows basic `HashMap` put, get, and entry-set printing. `OOPDemo` and `IsADemo` show the trainer's polymorphism and payment examples.
+`MapDemo` shows basic `HashMap` put, get, and entry-set printing. `OOPDemo` and `IsADemo` show the trainer's polymorphism and payment examples. `HeapDemo` shows heap references and the stack comment from the trainer. `com.design_pattern.App` shows the singleton `DBConnection` shared by the three DAOs. `com.factory.design_pattern.App` shows payment creation through `PaymentFactory`.
 
 Before running, create the database:
 
@@ -197,6 +220,14 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Added `Comparable` to `Employee` with joining-date default sort and sorted retrieval in `getAllEmployees`.
 - Added the trainer's OOPs payment hierarchy (`Account`, `Savings`, `Current`, `Dmat`, `Payment`, `Neft`, `Upi`), `PaymentMode` enum, `PaymentUtil`, and the `OOPDemo`, `IsADemo`, and `NEFTPayment` starters.
 - Verified with `javac` on Java 21 (BUILD_EXIT=0); `App` printed the department stats, branch salary stats, and total salary 1680000.0; `MapDemo`, `OOPDemo`, and `IsADemo` ran (RUN_EXIT=0).
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-09-25: Singleton and Factory Patterns
+
+- Added the `Customer` bean and the trainer's singleton `DBConnection` shared by `CustomerDao`, `OrderDao`, and `ProductDao` in `com.design_pattern`.
+- Added `HeapDemo` showing heap object references and the trainer's stack and garbage-collector comments.
+- Added the trainer's factory pattern in `com.factory.design_pattern` (`Payment`, `PaymentMode`, `PaymentFactory`, `Neft`, `RTGS`, `UPI`, `PhonePe`, `GooglePay`, `PayTM`) with its `App` starter.
+- Verified with `javac` on Java 21 (BUILD_EXIT=0); `HeapDemo`, `com.design_pattern.App` (same connection instance in all DAOs), and `com.factory.design_pattern.App` (charge 10.0, limit 200000.0) ran (RUN_EXIT=0).
 - Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information
