@@ -1,5 +1,19 @@
 # Release Notes
 
+## 0.11.0 - 2026-09-28
+
+### Added
+
+- `MavenDemo` Maven project with JUnit dependencies.
+- `DemoService` with validations, custom exceptions, and test cases.
+- Stream test cases for `EmployeeService` with model, enums, and tests.
+- DTO test case with `EmployeeRespDto` and `EmployeeMapper`.
+
+### Verified
+
+- `pom.xml` well-formed; all main sources compile with `javac` on Java 21: MAIN_BUILD_EXIT=0.
+- `mvn test` not run here: Maven and JUnit jars are not installed in this environment.
+
 ## 0.10.0 - 2026-09-25
 
 ### Added

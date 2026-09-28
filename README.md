@@ -11,7 +11,8 @@ flowchart LR
     C --> D[Java Applications]
     D --> H[Java Fundamentals]
     H --> I[OOPs and Design Patterns]
-    I --> E[Database Integration]
+    I --> J[Maven and JUnit]
+    J --> E[Database Integration]
     E --> F[Reviews and Improvements]
     F --> G[Training Milestones]
     G --> B
@@ -95,6 +96,30 @@ JavaFundamentals/
 pl-sql.sql
 lib/
 └── mysql-connector-j-9.1.0.jar
+MavenDemo/
+├── pom.xml
+└── src/
+    ├── main/java/com/
+    │   ├── service/
+    │   │   ├── DemoService.java
+    │   │   └── EmployeeService.java
+    │   ├── model/
+    │   │   └── Employee.java
+    │   ├── dto/
+    │   │   └── EmployeeRespDto.java
+    │   ├── mapper/
+    │   │   └── EmployeeMapper.java
+    │   ├── enums/
+    │   │   ├── Branch.java
+    │   │   ├── Department.java
+    │   │   └── SortDirection.java
+    │   └── exception/
+    │       ├── EmptyListException.java
+    │       ├── InvalidInputException.java
+    │       └── InvalidListException.java
+    └── test/java/com/service/
+        ├── DemoServiceTest.java
+        └── EmployeeServiceTest.java
 ```
 
 ## Requirements
@@ -150,6 +175,15 @@ java -cp .\out-fund com.factory.design_pattern.App
 ```
 
 `MapDemo` shows basic `HashMap` put, get, and entry-set printing. `OOPDemo` and `IsADemo` show the trainer's polymorphism and payment examples. `HeapDemo` shows heap references and the stack comment from the trainer. `com.design_pattern.App` shows the singleton `DBConnection` shared by the three DAOs. `com.factory.design_pattern.App` shows payment creation through `PaymentFactory`.
+
+To run the Maven JUnit tests (needs Maven with the JUnit dependencies from `MavenDemo/pom.xml`):
+
+```powershell
+cd MavenDemo
+mvn test
+```
+
+`DemoServiceTest` covers the demo service validations and exceptions, and `EmployeeServiceTest` covers the stream operations and DTO mapping. The main sources also compile with plain `javac` on Java 21 since they only use the JDK.
 
 Before running, create the database:
 
@@ -228,6 +262,17 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Added `HeapDemo` showing heap object references and the trainer's stack and garbage-collector comments.
 - Added the trainer's factory pattern in `com.factory.design_pattern` (`Payment`, `PaymentMode`, `PaymentFactory`, `Neft`, `RTGS`, `UPI`, `PhonePe`, `GooglePay`, `PayTM`) with its `App` starter.
 - Verified with `javac` on Java 21 (BUILD_EXIT=0); `HeapDemo`, `com.design_pattern.App` (same connection instance in all DAOs), and `com.factory.design_pattern.App` (charge 10.0, limit 200000.0) ran (RUN_EXIT=0).
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-09-28: Maven and JUnit Tests
+
+- Added the `MavenDemo` Maven project with JUnit dependencies in `pom.xml`.
+- Added `DemoService` with validations and custom exceptions (`EmptyListException`, `InvalidInputException`, `InvalidListException`).
+- Added `DemoServiceTest` test cases for validations and exceptions.
+- Added stream test cases with `EmployeeService`, `Employee` model, enums, and `EmployeeServiceTest`.
+- Added DTO test case with `EmployeeRespDto`, `EmployeeMapper`, and mapper coverage in the tests.
+- Verified `pom.xml` is well-formed and all main sources compile with `javac` on Java 21 (MAIN_BUILD_EXIT=0).
+- Test execution needs Maven and the JUnit jars, which are not installed in this environment, so `mvn test` could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information
