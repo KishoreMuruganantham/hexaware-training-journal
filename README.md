@@ -12,7 +12,8 @@ flowchart LR
     D --> H[Java Fundamentals]
     H --> I[OOPs and Design Patterns]
     I --> J[Maven and JUnit]
-    J --> E[Database Integration]
+    J --> K[Spring Core]
+    K --> E[Database Integration]
     E --> F[Reviews and Improvements]
     F --> G[Training Milestones]
     G --> B
@@ -120,6 +121,28 @@ MavenDemo/
     └── test/java/com/service/
         ├── DemoServiceTest.java
         └── EmployeeServiceTest.java
+SpringCoreApp/
+├── pom.xml
+└── src/main/java/com/
+    ├── config/
+    │   └── AppConfig.java
+    ├── main/
+    │   ├── App.java
+    │   ├── AppV2.java
+    │   ├── AppV3.java
+    │   ├── AppV4.java
+    │   └── SpringApp.java
+    ├── dao/
+    │   └── MyDao.java
+    ├── service/
+    │   ├── MyService.java
+    │   ├── MyServiceV2.java
+    │   ├── MyServiceV3.java
+    │   └── MyServiceV4.java
+    ├── mapper/
+    │   └── TestMapper.java
+    └── utility/
+        └── TestUtility.java
 ```
 
 ## Requirements
@@ -184,6 +207,15 @@ mvn test
 ```
 
 `DemoServiceTest` covers the demo service validations and exceptions, and `EmployeeServiceTest` covers the stream operations and DTO mapping. The main sources also compile with plain `javac` on Java 21 since they only use the JDK.
+
+To run the Spring Core app (needs Maven with the Spring dependencies from `SpringCoreApp/pom.xml`):
+
+```powershell
+cd SpringCoreApp
+mvn compile exec:java -Dexec.mainClass="com.main.App"
+```
+
+`App` through `AppV4` show context loading, bean injection, setter autowiring, in-method injection, and custom beans. `SpringApp` shows the `JdbcTemplate` query with the `HikariCP` datasource. The employee table needs the `joining_date` and `salary` columns from the updated `pl-sql.sql` before running the JDBC query.
 
 Before running, create the database:
 
@@ -273,6 +305,19 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Added DTO test case with `EmployeeRespDto`, `EmployeeMapper`, and mapper coverage in the tests.
 - Verified `pom.xml` is well-formed and all main sources compile with `javac` on Java 21 (MAIN_BUILD_EXIT=0).
 - Test execution needs Maven and the JUnit jars, which are not installed in this environment, so `mvn test` could not be run here.
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-09-29: Spring Core Dependency Injection
+
+- Added the `SpringCoreApp` Maven project with Spring dependencies in `pom.xml`.
+- Added `AppConfig` with component scanning and context loading in `App`.
+- Added `MyDao` and `MyService` beans to the context.
+- Added setter autowiring variants (`AppV2`, `AppV3`, `MyServiceV2`, `MyServiceV3`) with `TestMapper` and `TestUtility`.
+- Added in-method direct injection (`AppV4`, `MyServiceV4`) and a custom bean definition.
+- Added `HikariCP` datasource and `JdbcTemplate` config with the `SpringApp` starter.
+- Extended `pl-sql.sql` with `joining_date` and `salary` columns, seed values, and department `GROUP BY` queries in the existing file style.
+- Verified `pom.xml` is well-formed; `javac` on Java 21 reports only missing Spring/HikariCP package errors (60 errors, all `package does not exist` or cascading symbols), with no syntax errors.
+- Running needs Maven, the Spring jars, and MySQL with the updated employee table, so the app could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information

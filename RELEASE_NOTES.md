@@ -1,5 +1,19 @@
 # Release Notes
 
+## 0.12.0 - 2026-09-29
+
+### Added
+
+- `SpringCoreApp` Maven project with Spring dependencies.
+- `AppConfig` context loading, DAO/service beans, setter autowiring variants.
+- In-method injection, custom bean definition, HikariCP datasource with `JdbcTemplate`.
+- `joining_date`/`salary` columns, seed values, and `GROUP BY` queries in `pl-sql.sql`.
+
+### Verified
+
+- `pom.xml` well-formed; `javac` on Java 21 shows only missing Spring/HikariCP dependency errors, no syntax errors.
+- App run needs Maven, Spring jars, and MySQL; not run here.
+
 ## 0.11.0 - 2026-09-28
 
 ### Added
