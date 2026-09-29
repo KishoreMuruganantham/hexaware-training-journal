@@ -17,6 +17,14 @@ INSERT INTO employee(name, branch, city, department) VALUES
 ALTER TABLE employee
 MODIFY department ENUM('ADMIN', 'DEV', 'FINANCE');
 
+ALTER TABLE employee
+ADD COLUMN joining_date DATE,
+ADD COLUMN salary DOUBLE;
+
+UPDATE employee SET joining_date = CURDATE(), salary = 67000 WHERE id = 1;
+UPDATE employee SET joining_date = CURDATE(), salary = 56000 WHERE id = 2;
+UPDATE employee SET joining_date = CURDATE(), salary = 167000 WHERE id = 3;
+
 DROP PROCEDURE IF EXISTS all_emp;
 DELIMITER $$
 CREATE PROCEDURE all_emp()
@@ -192,3 +200,10 @@ END$$
 DELIMITER ;
 
 INSERT INTO orders(product_id, order_qty) VALUES (1, 2);
+
+-- Group By
+-- Display number of employees in each department.
+
+SELECT department, COUNT(id) AS no_of_emp
+FROM employee
+GROUP BY department;
