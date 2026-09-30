@@ -143,6 +143,33 @@ SpringCoreApp/
     │   └── TestMapper.java
     └── utility/
         └── TestUtility.java
+SpringCoreHelpDesk/
+├── pom.xml
+└── src/main/java/com/helpdesk/
+    ├── config/
+    │   └── AppConfig.java
+    ├── main/
+    │   └── App.java
+    ├── model/
+    │   ├── Customer.java
+    │   ├── User.java
+    │   └── Ticket.java
+    ├── enums/
+    │   ├── Plan.java
+    │   ├── Priority.java
+    │   ├── Status.java
+    │   └── Role.java
+    ├── repository/
+    │   ├── CustomerRepository.java
+    │   └── UserRepository.java
+    ├── service/
+    │   ├── CustomerService.java
+    │   └── UserService.java
+    ├── mapper/
+    │   ├── TicketMapper.java
+    │   └── UserMapper.java
+    └── exception/
+        └── InvalidCredentialsException.java
 ```
 
 ## Requirements
@@ -216,6 +243,8 @@ mvn compile exec:java -Dexec.mainClass="com.main.App"
 ```
 
 `App` through `AppV4` show context loading, bean injection, setter autowiring, in-method injection, and custom beans. `SpringApp` shows the `JdbcTemplate` query with the `HikariCP` datasource. The employee table needs the `joining_date` and `salary` columns from the updated `pl-sql.sql` before running the JDBC query.
+
+The `SpringCoreHelpDesk` case study wires the same pieces into a helpdesk app: `App` signs up customers and fetches records through the repositories, services, `RowMapper`s, and `JdbcTemplate` (needs Maven, Spring jars, and MySQL).
 
 Before running, create the database:
 
@@ -318,6 +347,16 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Extended `pl-sql.sql` with `joining_date` and `salary` columns, seed values, and department `GROUP BY` queries in the existing file style.
 - Verified `pom.xml` is well-formed; `javac` on Java 21 reports only missing Spring/HikariCP package errors (60 errors, all `package does not exist` or cascading symbols), with no syntax errors.
 - Running needs Maven, the Spring jars, and MySQL with the updated employee table, so the app could not be run here.
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-09-30: HelpDesk Case Study
+
+- Added the `SpringCoreHelpDesk` Maven project with models (`Customer`, `User`, `Ticket`), enums (`Plan`, `Priority`, `Status`, `Role`), repositories, and services.
+- Added customer sign-up insertion through the service and repository layers.
+- Added fetch operations with `TicketMapper`, `UserMapper`, and `InvalidCredentialsException`.
+- The trainer's `Case Study_spring-core.pdf` was left out as reference material.
+- Verified `pom.xml` is well-formed; `javac` on Java 21 reports only missing Spring/HikariCP package errors, with no syntax errors.
+- Running needs Maven, Spring jars, and MySQL, so the app could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information

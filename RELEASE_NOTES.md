@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.13.0 - 2026-09-30
+
+### Added
+
+- `SpringCoreHelpDesk` case study with models, enums, repositories, and services.
+- Customer sign-up insertion and fetch operations with mappers.
+
+### Verified
+
+- `pom.xml` well-formed; `javac` on Java 21 shows only missing Spring/HikariCP dependency errors, no syntax errors.
+- App run needs Maven, Spring jars, and MySQL; not run here.
+
 ## 0.12.0 - 2026-09-29
 
 ### Added
