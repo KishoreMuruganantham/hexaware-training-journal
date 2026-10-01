@@ -13,7 +13,8 @@ flowchart LR
     H --> I[OOPs and Design Patterns]
     I --> J[Maven and JUnit]
     J --> K[Spring Core]
-    K --> E[Database Integration]
+    K --> L[Hibernate and JPA]
+    L --> E[Database Integration]
     E --> F[Reviews and Improvements]
     F --> G[Training Milestones]
     G --> B
@@ -170,6 +171,31 @@ SpringCoreHelpDesk/
     │   └── UserMapper.java
     └── exception/
         └── InvalidCredentialsException.java
+HibernateJpaApp/
+├── pom.xml
+└── src/main/java/com/helpdesk/
+    ├── config/
+    │   └── AppConfig.java
+    ├── main/
+    │   └── App.java
+    ├── model/
+    │   ├── Customer.java
+    │   ├── User.java
+    │   ├── CustomerPlan.java
+    │   ├── Executive.java
+    │   ├── Manager.java
+    │   ├── Plan.java
+    │   └── Ticket.java
+    ├── enums/
+    │   ├── Role.java
+    │   ├── JobTitle.java
+    │   ├── PlanType.java
+    │   ├── Priority.java
+    │   └── Status.java
+    ├── repository/
+    │   └── CustomerRepository.java
+    └── service/
+        └── CustomerService.java
 ```
 
 ## Requirements
@@ -245,6 +271,15 @@ mvn compile exec:java -Dexec.mainClass="com.main.App"
 `App` through `AppV4` show context loading, bean injection, setter autowiring, in-method injection, and custom beans. `SpringApp` shows the `JdbcTemplate` query with the `HikariCP` datasource. The employee table needs the `joining_date` and `salary` columns from the updated `pl-sql.sql` before running the JDBC query.
 
 The `SpringCoreHelpDesk` case study wires the same pieces into a helpdesk app: `App` signs up customers and fetches records through the repositories, services, `RowMapper`s, and `JdbcTemplate` (needs Maven, Spring jars, and MySQL).
+
+To run the Hibernate app (needs Maven with the Hibernate and Spring dependencies from `HibernateJpaApp/pom.xml`):
+
+```powershell
+cd HibernateJpaApp
+mvn compile exec:java -Dexec.mainClass="com.helpdesk.main.App"
+```
+
+`App` saves and fetches `Customer` records through `CustomerService` and the JPQL repository, with the session factory, transaction manager, and `DriverManagerDataSource` from `AppConfig` (needs Maven, Hibernate/Spring jars, and MySQL).
 
 Before running, create the database:
 
@@ -357,6 +392,17 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - The trainer's `Case Study_spring-core.pdf` was left out as reference material.
 - Verified `pom.xml` is well-formed; `javac` on Java 21 reports only missing Spring/HikariCP package errors, with no syntax errors.
 - Running needs Maven, Spring jars, and MySQL, so the app could not be run here.
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-10-01: Hibernate and JPA Entities
+
+- Added the `HibernateJpaApp` Maven project with Hibernate and Spring dependencies in `pom.xml`.
+- Added `AppConfig` with the entity manager factory, transaction manager, and datasource.
+- Added the `Customer` entity with insert and fetch through `CustomerRepository` (JPQL) and `CustomerService`.
+- Added the `User` model with the `Role` enum.
+- Added all helpdesk entities (`CustomerPlan`, `Executive`, `Manager`, `Plan`, `Ticket`) with enums (`JobTitle`, `PlanType`, `Priority`, `Status`).
+- Verified `pom.xml` is well-formed; `javac` on Java 21 reports only missing JPA/Spring/Hibernate package errors, with no syntax errors.
+- Running needs Maven, Hibernate/Spring jars, and MySQL, so the app could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information

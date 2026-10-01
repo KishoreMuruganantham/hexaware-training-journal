@@ -1,5 +1,19 @@
 # Release Notes
 
+## 0.14.0 - 2026-10-01
+
+### Added
+
+- `HibernateJpaApp` Maven project with Hibernate and Spring dependencies.
+- `AppConfig` with entity manager factory, transaction manager, and datasource.
+- `Customer` entity with JPQL repository insert and fetch.
+- `User` model and all helpdesk entities with enums.
+
+### Verified
+
+- `pom.xml` well-formed; `javac` on Java 21 shows only missing JPA/Spring/Hibernate dependency errors, no syntax errors.
+- App run needs Maven, Hibernate/Spring jars, and MySQL; not run here.
+
 ## 0.13.0 - 2026-09-30
 
 ### Added
