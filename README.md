@@ -1,6 +1,6 @@
 # Hexaware Training Journal
 
-Private learning repository for tracking my Hexaware full-stack development training, exercises, database work, and daily progress.
+Private learning repository for tracking my Hexaware full-stack development training, exercises, database work, and daily progress. It follows the Java + React FSD training plan (program started 2026-09-21): PLSQL, Core Java 21, Maven, design principles and patterns, JUnit, Spring Core, and Hibernate/JPA are done here; each module lives on its own branch as well as in the integrated `main` history.
 
 ## Training Path
 
@@ -8,18 +8,76 @@ Private learning repository for tracking my Hexaware full-stack development trai
 flowchart LR
     A[Training Schedule] --> B[Daily Learning]
     B --> C[Hands-on Exercises]
-    C --> D[Java Applications]
+    C --> D[PLSQL and JDBC]
     D --> H[Java Fundamentals]
     H --> I[OOPs and Design Patterns]
-    I --> E[Database Integration]
+    I --> J[Maven and JUnit]
+    J --> K[Spring Core]
+    K --> L[Hibernate and JPA]
+    L --> E[Database Integration]
     E --> F[Reviews and Improvements]
     F --> G[Training Milestones]
     G --> B
 ```
 
-## Current Project
+## Module Plan
 
-This repository currently contains a Java 21 application that connects to MySQL using MySQL Connector/J.
+Taken from the training plan workbook. Status shows where each module is in this repository.
+
+| # | Skill | Main topics | Status |
+|---|-------|-------------|--------|
+| 1 | PLSQL | CRUD, joins, procedures, triggers, cursors, views | Done (`main`, `pl-sql`) |
+| 2 | Core Java 21 | OOP, collections, strings, date/time, JDBC, lambdas, streams | Done (`main`) |
+| 3 | Maven | Repos, dependencies, build lifecycle, `pom.xml` | Done (`junit`) |
+| 4 | Design principles and patterns | SOLID, Singleton, Factory | Done (`main`) |
+| 5 | JUnit | Test cases, validations, exceptions, streams, DTO mapping | Done (`junit`) |
+| 6 | Mockito | Mocking database/service dependencies | Upcoming |
+| 7 | Spring Core | DI, beans, autowiring, JdbcTemplate, transactions | Done (`spring-core`) |
+| 8 | JPA, Hibernate | ORM, session factory, mappings, HQL, criteria | Done (`hibernate-jpa`) |
+| 9 | Spring MVC with Spring Boot | Controllers, views, binding, validation | Upcoming |
+| 10 | Spring Batch | Batch jobs | Upcoming |
+| 11 | Spring REST with Spring Boot | REST controllers, JSON, Postman, Swagger | Upcoming |
+| 12 | Spring Security | OAuth2, JWT | Upcoming |
+| 13 | Logging and Code Quality | Log4J, SonarQube | Upcoming |
+| 14 | Microservices | Monolith to microservices, scaling | Upcoming |
+| 15 | API Development | Backend case study | Upcoming |
+| 16 | Demo and Technical Discussion | Final review | Upcoming |
+
+## Branch Guide
+
+```mermaid
+flowchart TD
+    M[main - integrated journal] --> P[pl-sql - PLSQL and JDBC era]
+    M --> JF[java-fundamentals - early fundamentals line]
+    M --> JU[junit - Maven and JUnit]
+    JU --> SC[spring-core - Spring Core and HelpDesk]
+    SC --> HJ[hibernate-jpa - Hibernate and JPA]
+    M --> QQ[feat/quitq-ecommerce-model - QuitQ model]
+```
+
+| Branch | Holds | Trainer source | Tip |
+|--------|-------|----------------|-----|
+| `main` | Complete integrated journal through factory patterns | `hex_fsd_sept-2026/main` up to 2026-09-25 | `613068d` |
+| `pl-sql` | PLSQL procedures, JDBC app, triggers, ER model (2026-09-21/22 state) | `hex_fsd_sept-2026/commits/pl-sql` | `3d88d2c` |
+| `junit` | `MavenDemo` with JUnit tests (2026-09-28) | `hex_fsd_sept-2026/commits/junit` (5 new commits) | `165b165` |
+| `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
+| `hibernate-jpa` | `HibernateJpaApp` entities and JPQL (2026-10-01) | `hex_fsd_sept-2026/commits/hibernate-jpa` (5 new commits) | `1897717` |
+| `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
+| `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
+
+How the data layer grows from module to module:
+
+```mermaid
+flowchart LR
+    S[pl-sql.sql procedures] --> J[JDBC CallableStatement]
+    J --> T[Spring JdbcTemplate]
+    T --> R[JPQL repositories]
+    R --> H[Hibernate entities]
+```
+
+## Projects on `main`
+
+This branch contains a Java 21 application that connects to MySQL using MySQL Connector/J, plus the `JavaFundamentals` exercise project.
 
 The `JavaFundamentals` project contains the trainer's Java collections exercise. It uses enums for branch, department, and sort direction, stores sample employees in a DAO, sorts the list by salary with a lambda expression, filters by department and branch with streams, maps the model to response DTOs, groups employees by department and branch salary totals, and sorts with a default `Comparable` order. It also has the trainer's OOPs payment hierarchy demos, a singleton `DBConnection` shared by DAOs with a heap/stack demo, and a factory pattern payment demo.
 
@@ -97,16 +155,54 @@ lib/
 └── mysql-connector-j-9.1.0.jar
 ```
 
+## Projects on Other Branches
+
+These live on their own branches (see the branch guide) and follow the trainer's Maven layout.
+
+### `junit` — MavenDemo
+
+Maven project with JUnit tests: `DemoService` validations and custom exceptions (`EmptyListException`, `InvalidInputException`, `InvalidListException`) covered by `DemoServiceTest`, plus stream operations and DTO mapping in `EmployeeService` covered by `EmployeeServiceTest`.
+
+```text
+MavenDemo/
+├── pom.xml
+└── src/
+    ├── main/java/com/
+    │   ├── service/DemoService.java
+    │   ├── service/EmployeeService.java
+    │   ├── model/Employee.java
+    │   ├── dto/EmployeeRespDto.java
+    │   ├── mapper/EmployeeMapper.java
+    │   ├── enums/Branch.java
+    │   ├── enums/Department.java
+    │   ├── enums/SortDirection.java
+    │   └── exception/EmptyListException.java
+    │       ├── InvalidInputException.java
+    │       └── InvalidListException.java
+    └── test/java/com/service/
+        ├── DemoServiceTest.java
+        └── EmployeeServiceTest.java
+```
+
+### `spring-core` — SpringCoreApp and SpringCoreHelpDesk
+
+`SpringCoreApp` walks through context loading (`AppConfig`, `App`), DAO/service beans, setter autowiring variants (`AppV2`, `AppV3`, `MyServiceV2`, `MyServiceV3` with `TestMapper` and `TestUtility`), in-method injection (`AppV4`, `MyServiceV4`), a custom bean, and a HikariCP datasource with `JdbcTemplate` (`SpringApp`). The same branch extends `pl-sql.sql` with `joining_date` and `salary` columns, seed values, and department `GROUP BY` queries for the JDBC query. `SpringCoreHelpDesk` wires the same pieces into a helpdesk app: models (`Customer`, `User`, `Ticket`), enums (`Plan`, `Priority`, `Status`, `Role`), repositories, services, `RowMapper`s (`TicketMapper`, `UserMapper`), sign-up insertion, and fetch operations with `InvalidCredentialsException`.
+
+### `hibernate-jpa` — HibernateJpaApp
+
+Hibernate/JPA version of the helpdesk app: `AppConfig` with the entity manager factory, transaction manager, and datasource; `Customer` entity with insert and fetch through `CustomerRepository` (JPQL) and `CustomerService`; `User` model with `Role`; and all entities (`CustomerPlan`, `Executive`, `Manager`, `Plan`, `Ticket`) with enums (`JobTitle`, `PlanType`, `Priority`, `Status`).
+
 ## Requirements
 
 - Java 21
 - MySQL Server running on `localhost:3306`
 - MySQL database named `fsd_hex_sept_2026`
-- MySQL Connector/J 9.1.0
+- MySQL Connector/J 9.1.0 (in `lib/`)
+- Maven with internet access for `MavenDemo`, `SpringCoreApp`, `SpringCoreHelpDesk`, and `HibernateJpaApp` (JUnit, Spring, HikariCP, Hibernate dependencies come from their `pom.xml` files)
 
-## Run the Application
+## Run the Applications
 
-From the repository root in PowerShell:
+JDBC application on `main`, from the repository root in PowerShell:
 
 ```powershell
 Remove-Item -Recurse -Force .\out -ErrorAction SilentlyContinue
@@ -127,7 +223,7 @@ It also supports parameterized department procedures:
 
 Run `pl-sql.sql` in the `fsd_hex_sept_2026` database before using these procedures.
 
-To run the Java fundamentals exercise (no database needed):
+Java fundamentals exercise on `main` (no database needed):
 
 ```powershell
 Remove-Item -Recurse -Force .\out-fund -ErrorAction SilentlyContinue
@@ -151,11 +247,48 @@ java -cp .\out-fund com.factory.design_pattern.App
 
 `MapDemo` shows basic `HashMap` put, get, and entry-set printing. `OOPDemo` and `IsADemo` show the trainer's polymorphism and payment examples. `HeapDemo` shows heap references and the stack comment from the trainer. `com.design_pattern.App` shows the singleton `DBConnection` shared by the three DAOs. `com.factory.design_pattern.App` shows payment creation through `PaymentFactory`.
 
+Maven projects on their branches (needs Maven):
+
+```powershell
+cd MavenDemo
+mvn test
+```
+
+```powershell
+cd SpringCoreApp
+mvn compile exec:java -Dexec.mainClass="com.main.App"
+```
+
+```powershell
+cd SpringCoreHelpDesk
+mvn compile exec:java -Dexec.mainClass="com.helpdesk.main.App"
+```
+
+```powershell
+cd HibernateJpaApp
+mvn compile exec:java -Dexec.mainClass="com.helpdesk.main.App"
+```
+
+The Spring and Hibernate apps additionally need MySQL running with the `fsd_hex_sept_2026` database from the updated `pl-sql.sql` on the `spring-core` branch (it adds the `joining_date` and `salary` columns).
+
 Before running, create the database:
 
 ```sql
 CREATE DATABASE fsd_hex_sept_2026;
 ```
+
+## Validation Summary
+
+| Project | Branch | Checks | Result |
+|---------|--------|--------|--------|
+| JDBC `src/` app | `main`, `pl-sql` | `javac` Java 21, MySQL reachable | BUILD_EXIT=0 |
+| `JavaFundamentals` | `main` | `javac` Java 21, ran all 7 demo entry points | BUILD_EXIT=0, RUN_EXIT=0 |
+| `MavenDemo` main sources | `junit` | `javac` Java 21 (JDK-only imports) | MAIN_BUILD_EXIT=0 |
+| `MavenDemo` tests | `junit` | `mvn test` | Not run here (no Maven/JUnit jars) |
+| `SpringCoreApp` | `spring-core` | `javac` Java 21 | Only missing Spring/HikariCP package errors, no syntax errors; run needs Maven, jars, MySQL |
+| `SpringCoreHelpDesk` | `spring-core` | `javac` Java 21 | Only missing Spring/HikariCP package errors, no syntax errors; run needs Maven, jars, MySQL |
+| `HibernateJpaApp` | `hibernate-jpa` | `javac` Java 21 | Only missing JPA/Spring/Hibernate package errors, no syntax errors; run needs Maven, jars, MySQL |
+| All `pom.xml` files | branches | XML well-formed | Passed |
 
 ## Training History
 
@@ -230,10 +363,53 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Verified with `javac` on Java 21 (BUILD_EXIT=0); `HeapDemo`, `com.design_pattern.App` (same connection instance in all DAOs), and `com.factory.design_pattern.App` (charge 10.0, limit 200000.0) ran (RUN_EXIT=0).
 - Known issue: none; kept the trainer's style and comments as shown.
 
+### 2026-09-28: Maven and JUnit Tests (branch `junit`)
+
+- Added the `MavenDemo` Maven project with JUnit dependencies, `DemoService` validations and exceptions, stream test cases, and DTO mapper test cases.
+- Verified `pom.xml` is well-formed and main sources compile with `javac` on Java 21; `mvn test` needs Maven and the JUnit jars, which are not installed here.
+- Released as `v0.11.0` on the `junit` branch.
+
+### 2026-09-29: Spring Core Dependency Injection (branch `spring-core`)
+
+- Added `SpringCoreApp` with `AppConfig`, DAO/service beans, setter autowiring variants, in-method injection, custom bean, and HikariCP datasource with `JdbcTemplate`.
+- Extended `pl-sql.sql` with `joining_date`/`salary` columns, seed values, and `GROUP BY` queries.
+- `javac` on Java 21 shows only missing Spring/HikariCP dependency errors; running needs Maven, jars, and MySQL.
+- Released as `v0.12.0` on the `spring-core` branch.
+
+### 2026-09-30: HelpDesk Case Study (branch `spring-core`)
+
+- Added `SpringCoreHelpDesk` with models, enums, repositories, services, sign-up insertion, and fetch operations with mappers.
+- `javac` on Java 21 shows only missing Spring/HikariCP dependency errors; running needs Maven, jars, and MySQL.
+- Released as `v0.13.0` on the `spring-core` branch.
+
+### 2026-10-01: Hibernate and JPA Entities (branch `hibernate-jpa`)
+
+- Added `HibernateJpaApp` with `AppConfig`, `Customer` entity and JPQL repository, `User` model, and all helpdesk entities with enums.
+- `javac` on Java 21 shows only missing JPA/Spring/Hibernate dependency errors; running needs Maven, jars, and MySQL.
+- Released as `v0.14.0` on the `hibernate-jpa` branch.
+
+### 2026-10-02: Journal Consolidation
+
+- Rewrote this README with the full module plan from the training workbook, the branch guide, per-branch project structure, run commands, and the validation summary.
+- No source code was changed; all training content and dates are untouched.
+- Known issue: none.
+
+## Known Issues and Limits
+
+- The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
+- `emp_name_by_department(?)` remains a placeholder in the Java code, as in the trainer's commit.
+- Maven projects (`MavenDemo`, `SpringCoreApp`, `SpringCoreHelpDesk`, `HibernateJpaApp`) need Maven with internet access plus MySQL where noted; this environment has no Maven, so their tests and runs are recorded as not run here.
+- Trainer reference PDFs (project briefs, case study) are intentionally not stored in this repository.
+
+## Release History
+
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`.
+
 ## Repository Information
 
 - Owner: Kishore Muruganantham
 - Training: Hexaware Technologies
 - Language: Java
 - Java version: 21
+- Branches: `main`, `pl-sql`, `junit`, `spring-core`, `hibernate-jpa`, `java-fundamentals`, `feat/quitq-ecommerce-model`
 - Visibility: Private

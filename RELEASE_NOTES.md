@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.1 - 2026-10-02
+
+### Changed
+
+- Rewrote `README.md` with the full module plan, branch guide, per-branch project structure, run commands, validation summary, and consolidated training history.
+- No source code changed.
+
 ## 0.10.0 - 2026-09-25
 
 ### Added
