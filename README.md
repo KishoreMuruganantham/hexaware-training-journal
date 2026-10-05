@@ -178,7 +178,8 @@ HibernateJpaApp/
     │   └── AppConfig.java
     ├── main/
     │   ├── App.java
-    │   └── ExecutiveController.java
+    │   ├── ExecutiveController.java
+    │   └── TicketController.java
     ├── model/
     │   ├── Customer.java
     │   ├── User.java
@@ -198,10 +199,12 @@ HibernateJpaApp/
     ├── repository/
     │   ├── CustomerRepository.java
     │   ├── ExecutiveRepository.java
+    │   ├── TicketRepository.java
     │   └── UserRepository.java
     └── service/
         ├── CustomerService.java
-        └── ExecutiveService.java
+        ├── ExecutiveService.java
+        └── TicketService.java
 ```
 
 The `helpdesk.mwb` MySQL Workbench model from the trainer sits at the repository root next to the app.
@@ -428,6 +431,20 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Implemented the full `insertExecutive` flow: validate the manager id through `ExecutiveRepository.getManagerById` with `ResourceNotFoundException`, persist the `User`, re-fetch the complete user row with the JPQL `getUserByUsername` query, attach user and manager to the executive, and persist it.
 - Added `UserRepository` with `insert` and `getUserByUsername`, `ResourceNotFoundException`, and the `User`/`Executive` model updates.
 - Verified with `javac` on Java 21: only missing JPA/Spring/Hibernate package errors, with no syntax errors; all 7 touched files byte-identical to the trainer's commit.
+- Running needs Maven, Hibernate/Spring jars, and MySQL, so the app could not be run here.
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-10-05: Ticket Creation With Customer
+
+- Added `TicketService` with step-commented `insertTicket`: fetch the customer by id (invalid id throws `ResourceNotFoundException`), prepare the ticket with `OPEN` status, attach the customer, and persist it.
+- Added `TicketRepository` and the `TicketController` starter, which files an "Internet shutdown" ticket for customer id `1`.
+- Extended `CustomerRepository` with `getCustomerById` and updated `UserRepository`, `Ticket`, `ExecutiveService`, `App`, and `ExecutiveController` as shown in the trainer's commit.
+- Seeded the demo row in the `helpdesk_v2` database with the trainer's statement before running:
+
+  ```sql
+  insert into customer(city,name) values ('london','harry potter');
+  ```
+- Verified with `javac` on Java 21: only missing JPA/Spring/Hibernate package errors, with no syntax errors; all 9 touched files byte-identical to the trainer's commit.
 - Running needs Maven, Hibernate/Spring jars, and MySQL, so the app could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 

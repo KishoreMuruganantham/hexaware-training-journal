@@ -1,5 +1,18 @@
 # Release Notes
 
+## 0.17.0 - 2026-10-05
+
+### Added
+
+- Ticket creation flow with customer validation and `OPEN` status.
+- `TicketService`, `TicketRepository`, `TicketController`, customer lookup.
+
+### Verified
+
+- All touched files byte-identical to the trainer's commit.
+- `javac` on Java 21 shows only missing JPA/Spring/Hibernate dependency errors, no syntax errors.
+- App run needs Maven, Hibernate/Spring jars, MySQL, and the seeded customer row; not run here.
+
 ## 0.16.0 - 2026-10-05
 
 ### Added
