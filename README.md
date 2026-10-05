@@ -433,3 +433,7 @@ Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9
 - Java version: 21
 - Branches: `main`, `pl-sql`, `junit`, `spring-core`, `hibernate-jpa`, `java-fundamentals`, `feat/quitq-ecommerce-model`
 - Visibility: Private
+
+## Case Study Projects
+
+- **simple-library-system** (Task 1 - Basic CRUD): https://github.com/KishoreMuruganantham/simple-library-system — pure Java 21 + JDBC, MySQL, DriverManager, PreparedStatement, manual ResultSet mapping, 3 entities (Author, Member, Book), 9 DAO methods, enums, service layer with step comments, library.sql + library.mwb
