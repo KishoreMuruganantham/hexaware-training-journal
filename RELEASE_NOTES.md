@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.4 - 2026-10-05
+
+### Changed
+
+- Recorded the 2026-10-05 ticket-fetch training from the `hibernate-jpa` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.3 - 2026-10-05
 
 ### Changed
