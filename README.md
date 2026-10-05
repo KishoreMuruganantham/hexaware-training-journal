@@ -193,9 +193,12 @@ HibernateJpaApp/
     │   ├── PlanType.java
     │   ├── Priority.java
     │   └── Status.java
+    ├── exception/
+    │   └── ResourceNotFoundException.java
     ├── repository/
     │   ├── CustomerRepository.java
-    │   └── ExecutiveRepository.java
+    │   ├── ExecutiveRepository.java
+    │   └── UserRepository.java
     └── service/
         ├── CustomerService.java
         └── ExecutiveService.java
@@ -417,6 +420,14 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Restructured the datasource bean in `AppConfig` to the trainer's constructor style against `helpdesk_v2`.
 - Added the trainer's `helpdesk.mwb` Workbench model at the repository root.
 - Verified with `javac` on Java 21: only missing JPA/Spring/Hibernate package errors, with no syntax errors; new files are byte-identical to the trainer's.
+- Running needs Maven, Hibernate/Spring jars, and MySQL, so the app could not be run here.
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-10-05: Executive Insert With User Flow
+
+- Implemented the full `insertExecutive` flow: validate the manager id through `ExecutiveRepository.getManagerById` with `ResourceNotFoundException`, persist the `User`, re-fetch the complete user row with the JPQL `getUserByUsername` query, attach user and manager to the executive, and persist it.
+- Added `UserRepository` with `insert` and `getUserByUsername`, `ResourceNotFoundException`, and the `User`/`Executive` model updates.
+- Verified with `javac` on Java 21: only missing JPA/Spring/Hibernate package errors, with no syntax errors; all 7 touched files byte-identical to the trainer's commit.
 - Running needs Maven, Hibernate/Spring jars, and MySQL, so the app could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 

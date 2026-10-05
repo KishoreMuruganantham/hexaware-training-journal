@@ -1,5 +1,18 @@
 # Release Notes
 
+## 0.16.0 - 2026-10-05
+
+### Added
+
+- Full executive insert flow with manager validation, user persist and re-fetch, and executive persist.
+- `UserRepository`, `ResourceNotFoundException`, model updates.
+
+### Verified
+
+- All touched files byte-identical to the trainer's commit.
+- `javac` on Java 21 shows only missing JPA/Spring/Hibernate dependency errors, no syntax errors.
+- App run needs Maven, Hibernate/Spring jars, and MySQL; not run here.
+
 ## 0.15.0 - 2026-10-05
 
 ### Added
