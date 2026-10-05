@@ -1,5 +1,20 @@
 # Release Notes
 
+## 0.15.0 - 2026-10-05
+
+### Added
+
+- `ExecutiveService` with step-commented `insertExecutive`.
+- `ExecutiveRepository` and `ExecutiveController` starter.
+- Datasource bean restructured to constructor style.
+- `helpdesk.mwb` Workbench model.
+
+### Verified
+
+- New files byte-identical to the trainer's commit.
+- `javac` on Java 21 shows only missing JPA/Spring/Hibernate dependency errors, no syntax errors.
+- App run needs Maven, Hibernate/Spring jars, and MySQL; not run here.
+
 ## 0.14.0 - 2026-10-01
 
 ### Added
