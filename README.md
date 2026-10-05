@@ -180,6 +180,10 @@ HibernateJpaApp/
     │   ├── App.java
     │   ├── ExecutiveController.java
     │   └── TicketController.java
+    ├── dto/
+    │   └── TicketRespDto.java
+    ├── mapper/
+    │   └── TicketMapper.java
     ├── model/
     │   ├── Customer.java
     │   ├── User.java
@@ -445,6 +449,16 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
   insert into customer(city,name) values ('london','harry potter');
   ```
 - Verified with `javac` on Java 21: only missing JPA/Spring/Hibernate package errors, with no syntax errors; all 9 touched files byte-identical to the trainer's commit.
+- Running needs Maven, Hibernate/Spring jars, and MySQL, so the app could not be run here.
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-10-05: Ticket Fetch With DTO
+
+- Added `TicketRespDto` and `TicketMapper` converting ticket entities (customer name/username, executive id/job title) to DTOs.
+- Added `fetchTicketInfoV1` (all tickets) and the `fetchTicketInfoV2` join-query placeholder in `TicketRepository`.
+- Added `fetchTicketInfo` in `TicketService` mapping the ticket list to DTOs; `TicketController` now demos the fetch instead of the insert.
+- Updated `Customer`, `Ticket`, and related layers as shown in the trainer's commit.
+- Verified with `javac` on Java 21: only missing JPA/Spring/Hibernate package errors, with no syntax errors; all 7 touched files byte-identical to the trainer's commit.
 - Running needs Maven, Hibernate/Spring jars, and MySQL, so the app could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 

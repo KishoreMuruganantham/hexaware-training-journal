@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.18.0 - 2026-10-05
+
+### Added
+
+- Ticket fetch with DTO mapping (`TicketRespDto`, `TicketMapper`, V1/V2 repository queries).
+
+### Verified
+
+- All touched files byte-identical to the trainer's commit.
+- `javac` on Java 21 shows only missing JPA/Spring/Hibernate dependency errors, no syntax errors.
+- App run needs Maven, Hibernate/Spring jars, and MySQL; not run here.
+
 ## 0.17.0 - 2026-10-05
 
 ### Added
