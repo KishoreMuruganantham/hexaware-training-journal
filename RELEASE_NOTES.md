@@ -1,5 +1,15 @@
 # Release Notes
 
+## 0.22.0 - 2026-10-06
+
+### Added
+
+- Error DTO response object with `ResponseEntity` for invalid ids.
+
+### Verified
+
+- Rebooted and exercised live (outputs in history).
+
 ## 0.21.0 - 2026-10-06
 
 ### Added

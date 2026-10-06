@@ -514,6 +514,12 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Exercised live after reboot: `GET /all` 200, `GET /3` 200 with the record, `GET /1`, `GET /2`, and `DELETE /999` (all missing) each return 400 with `Invalid customer id`, and `DELETE /3` returns 200 empty. The old 500 JSON is gone.
 - Known issue: none; kept the trainer's style and comments as shown.
 
+### 2026-10-06: Error DTO Response
+
+- Added `ErrorDto` record (`message`, `comments`, `timestamp`) fulfilling his own "always reply the object not the string" comment; the handler now returns the DTO with 400 and `"Id not found in DB"`.
+- Rebooted and verified live: `GET /1` returns 400 with `{"message":"Invalid customer id","comments":"Id not found in DB","timestamp":"..."}`, and `GET /all` still returns 200 with the records.
+- Known issue: none; kept the trainer's style and comments as shown.
+
 ## Repository Information
 
 - Owner: Kishore Muruganantham
