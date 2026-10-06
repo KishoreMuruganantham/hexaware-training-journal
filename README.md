@@ -63,7 +63,7 @@ flowchart TD
 | `junit` | `MavenDemo` with JUnit tests (2026-09-28) | `hex_fsd_sept-2026/commits/junit` (5 new commits) | `165b165` |
 | `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
-| `spring-boot` | `helpdesk_backend` Boot project with customer POST API (2026-10-06) | `hex_fsd_sept-2026/commits/spring-boot` (1 new commit) | `20067cb` |
+| `spring-boot` | `helpdesk_backend` Boot project with customer POST API (2026-10-06) | `hex_fsd_sept-2026/commits/spring-boot` (2 new commits) | `8d80e10` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -421,6 +421,13 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Added the trainer's `helpdesk_backend` Spring Boot 3.5.16 project with customer POST API, verified booting on port 8080 with a live POST returning HTTP 200.
 - Code and journal live on the `spring-boot` branch; only this README entry is merged here.
 - Released as `v0.19.0` on the `spring-boot` branch.
+
+### 2026-10-06: Customer CRUD APIs (branch `spring-boot`)
+
+- Added `GET /api/customer/all`, `GET /api/customer/{id}`, and `DELETE /api/customer/{id}` with `ResourceNotFoundException` for bad ids.
+- Exercised all four endpoints live: GET all 200, GET one 200, POST 200, DELETE 200, and GET-after-delete reproduces the trainer's 500 JSON (his exception carries no status mapping, kept as written).
+- Code and journal live on the `spring-boot` branch; only this README entry is merged here.
+- Released as `v0.20.0` on the `spring-boot` branch.
 
 ## Known Issues and Limits
 
