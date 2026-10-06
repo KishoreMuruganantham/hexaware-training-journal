@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.21.0 - 2026-10-06
+
+### Added
+
+- Global exception handler mapping invalid ids to 400 with the message.
+- Delete validates the id before removing.
+
+### Verified
+
+- App rebooted and all paths exercised live: valid ids 200, missing ids 400 with message.
+- Files byte-identical to the trainer's commit.
+
 ## 0.20.0 - 2026-10-06
 
 ### Added

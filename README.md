@@ -507,6 +507,13 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Exercised all four endpoints live: `GET /all` returned 200 with 5 records, `GET /1` returned 200 with the record, `POST` returned 200 with the new record, `DELETE /1` returned 200 with an empty body, and `GET /1` afterwards returned the trainer's exact 500 JSON because the exception carries no status mapping — kept exactly as he wrote it.
 - Known issue: none in code; the 500 on missing ids is his implementation as shown.
 
+### 2026-10-06: Global Handler for Invalid IDs
+
+- Added `GlobalExceptionHandler` (`@ControllerAdvice`) mapping `ResourceNotFoundException` to 400 with the message body, kept exactly as he wrote it.
+- `deleteById` now validates through `getById` first, so deleting a missing id throws instead of silently passing.
+- Exercised live after reboot: `GET /all` 200, `GET /3` 200 with the record, `GET /1`, `GET /2`, and `DELETE /999` (all missing) each return 400 with `Invalid customer id`, and `DELETE /3` returns 200 empty. The old 500 JSON is gone.
+- Known issue: none; kept the trainer's style and comments as shown.
+
 ## Repository Information
 
 - Owner: Kishore Muruganantham
