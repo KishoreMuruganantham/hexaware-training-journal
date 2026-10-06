@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.8 - 2026-10-06
+
+### Changed
+
+- Recorded the 2026-10-06 error-DTO training from the `spring-boot` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.7 - 2026-10-06
 
 ### Changed
