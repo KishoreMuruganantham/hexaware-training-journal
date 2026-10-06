@@ -296,7 +296,11 @@ CREATE DATABASE fsd_hex_sept_2026;
 
 Daily training notes, schedules, exercises, and milestones will be added over time. Each meaningful learning milestone should be recorded with its date, topic, work completed, and follow-up action.
 
-### 2026-09-21: Stored Procedure Employee Retrieval
+### 2026-09-21
+
+Commits: `48297b1` Initialize Hexaware training journal; `9d89488` Add employee stored procedure retrieval.
+
+**Stored Procedure Employee Retrieval**
 
 - Added the `Employee` model with fields for ID, name, branch, city, and department.
 - Added the `CustomerDao` data-access layer for calling `all_emp()`.
@@ -304,7 +308,11 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Updated the application entry point to print all returned employees.
 - Updated `DBConnection.dbConnect()` to return the active JDBC connection.
 
-### 2026-09-22: Parameterized Department Procedures
+### 2026-09-22
+
+Commits: `976ad6f` Add parameterized department procedures; `f88e5f3` Align training exercises with trainer commits; `82ccd94` Remove unused database connection variable; `1caa3c0` Add employee count and views; `e4426f3` Add product stock triggers; `3d88d2c` Add e-commerce ER model.
+
+**Parameterized Department Procedures**
 
 - Added the trainer's validated `emp_by_department` and `emp_name_by_department` procedures.
 - Added the trainer's parameterized `emp_by_department` JDBC call using `CallableStatement`.
@@ -312,28 +320,32 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Kept `getEmployeeNamesByDepartment` as the trainer's placeholder method.
 - Updated the application to demonstrate department-based retrieval.
 
-### 2026-09-22: OUT Parameter and Views
+**OUT Parameter and Views**
 
 - Added `getEmpCountByDept` using `CallableStatement` and an integer OUT parameter.
 - Updated the application to display the employee count for the DEV department.
 - Added the trainer's `v_emp` and `v_emp_dev` view examples with `WITH CHECK OPTION`.
 - Commented the database connection status messages as shown in the trainer's commit.
 
-### 2026-09-22: E-commerce Triggers
+**E-commerce Triggers**
 
 - Added the `product` and `orders` tables from the trainer's trigger case study.
 - Added `trg_check_stock_qty` to reject invalid products and orders exceeding available stock.
 - Added `trg_update_product_stock_qty` to reduce stock after a valid order.
 - Added a valid sample order for product `1` with quantity `2`.
 
-### 2026-09-22: E-commerce ER Model
+**E-commerce ER Model**
 
 - Added the MySQL Workbench model `ecom_sample.mwb`.
 - Forward-engineered the `ecom_sample_db` schema with `users`, `customer`, `vendor`, `category`, `product`, and `customer_product`.
 - Verified the six foreign-key relationships shown in the trainer's ER diagram.
 - Prepared the forward-engineered SQL without the generated first three lines, last three lines, or `VISIBLE` keyword.
 
-### 2026-09-23: Java Fundamentals Collections and DTO Mapping
+### 2026-09-23
+
+Commits: `90cf076` Add Java fundamentals collections and DTO mapping; `1422710` Correct release version to 0.8.9.
+
+**Java Fundamentals Collections and DTO Mapping**
 
 - Added the `JavaFundamentals` project with `Branch`, `Department`, and `SortDirection` enums.
 - Added the `Employee` model with branch, department, joining date, and salary fields.
@@ -346,7 +358,11 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - MySQL server on `localhost:3306` was reachable; the fundamentals exercise itself does not need a database.
 - Known issue: none; the salary sort uses the trainer's `(int)` cast comparison.
 
-### 2026-09-24: Grouping, DTO Stats, Comparable, and OOPs
+### 2026-09-24
+
+Commits: `4725f2b` Add grouping employees by department; `1d4f11d` Add map to DTO conversion with Map demo; `a75ff1f` Add salary grouping by branch with total sum; `2779d85` Add Comparable default sort by joining date; `89f3cd3` Add OOPs concepts with payment hierarchy; `c1b4d37` Update journal for grouping, DTO stats, Comparable and OOPs training.
+
+**Grouping, DTO Stats, Comparable, and OOPs**
 
 - Added `EmpDeptStatDto` and `getEmpCountForEachDepartment` grouping with `Collectors.groupingBy` and `Collectors.counting`.
 - Added `MapDemo` with the trainer's `HashMap` login example.
@@ -357,7 +373,11 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Verified with `javac` on Java 21 (BUILD_EXIT=0); `App` printed the department stats, branch salary stats, and total salary 1680000.0; `MapDemo`, `OOPDemo`, and `IsADemo` ran (RUN_EXIT=0).
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-09-25: Singleton and Factory Patterns
+### 2026-09-25
+
+Commits: `5138f41` Add Singleton pattern with heap and stack demo; `da77d71` Add factory pattern for payments; `613068d` Update journal for Singleton and factory pattern training.
+
+**Singleton and Factory Patterns**
 
 - Added the `Customer` bean and the trainer's singleton `DBConnection` shared by `CustomerDao`, `OrderDao`, and `ProductDao` in `com.design_pattern`.
 - Added `HeapDemo` showing heap object references and the trainer's stack and garbage-collector comments.
@@ -365,78 +385,106 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Verified with `javac` on Java 21 (BUILD_EXIT=0); `HeapDemo`, `com.design_pattern.App` (same connection instance in all DAOs), and `com.factory.design_pattern.App` (charge 10.0, limit 200000.0) ran (RUN_EXIT=0).
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-09-28: Maven and JUnit Tests (branch `junit`)
+### 2026-09-28
+
+Commits (branch `junit`): `8851402` Add Maven project setup with JUnit dependencies; `0de9be7` Add first test case for demo service; `a3b7930` Add test case with validations and exceptions; `c72118f` Add stream test cases for employee service; `9e05f28` Add DTO test case with mapper; `165b165` Update journal for Maven and JUnit training.
+
+**Maven and JUnit Tests** (branch `junit`)
 
 - Added the `MavenDemo` Maven project with JUnit dependencies, `DemoService` validations and exceptions, stream test cases, and DTO mapper test cases.
 - Verified `pom.xml` is well-formed and main sources compile with `javac` on Java 21; `mvn test` needs Maven and the JUnit jars, which are not installed here.
 - Released as `v0.11.0` on the `junit` branch.
 
-### 2026-09-29: Spring Core Dependency Injection (branch `spring-core`)
+### 2026-09-29
+
+Commits (branch `spring-core`): `0013596` Add Spring app setup with employee salary columns; `a15cdb3` Load Spring app with AppConfig; `af076c1` Add DAO and service classes to Spring context; `b0f549a` Add autowiring with setter injection variants; `1c9c63a` Add in-method direct injection; `6b378f1` Add custom bean definition; `eb160fa` Add datasource and JdbcTemplate config; `518ed01` Update journal for Spring Core training.
+
+**Spring Core Dependency Injection** (branch `spring-core`)
 
 - Added `SpringCoreApp` with `AppConfig`, DAO/service beans, setter autowiring variants, in-method injection, custom bean, and HikariCP datasource with `JdbcTemplate`.
 - Extended `pl-sql.sql` with `joining_date`/`salary` columns, seed values, and `GROUP BY` queries.
 - `javac` on Java 21 shows only missing Spring/HikariCP dependency errors; running needs Maven, jars, and MySQL.
 - Released as `v0.12.0` on the `spring-core` branch.
 
-### 2026-09-30: HelpDesk Case Study (branch `spring-core`)
+### 2026-09-30
+
+Commits (branch `spring-core`): `b70c973` Add HelpDesk project setup with models; `61d618d` Add HelpDesk models, repositories and services; `c207393` Add customer sign up insertion; `86facdf` Add fetch operations with mappers; `d13e93d` Update journal for HelpDesk case study.
+
+**HelpDesk Case Study** (branch `spring-core`)
 
 - Added `SpringCoreHelpDesk` with models, enums, repositories, services, sign-up insertion, and fetch operations with mappers.
 - `javac` on Java 21 shows only missing Spring/HikariCP dependency errors; running needs Maven, jars, and MySQL.
 - Released as `v0.13.0` on the `spring-core` branch.
 
-### 2026-10-01: Hibernate and JPA Entities (branch `hibernate-jpa`)
+### 2026-10-01
+
+Commits (branch `hibernate-jpa`): `b4cf2d7` Add Hibernate app initial config; `4beb80e` Add Hibernate config with Customer entity; `cd3bfa1` Add insert and fetch with JPQL repository; `cfcb1c9` Add User model with roles; `5804b7c` Add all helpdesk entities; `1897717` Update journal for Hibernate and JPA training.
+
+**Hibernate and JPA Entities** (branch `hibernate-jpa`)
 
 - Added `HibernateJpaApp` with `AppConfig`, `Customer` entity and JPQL repository, `User` model, and all helpdesk entities with enums.
 - `javac` on Java 21 shows only missing JPA/Spring/Hibernate dependency errors; running needs Maven, jars, and MySQL.
 - Released as `v0.14.0` on the `hibernate-jpa` branch.
 
-### 2026-10-02: Journal Consolidation
+### 2026-10-02
+
+Commits: `dbab042` Consolidate journal README with full training details.
+
+**Journal Consolidation**
 
 - Rewrote this README with the full module plan from the training workbook, the branch guide, per-branch project structure, run commands, and the validation summary.
 - No source code was changed; all training content and dates are untouched.
 - Known issue: none.
 
-### 2026-10-05: Executive Insert (branch `hibernate-jpa`)
+### 2026-10-05
+
+Commits (branch `hibernate-jpa`): `9c1fab1` Add executive insert with service and repository; `91707e0` Update journal for executive insert training; `656713a` Add full executive insert with user flow; `554edb4` Update journal for executive user flow training; `43e99f5` Add ticket creation with customer flow; `a30c336` Update journal for ticket creation training; `a7fd88c` Add ticket fetch with DTO mapping; `f0af1aa` Update journal for ticket fetch training. Commits (`main`): `a00c2fa`, `9858acf`, `5261178` README merges; `19f0b1d` add simple-library-system Task 1 reference.
+
+**Executive Insert** (branch `hibernate-jpa`)
 
 - Added `ExecutiveService` with the trainer's step-commented `insertExecutive`, `ExecutiveRepository`, `ExecutiveController` starter, restructured datasource bean, and the `helpdesk.mwb` model.
 - Added the full user flow: manager validation, user persist with JPQL re-fetch, and executive persist.
 - Code and journal live on the `hibernate-jpa` branch; only this README entry is merged here.
 - Released as `v0.15.0` and `v0.16.0` on the `hibernate-jpa` branch.
 
-### 2026-10-05: Ticket Creation With Customer (branch `hibernate-jpa`)
+**Ticket Creation With Customer** (branch `hibernate-jpa`)
 
 - Added `TicketService` with step-commented `insertTicket`, `TicketRepository`, `TicketController` starter, customer lookup, and model updates.
 - Seeded the `helpdesk_v2` customer row with the trainer's statement (`insert into customer(city,name) values ('london','harry potter');`).
 - Code and journal live on the `hibernate-jpa` branch; only this README entry is merged here.
 - Released as `v0.17.0` on the `hibernate-jpa` branch.
 
-### 2026-10-05: Ticket Fetch With DTO (branch `hibernate-jpa`)
+**Ticket Fetch With DTO** (branch `hibernate-jpa`)
 
 - Added `TicketRespDto` and `TicketMapper`, V1/V2 fetch queries, `fetchTicketInfo` service, and the controller fetch demo.
 - Code and journal live on the `hibernate-jpa` branch; only this README entry is merged here.
 - Released as `v0.18.0` on the `hibernate-jpa` branch.
 
-### 2026-10-06: Spring Boot Customer POST API (branch `spring-boot`)
+### 2026-10-06
+
+Commits (branch `spring-boot`): `fb6f234` Add Spring Boot helpdesk backend with customer POST API; `20067cb` Update journal for Spring Boot backend training; `5857616` Add basic CRUD APIs for customer; `8d80e10` Update journal for customer CRUD APIs training; `5750a19` Add global handler for invalid IDs; `4a84739` Update journal for global handler training; `23dbee5` Add error DTO response with ResponseEntity; `b0d8558` Update journal for error DTO training. Commits (`main`): `96cdb49`, `f648ef0`, `e2996da`, `1e81984` README merges.
+
+**Spring Boot Customer POST API** (branch `spring-boot`)
 
 - Added the trainer's `helpdesk_backend` Spring Boot 3.5.16 project with customer POST API, verified booting on port 8080 with a live POST returning HTTP 200.
 - Code and journal live on the `spring-boot` branch; only this README entry is merged here.
 - Released as `v0.19.0` on the `spring-boot` branch.
 
-### 2026-10-06: Customer CRUD APIs (branch `spring-boot`)
+**Customer CRUD APIs** (branch `spring-boot`)
 
 - Added `GET /api/customer/all`, `GET /api/customer/{id}`, and `DELETE /api/customer/{id}` with `ResourceNotFoundException` for bad ids.
 - Exercised all four endpoints live: GET all 200, GET one 200, POST 200, DELETE 200, and GET-after-delete reproduces the trainer's 500 JSON (his exception carries no status mapping, kept as written).
 - Code and journal live on the `spring-boot` branch; only this README entry is merged here.
 - Released as `v0.20.0` on the `spring-boot` branch.
 
-### 2026-10-06: Global Handler for Invalid IDs (branch `spring-boot`)
+**Global Handler for Invalid IDs** (branch `spring-boot`)
 
 - Added `GlobalExceptionHandler` mapping invalid ids to 400 with the message; delete validates first.
 - Rebooted and exercised live: valid ids 200, missing ids 400 with `Invalid customer id`.
 - Code and journal live on the `spring-boot` branch; only this README entry is merged here.
 - Released as `v0.21.0` on the `spring-boot` branch.
 
-### 2026-10-06: Error DTO Response (branch `spring-boot`)
+**Error DTO Response** (branch `spring-boot`)
 
 - Added `ErrorDto` record with `ResponseEntity`, fulfilling his "always reply the object not the string" comment; missing ids now return 400 with the DTO instead of 500 JSON.
 - Verified live after reboot on the branch.
