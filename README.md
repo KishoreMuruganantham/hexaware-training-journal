@@ -324,7 +324,7 @@ cd helpdesk_backend
 .\mvnw.cmd spring-boot:run
 ```
 
-The app starts Tomcat on port 8080 using the `helpdesk_db` database (created automatically) with the datasource from `application.properties`. Security auto-configuration is excluded in the trainer's starter. Test the customer endpoint with a POST of raw JSON to `localhost:8080/api/customer/add`; the saved record comes back with its generated id.
+The app starts Tomcat on port 8080 using the `helpdesk_db` database (created automatically) with the datasource from `application.properties`. Security auto-configuration is excluded in the trainer's starter. Customer endpoints: `POST /api/customer/add` with raw JSON saves and returns the record with its generated id; `GET /api/customer/all` lists all records; `GET /api/customer/{id}` fetches one (`ResourceNotFoundException` for a bad id); `DELETE /api/customer/{id}` removes it.
 
 Before running, create the database:
 
@@ -499,6 +499,13 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Added `application.properties` with the `helpdesk_db` datasource (auto-created) and `ddl-auto=update`; security auto-configuration is excluded in the starter.
 - Verified with the `mvnw` wrapper: Maven bootstrapped, project compiles, app booted with Tomcat on port 8080, and `POST /api/customer/add` with raw JSON returned HTTP 200 plus the saved record with its generated id.
 - Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-10-06: Customer CRUD APIs
+
+- Added `GET /api/customer/all`, `GET /api/customer/{id}`, and `DELETE /api/customer/{id}` to the controller with `getAll`, `getById`, and `deleteById` in the service using the free `JpaRepository` methods.
+- Added `ResourceNotFoundException` thrown for an invalid customer id.
+- Exercised all four endpoints live: `GET /all` returned 200 with 5 records, `GET /1` returned 200 with the record, `POST` returned 200 with the new record, `DELETE /1` returned 200 with an empty body, and `GET /1` afterwards returned the trainer's exact 500 JSON because the exception carries no status mapping — kept exactly as he wrote it.
+- Known issue: none in code; the 500 on missing ids is his implementation as shown.
 
 ## Repository Information
 

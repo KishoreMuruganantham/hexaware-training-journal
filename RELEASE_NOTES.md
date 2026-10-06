@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.20.0 - 2026-10-06
+
+### Added
+
+- Basic customer CRUD APIs with `ResourceNotFoundException`.
+- GET all, GET by id, and DELETE endpoints.
+
+### Verified
+
+- App boots with Tomcat on port 8080; all four endpoints exercised live (outputs in history).
+
 ## 0.19.0 - 2026-10-06
 
 ### Added
