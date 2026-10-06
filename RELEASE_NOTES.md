@@ -1,5 +1,18 @@
 # Release Notes
 
+## 0.19.0 - 2026-10-06
+
+### Added
+
+- `helpdesk_backend` Spring Boot project with customer POST API.
+- `Customer` entity, `JpaRepository`, service, and controller.
+- Datasource properties with auto-created `helpdesk_db`.
+
+### Verified
+
+- Maven bootstrapped through `mvnw`; project compiles on Java 21.
+- App boots with Tomcat on port 8080; POST returns HTTP 200 with the saved record (run output recorded in history).
+
 ## 0.18.0 - 2026-10-05
 
 ### Added

@@ -14,7 +14,8 @@ flowchart LR
     I --> J[Maven and JUnit]
     J --> K[Spring Core]
     K --> L[Hibernate and JPA]
-    L --> E[Database Integration]
+    L --> M[Spring Boot REST]
+    M --> E[Database Integration]
     E --> F[Reviews and Improvements]
     F --> G[Training Milestones]
     G --> B
@@ -213,6 +214,26 @@ HibernateJpaApp/
 
 The `helpdesk.mwb` MySQL Workbench model from the trainer sits at the repository root next to the app.
 
+`helpdesk_backend/` is the trainer's Spring Boot project (generated from start.spring.io, Boot 3.5.16, Java 21) with the customer POST API:
+
+```text
+helpdesk_backend/
+├── pom.xml
+├── mvnw
+├── mvnw.cmd
+└── src/
+    ├── main/
+    │   ├── java/com/springboot/helpdesk/
+    │   │   ├── HelpdeskBackendApplication.java
+    │   │   ├── controller/CustomerController.java
+    │   │   ├── service/CustomerService.java
+    │   │   ├── repository/CustomerRepository.java
+    │   │   └── model/Customer.java
+    │   └── resources/application.properties
+    └── test/java/com/springboot/helpdesk/
+        └── HelpdeskBackendApplicationTests.java
+```
+
 ## Requirements
 
 - Java 21
@@ -295,6 +316,15 @@ mvn compile exec:java -Dexec.mainClass="com.helpdesk.main.App"
 ```
 
 `App` saves and fetches `Customer` records through `CustomerService` and the JPQL repository, with the session factory, transaction manager, and `DriverManagerDataSource` from `AppConfig` (needs Maven, Hibernate/Spring jars, and MySQL).
+
+To run the Spring Boot backend (Maven comes through the `mvnw` wrapper, which downloads it on first run):
+
+```powershell
+cd helpdesk_backend
+.\mvnw.cmd spring-boot:run
+```
+
+The app starts Tomcat on port 8080 using the `helpdesk_db` database (created automatically) with the datasource from `application.properties`. Security auto-configuration is excluded in the trainer's starter. Test the customer endpoint with a POST of raw JSON to `localhost:8080/api/customer/add`; the saved record comes back with its generated id.
 
 Before running, create the database:
 
@@ -460,6 +490,14 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Updated `Customer`, `Ticket`, and related layers as shown in the trainer's commit.
 - Verified with `javac` on Java 21: only missing JPA/Spring/Hibernate package errors, with no syntax errors; all 7 touched files byte-identical to the trainer's commit.
 - Running needs Maven, Hibernate/Spring jars, and MySQL, so the app could not be run here.
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-10-06: Spring Boot Customer POST API
+
+- Added the trainer's `helpdesk_backend` Spring Boot project (Boot 3.5.16, Java 21, Maven wrapper) with Web, Data JPA, MySQL, Security, Lombok, and Validation starters.
+- Added `Customer` entity (Lombok + JPA), `CustomerRepository` (`JpaRepository`), `CustomerService`, and `CustomerController` with `POST /api/customer/add` returning the saved record with its generated id.
+- Added `application.properties` with the `helpdesk_db` datasource (auto-created) and `ddl-auto=update`; security auto-configuration is excluded in the starter.
+- Verified with the `mvnw` wrapper: Maven bootstrapped, project compiles, app booted with Tomcat on port 8080, and `POST /api/customer/add` with raw JSON returned HTTP 200 plus the saved record with its generated id.
 - Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information
