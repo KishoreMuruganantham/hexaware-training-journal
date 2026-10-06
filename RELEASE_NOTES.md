@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.5 - 2026-10-06
+
+### Changed
+
+- Recorded the 2026-10-06 Spring Boot backend training from the `spring-boot` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.4 - 2026-10-05
 
 ### Changed

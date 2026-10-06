@@ -52,6 +52,7 @@ flowchart TD
     M --> JU[junit - Maven and JUnit]
     JU --> SC[spring-core - Spring Core and HelpDesk]
     SC --> HJ[hibernate-jpa - Hibernate and JPA]
+    HJ --> SB[spring-boot - Boot REST backend]
     M --> QQ[feat/quitq-ecommerce-model - QuitQ model]
 ```
 
@@ -62,6 +63,7 @@ flowchart TD
 | `junit` | `MavenDemo` with JUnit tests (2026-09-28) | `hex_fsd_sept-2026/commits/junit` (5 new commits) | `165b165` |
 | `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
+| `spring-boot` | `helpdesk_backend` Boot project with customer POST API (2026-10-06) | `hex_fsd_sept-2026/commits/spring-boot` (1 new commit) | `20067cb` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -414,6 +416,12 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Code and journal live on the `hibernate-jpa` branch; only this README entry is merged here.
 - Released as `v0.18.0` on the `hibernate-jpa` branch.
 
+### 2026-10-06: Spring Boot Customer POST API (branch `spring-boot`)
+
+- Added the trainer's `helpdesk_backend` Spring Boot 3.5.16 project with customer POST API, verified booting on port 8080 with a live POST returning HTTP 200.
+- Code and journal live on the `spring-boot` branch; only this README entry is merged here.
+- Released as `v0.19.0` on the `spring-boot` branch.
+
 ## Known Issues and Limits
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
@@ -431,7 +439,7 @@ Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9
 - Training: Hexaware Technologies
 - Language: Java
 - Java version: 21
-- Branches: `main`, `pl-sql`, `junit`, `spring-core`, `hibernate-jpa`, `java-fundamentals`, `feat/quitq-ecommerce-model`
+- Branches: `main`, `pl-sql`, `junit`, `spring-core`, `hibernate-jpa`, `spring-boot`, `java-fundamentals`, `feat/quitq-ecommerce-model`
 - Visibility: Private
 
 ## Case Study Projects
