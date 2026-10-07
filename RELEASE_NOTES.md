@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.27.0 - 2026-10-07
+
+### Added
+
+- Customer POST with linked user creation (`CustomerDto`, `CustomerMapper`, user link).
+- `User` model updates and service wiring.
+
+### Verified
+
+- Rebooted and exercised live (outputs in history).
+
 ## 0.26.0 - 2026-10-07
 
 ### Added

@@ -556,6 +556,12 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Rebooted and verified live: manager POST 200 with linked user; executive POST with valid manager id 200; bad manager id 400. One 500 seen mid-testing was a duplicate-username row from earlier test data, confirmed in the server log — code faultless.
 - Known issue: none; kept the trainer's style and comments as shown.
 
+### 2026-10-07: Customer POST With Linked User
+
+- Added `CustomerDto`, `CustomerMapper`, and the user link on `Customer`; the customer POST now persists the user first and returns the customer with its managed user attached.
+- Rebooted and verified live: customer POST 200 carrying the persisted user; older rows show `user:null` as before.
+- Known issue: none; kept the trainer's style and comments as shown.
+
 ## Repository Information
 
 - Owner: Kishore Muruganantham
