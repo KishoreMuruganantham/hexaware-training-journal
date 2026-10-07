@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.11 - 2026-10-07
+
+### Changed
+
+- Recorded the 2026-10-07 validation trainings from the `spring-boot` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.10 - 2026-10-07
 
 ### Changed
