@@ -63,7 +63,7 @@ flowchart TD
 | `junit` | `MavenDemo` with JUnit tests (2026-09-28) | `hex_fsd_sept-2026/commits/junit` (5 new commits) | `165b165` |
 | `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
-| `spring-boot` | `helpdesk_backend` Boot project with customer/executive APIs (2026-10-06/07) | `hex_fsd_sept-2026/commits/spring-boot` (7 new commits) | `579a450` |
+| `spring-boot` | `helpdesk_backend` Boot project with customer/executive/manager APIs (2026-10-06/07) | `hex_fsd_sept-2026/commits/spring-boot` (8 new commits) | `a267e97` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -514,6 +514,13 @@ Commits (branch `spring-boot`): `7d43b8a` Add executive POST API with validation
 - Verified live on the branch (valid 200 carrying the persisted user, invalid 400 with the field map).
 - Code and journal live on the `spring-boot` branch; only this README entry is merged here.
 - Released as `v0.25.0` on the `spring-boot` branch.
+
+**Manager POST With Connected Executive** (branch `spring-boot`)
+
+- Added `Manager` entity, `ManagerDto`, `ManagerMapper`, `ManagerRepository`, and `ManagerService` with linked-user creation; executive POST takes the manager id from the path with validation.
+- Verified live on the branch (manager 200, executive with valid manager 200, bad manager 400).
+- Code and journal live on the `spring-boot` branch; only this README entry is merged here.
+- Released as `v0.26.0` on the `spring-boot` branch.
 
 ## Known Issues and Limits
 
