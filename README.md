@@ -226,9 +226,19 @@ helpdesk_backend/
     │   ├── java/com/springboot/helpdesk/
     │   │   ├── HelpdeskBackendApplication.java
     │   │   ├── controller/CustomerController.java
+    │   │   ├── controller/ExecutiveController.java
     │   │   ├── service/CustomerService.java
+    │   │   ├── service/ExecutiveService.java
     │   │   ├── repository/CustomerRepository.java
-    │   │   └── model/Customer.java
+    │   │   ├── repository/ExecutiveRepository.java
+    │   │   ├── model/Customer.java
+    │   │   ├── model/Executive.java
+    │   │   ├── dto/request/ExecutiveDto.java
+    │   │   ├── dto/response/ErrorDto.java
+    │   │   ├── mapper/ExecutiveMapper.java
+    │   │   ├── enums/JobTitle.java
+    │   │   ├── config/GlobalExceptionHandler.java
+    │   │   └── exception/ResourceNotFoundException.java
     │   └── resources/application.properties
     └── test/java/com/springboot/helpdesk/
         └── HelpdeskBackendApplicationTests.java
@@ -324,7 +334,7 @@ cd helpdesk_backend
 .\mvnw.cmd spring-boot:run
 ```
 
-The app starts Tomcat on port 8080 using the `helpdesk_db` database (created automatically) with the datasource from `application.properties`. Security auto-configuration is excluded in the trainer's starter. Customer endpoints: `POST /api/customer/add` with raw JSON saves and returns the record with its generated id; `GET /api/customer/all` lists all records; `GET /api/customer/{id}` fetches one (`ResourceNotFoundException` for a bad id); `DELETE /api/customer/{id}` removes it.
+The app starts Tomcat on port 8080 using the `helpdesk_db` database (created automatically) with the datasource from `application.properties`. Security auto-configuration is excluded in the trainer's starter. Customer endpoints: `POST /api/customer/add` with raw JSON saves and returns the record with its generated id; `GET /api/customer/all` lists all records; `GET /api/customer/{id}` fetches one (`ResourceNotFoundException` for a bad id); `DELETE /api/customer/{id}` removes it. `POST /api/executive/add` takes an `ExecutiveDto` (`@Valid`), maps it to an `Executive`, and saves it; bad input returns 400 with the field messages.
 
 Before running, create the database:
 
@@ -518,6 +528,13 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 
 - Added `ErrorDto` record (`message`, `comments`, `timestamp`) fulfilling his own "always reply the object not the string" comment; the handler now returns the DTO with 400 and `"Id not found in DB"`.
 - Rebooted and verified live: `GET /1` returns 400 with `{"message":"Invalid customer id","comments":"Id not found in DB","timestamp":"..."}`, and `GET /all` still returns 200 with the records.
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-10-07: Executive POST API With Validation
+
+- Added `ExecutiveDto` record with `@NotBlank`, `@NotNull`, `@Email`, and `@Size` validations, `ExecutiveMapper`, `Executive` entity, `JobTitle` enum, `ExecutiveRepository`, and `ExecutiveService` mapping DTO to entity.
+- Added `ExecutiveController` with `POST /api/executive/add` (`@Valid @RequestBody`); added `@Repository` to the customer repository and a port note in properties.
+- Rebooted and verified live: valid POST returns 200 with the saved executive (`id:1`); invalid POST (blank name, bad email, short contact) returns 400 with the three field messages.
 - Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information

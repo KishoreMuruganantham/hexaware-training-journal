@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.23.0 - 2026-10-07
+
+### Added
+
+- Executive POST API with bean validation (`ExecutiveDto`, `@Valid`, mapper, entity, repository, service).
+- Port note in properties; `@Repository` on customer repository.
+
+### Verified
+
+- Rebooted and exercised live (outputs in history).
+
 ## 0.22.0 - 2026-10-06
 
 ### Added
