@@ -227,16 +227,26 @@ helpdesk_backend/
     │   │   ├── HelpdeskBackendApplication.java
     │   │   ├── controller/CustomerController.java
     │   │   ├── controller/ExecutiveController.java
+    │   │   ├── controller/ManagerController.java
     │   │   ├── service/CustomerService.java
     │   │   ├── service/ExecutiveService.java
+    │   │   ├── service/ManagerService.java
+    │   │   ├── service/UserService.java
     │   │   ├── repository/CustomerRepository.java
     │   │   ├── repository/ExecutiveRepository.java
+    │   │   ├── repository/ManagerRepository.java
+    │   │   ├── repository/UserRepository.java
     │   │   ├── model/Customer.java
     │   │   ├── model/Executive.java
+    │   │   ├── model/Manager.java
+    │   │   ├── model/User.java
     │   │   ├── dto/request/ExecutiveDto.java
+    │   │   ├── dto/request/ManagerDto.java
     │   │   ├── dto/response/ErrorDto.java
     │   │   ├── mapper/ExecutiveMapper.java
+    │   │   ├── mapper/ManagerMapper.java
     │   │   ├── enums/JobTitle.java
+    │   │   ├── enums/Role.java
     │   │   ├── config/GlobalExceptionHandler.java
     │   │   └── exception/ResourceNotFoundException.java
     │   └── resources/application.properties
@@ -334,7 +344,7 @@ cd helpdesk_backend
 .\mvnw.cmd spring-boot:run
 ```
 
-The app starts Tomcat on port 8080 using the `helpdesk_db` database (created automatically) with the datasource from `application.properties`. Security auto-configuration is excluded in the trainer's starter. Customer endpoints: `POST /api/customer/add` with raw JSON saves and returns the record with its generated id; `GET /api/customer/all` lists all records; `GET /api/customer/{id}` fetches one (`ResourceNotFoundException` for a bad id); `DELETE /api/customer/{id}` removes it. `POST /api/executive/add` takes an `ExecutiveDto` (`@Valid`), maps it to an `Executive`, and saves it; bad input returns 400 with the field messages.
+The app starts Tomcat on port 8080 using the `helpdesk_db` database (created automatically) with the datasource from `application.properties`. Security auto-configuration is excluded in the trainer's starter. Customer endpoints: `POST /api/customer/add` with raw JSON saves and returns the record with its generated id; `GET /api/customer/all` lists all records; `GET /api/customer/{id}` fetches one (`ResourceNotFoundException` for a bad id); `DELETE /api/customer/{id}` removes it. `POST /api/executive/add` takes an `ExecutiveDto` (`@Valid`), maps it to an `Executive`, and saves it; bad input returns 400 with the field messages. `POST /api/manager/add` creates the linked user first (`Role.MANAGER`) and saves the manager; `POST /api/executive/add/{managerId}` validates the manager and attaches user plus manager to the executive.
 
 Before running, create the database:
 
@@ -537,6 +547,13 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Verified live after reboot: valid POST returns 200 with the saved executive carrying its persisted user (`id`, `createdAt`, `active` all attached — the old chat question answered in one response); invalid POST returns 400 with the clean field map.
 - Caught mid-verification: the first reboot served stale compiled classes and still showed the old error shape; recompiled and rebooted to confirm the new one.
 - Environment note: one boot attempt failed with MySQL `Communications link failure` while MySQL80 showed Running but accepted no connections; after a service restart the identical code booted and verified clean — code faultless, database was the cause.
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-10-07: Manager POST With Connected Executive
+
+- Added `Manager` entity, `ManagerDto`, `ManagerMapper`, `ManagerRepository`, and `ManagerService` creating the linked user first (`Role.MANAGER`).
+- `ExecutiveService` now takes the manager id from the path, validates it, and attaches user plus manager to the executive; `Executive` gained the `manager` link.
+- Rebooted and verified live: manager POST 200 with linked user; executive POST with valid manager id 200; bad manager id 400. One 500 seen mid-testing was a duplicate-username row from earlier test data, confirmed in the server log — code faultless.
 - Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information

@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.26.0 - 2026-10-07
+
+### Added
+
+- Manager POST flow with linked user (`Manager`, `ManagerDto`, `ManagerMapper`, `ManagerRepository`, `ManagerService`).
+- Executive POST now takes the manager id in the path and validates it.
+
+### Verified
+
+- Rebooted and exercised live (outputs in history).
+
 ## 0.25.0 - 2026-10-07
 
 ### Added
