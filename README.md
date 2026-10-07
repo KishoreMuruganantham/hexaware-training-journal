@@ -242,13 +242,17 @@ helpdesk_backend/
     │   │   ├── model/User.java
     │   │   ├── dto/request/ExecutiveDto.java
     │   │   ├── dto/request/ManagerDto.java
+    │   │   ├── dto/request/CustomerDto.java
+    │   │   ├── dto/request/CustomerUpdateDto.java
     │   │   ├── dto/response/ErrorDto.java
+    │   │   ├── mapper/CustomerMapper.java
     │   │   ├── mapper/ExecutiveMapper.java
     │   │   ├── mapper/ManagerMapper.java
     │   │   ├── enums/JobTitle.java
     │   │   ├── enums/Role.java
     │   │   ├── config/GlobalExceptionHandler.java
-    │   │   └── exception/ResourceNotFoundException.java
+    │   │   ├── exception/ResourceNotFoundException.java
+    │   │   └── exception/InvalidCallException.java
     │   └── resources/application.properties
     └── test/java/com/springboot/helpdesk/
         └── HelpdeskBackendApplicationTests.java
@@ -344,7 +348,7 @@ cd helpdesk_backend
 .\mvnw.cmd spring-boot:run
 ```
 
-The app starts Tomcat on port 8080 using the `helpdesk_db` database (created automatically) with the datasource from `application.properties`. Security auto-configuration is excluded in the trainer's starter. Customer endpoints: `POST /api/customer/add` with raw JSON saves and returns the record with its generated id; `GET /api/customer/all` lists all records; `GET /api/customer/{id}` fetches one (`ResourceNotFoundException` for a bad id); `DELETE /api/customer/{id}` removes it. `POST /api/executive/add` takes an `ExecutiveDto` (`@Valid`), maps it to an `Executive`, and saves it; bad input returns 400 with the field messages. `POST /api/manager/add` creates the linked user first (`Role.MANAGER`) and saves the manager; `POST /api/executive/add/{managerId}` validates the manager and attaches user plus manager to the executive.
+The app starts Tomcat on port 8080 using the `helpdesk_db` database (created automatically) with the datasource from `application.properties`. Security auto-configuration is excluded in the trainer's starter. Customer endpoints: `POST /api/customer/add` with raw JSON saves and returns the record with its generated id; `GET /api/customer/all` lists all records; `GET /api/customer/{id}` fetches one (`ResourceNotFoundException` for a bad id); `DELETE /api/customer/{id}` removes it. `POST /api/executive/add` takes an `ExecutiveDto` (`@Valid`), maps it to an `Executive`, and saves it; bad input returns 400 with the field messages. `POST /api/manager/add` creates the linked user first (`Role.MANAGER`) and saves the manager; `POST /api/executive/add/{managerId}` validates the manager and attaches user plus manager to the executive. `PUT /api/customer/{id}` partially updates name/city and stamps `updatedAt`; an empty update returns 400 with the DTO.
 
 Before running, create the database:
 
@@ -560,6 +564,13 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 
 - Added `CustomerDto`, `CustomerMapper`, and the user link on `Customer`; the customer POST now persists the user first and returns the customer with its managed user attached.
 - Rebooted and verified live: customer POST 200 carrying the persisted user; older rows show `user:null` as before.
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-10-07: Customer Update Record
+
+- Added `PUT /api/customer/{id}` with partial name/city update; empty updates throw `InvalidCallException` mapped to 400 with the DTO.
+- Added `CustomerUpdateDto` and stamped `updatedAt` on the customer via `@UpdateTimestamp`.
+- Rebooted and verified live: PUT with fields 200 with changed record and fresh timestamp; PUT `{}` 400 with `Update op terminated`.
 - Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information

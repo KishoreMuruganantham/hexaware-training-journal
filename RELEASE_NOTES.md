@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.28.0 - 2026-10-07
+
+### Added
+
+- Customer update API with partial name/city update and `InvalidCallException`.
+- `CustomerUpdateDto`, `updatedAt` timestamp on customer.
+
+### Verified
+
+- Rebooted and exercised live (outputs in history).
+
 ## 0.27.0 - 2026-10-07
 
 ### Added
