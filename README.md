@@ -63,7 +63,7 @@ flowchart TD
 | `junit` | `MavenDemo` with JUnit tests (2026-09-28) | `hex_fsd_sept-2026/commits/junit` (5 new commits) | `165b165` |
 | `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
-| `spring-boot` | `helpdesk_backend` Boot project with customer/executive APIs (2026-10-06/07) | `hex_fsd_sept-2026/commits/spring-boot` (6 new commits) | `875e0a1` |
+| `spring-boot` | `helpdesk_backend` Boot project with customer/executive APIs (2026-10-06/07) | `hex_fsd_sept-2026/commits/spring-boot` (7 new commits) | `579a450` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -493,7 +493,7 @@ Commits (branch `spring-boot`): `fb6f234` Add Spring Boot helpdesk backend with 
 
 ### 2026-10-07
 
-Commits (branch `spring-boot`): `7d43b8a` Add executive POST API with validation; `09a15b0` Update journal for executive validation training.
+Commits (branch `spring-boot`): `7d43b8a` Add executive POST API with validation; `09a15b0` Update journal for executive validation training; `b507731` Refine validation errors to field message map; `875e0a1` Update journal for validation refinement training; `175dabb` Add executive POST with linked user; `579a450` Update journal for executive user training.
 
 **Executive POST API With Validation** (branch `spring-boot`)
 
@@ -501,16 +501,19 @@ Commits (branch `spring-boot`): `7d43b8a` Add executive POST API with validation
 - Code and journal live on the `spring-boot` branch; only this README entry is merged here.
 - Released as `v0.23.0` on the `spring-boot` branch.
 
-### 2026-10-07
-
-Commits (branch `spring-boot`): `7d43b8a` Add executive POST API with validation; `09a15b0` Update journal for executive validation training; `b507731` Refine validation errors to field message map; `875e0a1` Update journal for validation refinement training.
-
-**Executive POST API With Validation** (branch `spring-boot`)
+**Validation Errors Refined to Field Map** (branch `spring-boot`)
 
 - Added `ExecutiveDto` with bean validations, mapper, entity, repository, service, and `POST /api/executive/add`; refined errors to a field-to-message map with corrected contact messages.
 - Verified live on the branch (valid 200 with saved record, invalid 400 with the field map).
 - Code and journal live on the `spring-boot` branch; only this README entry is merged here.
-- Released as `v0.23.0` and `v0.24.0` on the `spring-boot` branch.
+- Released as `v0.24.0` on the `spring-boot` branch.
+
+**Executive POST With Linked User** (branch `spring-boot`)
+
+- Added `User` entity, `Role` enum, `UserRepository`, and `UserService`; the executive POST now persists the user first and returns the executive with its managed user attached.
+- Verified live on the branch (valid 200 carrying the persisted user, invalid 400 with the field map).
+- Code and journal live on the `spring-boot` branch; only this README entry is merged here.
+- Released as `v0.25.0` on the `spring-boot` branch.
 
 ## Known Issues and Limits
 
