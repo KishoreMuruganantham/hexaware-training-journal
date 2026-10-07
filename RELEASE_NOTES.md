@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.25.0 - 2026-10-07
+
+### Added
+
+- Executive POST with linked user creation (`User`, `Role`, `UserRepository`, `UserService`).
+- `@OneToOne` executive-user link; username/password fields with validations.
+
+### Verified
+
+- Rebooted and exercised live (outputs in history).
+
 ## 0.24.0 - 2026-10-07
 
 ### Added

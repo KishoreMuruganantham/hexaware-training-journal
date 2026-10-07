@@ -534,7 +534,9 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 
 - Added `ExecutiveDto` record with `@NotBlank`, `@NotNull`, `@Email`, and `@Size` validations, `ExecutiveMapper`, `Executive` entity, `JobTitle` enum, `ExecutiveRepository`, and `ExecutiveService` mapping DTO to entity.
 - Added `ExecutiveController` with `POST /api/executive/add` (`@Valid @RequestBody`); added `@Repository` to the customer repository and a port note in properties.
-- Rebooted and verified live: valid POST returns 200 with the saved executive (`id:1`); invalid POST (blank name, bad email, short contact) returns 400 with the clean field map `{"contact":"contact should be 10 digit mobile number","name":"Name is required","email":"Email seems invalid"}` (note: first boot served stale classes and still showed the old shape; recompiled and rebooted to confirm the new one).
+- Verified live after reboot: valid POST returns 200 with the saved executive carrying its persisted user (`id`, `createdAt`, `active` all attached — the old chat question answered in one response); invalid POST returns 400 with the clean field map.
+- Caught mid-verification: the first reboot served stale compiled classes and still showed the old error shape; recompiled and rebooted to confirm the new one.
+- Environment note: one boot attempt failed with MySQL `Communications link failure` while MySQL80 showed Running but accepted no connections; after a service restart the identical code booted and verified clean — code faultless, database was the cause.
 - Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information
