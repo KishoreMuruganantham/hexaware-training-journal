@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.15 - 2026-10-07
+
+### Changed
+
+- Recorded the 2026-10-07 customer-update training from the `spring-boot` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.14 - 2026-10-07
 
 ### Changed
