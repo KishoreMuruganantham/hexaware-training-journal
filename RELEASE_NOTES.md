@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.24.0 - 2026-10-07
+
+### Added
+
+- Validation errors refined to a field-to-message map in the global handler.
+- Contact-field messages corrected in `ExecutiveDto`.
+
+### Verified
+
+- Rebooted and exercised live: invalid POST returns the clean field map with 400.
+- Files byte-identical to the trainer's commit.
+
 ## 0.23.0 - 2026-10-07
 
 ### Added
