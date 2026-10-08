@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.29.0 - 2026-10-08
+
+### Added
+
+- Ticket POST, executive assign, and paginated fetch by customer id and username.
+- `TicketInfoDto` joined DTO with optional pagination.
+
+### Verified
+
+- Rebooted and exercised live (outputs in history).
+
 ## 0.28.0 - 2026-10-07
 
 ### Added

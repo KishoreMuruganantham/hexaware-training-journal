@@ -228,28 +228,34 @@ helpdesk_backend/
     │   │   ├── controller/CustomerController.java
     │   │   ├── controller/ExecutiveController.java
     │   │   ├── controller/ManagerController.java
+    │   │   ├── controller/TicketController.java
     │   │   ├── service/CustomerService.java
     │   │   ├── service/ExecutiveService.java
     │   │   ├── service/ManagerService.java
     │   │   ├── service/UserService.java
+    │   │   ├── service/TicketService.java
     │   │   ├── repository/CustomerRepository.java
     │   │   ├── repository/ExecutiveRepository.java
     │   │   ├── repository/ManagerRepository.java
     │   │   ├── repository/UserRepository.java
+    │   │   ├── repository/TicketRepository.java
     │   │   ├── model/Customer.java
     │   │   ├── model/Executive.java
     │   │   ├── model/Manager.java
     │   │   ├── model/User.java
+    │   │   ├── model/Ticket.java
     │   │   ├── dto/request/ExecutiveDto.java
     │   │   ├── dto/request/ManagerDto.java
-    │   │   ├── dto/request/CustomerDto.java
-    │   │   ├── dto/request/CustomerUpdateDto.java
+    │   │   ├── dto/request/TicketDto.java
     │   │   ├── dto/response/ErrorDto.java
-    │   │   ├── mapper/CustomerMapper.java
+    │   │   ├── dto/response/TicketInfoDto.java
     │   │   ├── mapper/ExecutiveMapper.java
     │   │   ├── mapper/ManagerMapper.java
+    │   │   ├── mapper/TicketMapper.java
     │   │   ├── enums/JobTitle.java
     │   │   ├── enums/Role.java
+    │   │   ├── enums/Priority.java
+    │   │   ├── enums/Status.java
     │   │   ├── config/GlobalExceptionHandler.java
     │   │   ├── exception/ResourceNotFoundException.java
     │   │   └── exception/InvalidCallException.java
@@ -348,7 +354,7 @@ cd helpdesk_backend
 .\mvnw.cmd spring-boot:run
 ```
 
-The app starts Tomcat on port 8080 using the `helpdesk_db` database (created automatically) with the datasource from `application.properties`. Security auto-configuration is excluded in the trainer's starter. Customer endpoints: `POST /api/customer/add` with raw JSON saves and returns the record with its generated id; `GET /api/customer/all` lists all records; `GET /api/customer/{id}` fetches one (`ResourceNotFoundException` for a bad id); `DELETE /api/customer/{id}` removes it. `POST /api/executive/add` takes an `ExecutiveDto` (`@Valid`), maps it to an `Executive`, and saves it; bad input returns 400 with the field messages. `POST /api/manager/add` creates the linked user first (`Role.MANAGER`) and saves the manager; `POST /api/executive/add/{managerId}` validates the manager and attaches user plus manager to the executive. `PUT /api/customer/{id}` partially updates name/city and stamps `updatedAt`; an empty update returns 400 with the DTO.
+The app starts Tomcat on port 8080 using the `helpdesk_db` database (created automatically) with the datasource from `application.properties`. Security auto-configuration is excluded in the trainer's starter. Customer endpoints: `POST /api/customer/add` with raw JSON saves and returns the record with its generated id; `GET /api/customer/all` lists all records; `GET /api/customer/{id}` fetches one (`ResourceNotFoundException` for a bad id); `DELETE /api/customer/{id}` removes it. `POST /api/executive/add` takes an `ExecutiveDto` (`@Valid`), maps it to an `Executive`, and saves it; bad input returns 400 with the field messages. `POST /api/manager/add` creates the linked user first (`Role.MANAGER`) and saves the manager; `POST /api/executive/add/{managerId}` validates the manager and attaches user plus manager to the executive. `PUT /api/customer/{id}` partially updates name/city and stamps `updatedAt`; an empty update returns 400 with the DTO. Ticket endpoints: `POST /api/ticket/add/{customerId}` files a ticket; `PUT /api/ticket/assign/{executiveId}/{ticketId}` assigns it; `GET /api/ticket/v1/{customerId}?page=&size=` and `GET /api/ticket/v2?username=&page=&size=` return joined DTO pages.
 
 Before running, create the database:
 
@@ -571,6 +577,14 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Added `PUT /api/customer/{id}` with partial name/city update; empty updates throw `InvalidCallException` mapped to 400 with the DTO.
 - Added `CustomerUpdateDto` and stamped `updatedAt` on the customer via `@UpdateTimestamp`.
 - Rebooted and verified live: PUT with fields 200 with changed record and fresh timestamp; PUT `{}` 400 with `Update op terminated`.
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-10-08: Ticket POST, Assign, and Paginated Fetch
+
+- Added `Ticket` entity, `TicketDto`, `TicketMapper`, `TicketRepository`, and `TicketService` with ticket POST (validated customer, `OPEN` status) and executive assign flow.
+- Added `TicketInfoDto` joined DTO with `Pageable` fetch by customer id and by customer username (optional page/size defaults).
+- Rebooted and verified live: ticket POST 200; assign 200; v1 paged 200 with joined DTO; v2 by username 200 with full ticket-customer-executive row.
+- Queries use inner joins to executive, so unassigned tickets are excluded by design — kept exactly as he wrote it.
 - Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information
