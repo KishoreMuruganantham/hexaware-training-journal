@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.32.0 - 2026-10-08
+
+### Changed
+
+- Regrouped the training history to one heading per date with that day's commits listed; no entries added, removed, or reworded.
+- No source code changed.
+
 ## 0.31.0 - 2026-10-08
 
 ### Added
