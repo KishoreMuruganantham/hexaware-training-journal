@@ -1,5 +1,15 @@
 # Release Notes
 
+## 0.30.0 - 2026-10-08
+
+### Added
+
+- Ticket fetch by executive username with `TicketInfoDtoV2` and optional pagination.
+
+### Verified
+
+- Rebooted and exercised live (outputs in history).
+
 ## 0.29.0 - 2026-10-08
 
 ### Added
