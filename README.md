@@ -375,7 +375,11 @@ CREATE DATABASE fsd_hex_sept_2026;
 
 Daily training notes, schedules, exercises, and milestones will be added over time. Each meaningful learning milestone should be recorded with its date, topic, work completed, and follow-up action.
 
-### 2026-09-21: Stored Procedure Employee Retrieval
+### 2026-09-21
+
+Commits: `48297b1` Initialize Hexaware training journal; `9d89488` Add employee stored procedure retrieval.
+
+**Stored Procedure Employee Retrieval**
 
 - Added the `Employee` model with fields for ID, name, branch, city, and department.
 - Added the `CustomerDao` data-access layer for calling `all_emp()`.
@@ -383,7 +387,11 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Updated the application entry point to print all returned employees.
 - Updated `DBConnection.dbConnect()` to return the active JDBC connection.
 
-### 2026-09-22: Parameterized Department Procedures
+### 2026-09-22
+
+Commits: `976ad6f` Add parameterized department procedures; `f88e5f3` Align training exercises with trainer commits; `82ccd94` Remove unused database connection variable; `1caa3c0` Add employee count and views; `e4426f3` Add product stock triggers; `3d88d2c` Add e-commerce ER model.
+
+**Parameterized Department Procedures**
 
 - Added the trainer's validated `emp_by_department` and `emp_name_by_department` procedures.
 - Added the trainer's parameterized `emp_by_department` JDBC call using `CallableStatement`.
@@ -391,28 +399,32 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Kept `getEmployeeNamesByDepartment` as the trainer's placeholder method.
 - Updated the application to demonstrate department-based retrieval.
 
-### 2026-09-22: OUT Parameter and Views
+**OUT Parameter and Views**
 
 - Added `getEmpCountByDept` using `CallableStatement` and an integer OUT parameter.
 - Updated the application to display the employee count for the DEV department.
 - Added the trainer's `v_emp` and `v_emp_dev` view examples with `WITH CHECK OPTION`.
 - Commented the database connection status messages as shown in the trainer's commit.
 
-### 2026-09-22: E-commerce Triggers
+**E-commerce Triggers**
 
 - Added the `product` and `orders` tables from the trainer's trigger case study.
 - Added `trg_check_stock_qty` to reject invalid products and orders exceeding available stock.
 - Added `trg_update_product_stock_qty` to reduce stock after a valid order.
 - Added a valid sample order for product `1` with quantity `2`.
 
-### 2026-09-22: E-commerce ER Model
+**E-commerce ER Model**
 
 - Added the MySQL Workbench model `ecom_sample.mwb`.
 - Forward-engineered the `ecom_sample_db` schema with `users`, `customer`, `vendor`, `category`, `product`, and `customer_product`.
 - Verified the six foreign-key relationships shown in the trainer's ER diagram.
 - Prepared the forward-engineered SQL without the generated first three lines, last three lines, or `VISIBLE` keyword.
 
-### 2026-09-23: Java Fundamentals Collections and DTO Mapping
+### 2026-09-23
+
+Commits: `90cf076` Add Java fundamentals collections and DTO mapping; `1422710` Correct release version to 0.8.9.
+
+**Java Fundamentals Collections and DTO Mapping**
 
 - Added the `JavaFundamentals` project with `Branch`, `Department`, and `SortDirection` enums.
 - Added the `Employee` model with branch, department, joining date, and salary fields.
@@ -425,7 +437,11 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - MySQL server on `localhost:3306` was reachable; the fundamentals exercise itself does not need a database.
 - Known issue: none; the salary sort uses the trainer's `(int)` cast comparison.
 
-### 2026-09-24: Grouping, DTO Stats, Comparable, and OOPs
+### 2026-09-24
+
+Commits: `4725f2b` Add grouping employees by department; `1d4f11d` Add map to DTO conversion with Map demo; `a75ff1f` Add salary grouping by branch with total sum; `2779d85` Add Comparable default sort by joining date; `89f3cd3` Add OOPs concepts with payment hierarchy; `c1b4d37` Update journal for grouping, DTO stats, Comparable and OOPs training.
+
+**Grouping, DTO Stats, Comparable, and OOPs**
 
 - Added `EmpDeptStatDto` and `getEmpCountForEachDepartment` grouping with `Collectors.groupingBy` and `Collectors.counting`.
 - Added `MapDemo` with the trainer's `HashMap` login example.
@@ -436,7 +452,11 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Verified with `javac` on Java 21 (BUILD_EXIT=0); `App` printed the department stats, branch salary stats, and total salary 1680000.0; `MapDemo`, `OOPDemo`, and `IsADemo` ran (RUN_EXIT=0).
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-09-25: Singleton and Factory Patterns
+### 2026-09-25
+
+Commits: `5138f41` Add Singleton pattern with heap and stack demo; `da77d71` Add factory pattern for payments; `613068d` Update journal for Singleton and factory pattern training.
+
+**Singleton and Factory Patterns**
 
 - Added the `Customer` bean and the trainer's singleton `DBConnection` shared by `CustomerDao`, `OrderDao`, and `ProductDao` in `com.design_pattern`.
 - Added `HeapDemo` showing heap object references and the trainer's stack and garbage-collector comments.
@@ -444,7 +464,11 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Verified with `javac` on Java 21 (BUILD_EXIT=0); `HeapDemo`, `com.design_pattern.App` (same connection instance in all DAOs), and `com.factory.design_pattern.App` (charge 10.0, limit 200000.0) ran (RUN_EXIT=0).
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-09-28: Maven and JUnit Tests
+### 2026-09-28
+
+Commits (branch `junit`): `8851402` Add Maven project setup with JUnit dependencies; `0de9be7` Add first test case for demo service; `a3b7930` Add test case with validations and exceptions; `c72118f` Add stream test cases for employee service; `9e05f28` Add DTO test case with mapper; `165b165` Update journal for Maven and JUnit training.
+
+**Maven and JUnit Tests**
 
 - Added the `MavenDemo` Maven project with JUnit dependencies in `pom.xml`.
 - Added `DemoService` with validations and custom exceptions (`EmptyListException`, `InvalidInputException`, `InvalidListException`).
@@ -455,7 +479,11 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Test execution needs Maven and the JUnit jars, which are not installed in this environment, so `mvn test` could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-09-29: Spring Core Dependency Injection
+### 2026-09-29
+
+Commits (branch `spring-core`): `0013596` Add Spring app setup with employee salary columns; `a15cdb3` Load Spring app with AppConfig; `af076c1` Add DAO and service classes to Spring context; `b0f549a` Add autowiring with setter injection variants; `1c9c63a` Add in-method direct injection; `6b378f1` Add custom bean definition; `eb160fa` Add datasource and JdbcTemplate config; `518ed01` Update journal for Spring Core training.
+
+**Spring Core Dependency Injection**
 
 - Added the `SpringCoreApp` Maven project with Spring dependencies in `pom.xml`.
 - Added `AppConfig` with component scanning and context loading in `App`.
@@ -468,7 +496,11 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Running needs Maven, the Spring jars, and MySQL with the updated employee table, so the app could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-09-30: HelpDesk Case Study
+### 2026-09-30
+
+Commits (branch `spring-core`): `b70c973` Add HelpDesk project setup with models; `61d618d` Add HelpDesk models, repositories and services; `c207393` Add customer sign up insertion; `86facdf` Add fetch operations with mappers; `d13e93d` Update journal for HelpDesk case study.
+
+**HelpDesk Case Study**
 
 - Added the `SpringCoreHelpDesk` Maven project with models (`Customer`, `User`, `Ticket`), enums (`Plan`, `Priority`, `Status`, `Role`), repositories, and services.
 - Added customer sign-up insertion through the service and repository layers.
@@ -478,7 +510,11 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Running needs Maven, Spring jars, and MySQL, so the app could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-01: Hibernate and JPA Entities
+### 2026-10-01
+
+Commits (branch `hibernate-jpa`): `b4cf2d7` Add Hibernate app initial config; `4beb80e` Add Hibernate config with Customer entity; `cd3bfa1` Add insert and fetch with JPQL repository; `cfcb1c9` Add User model with roles; `5804b7c` Add all helpdesk entities; `1897717` Update journal for Hibernate and JPA training.
+
+**Hibernate and JPA Entities**
 
 - Added the `HibernateJpaApp` Maven project with Hibernate and Spring dependencies in `pom.xml`.
 - Added `AppConfig` with the entity manager factory, transaction manager, and datasource.
@@ -489,7 +525,11 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Running needs Maven, Hibernate/Spring jars, and MySQL, so the app could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-05: Executive Insert
+### 2026-10-05
+
+Commits (branch `hibernate-jpa`): `9c1fab1` Add executive insert with service and repository; `91707e0` Update journal for executive insert training; `656713a` Add full executive insert with user flow; `554edb4` Update journal for executive user flow training; `43e99f5` Add ticket creation with customer flow; `a30c336` Update journal for ticket creation training; `a7fd88c` Add ticket fetch with DTO mapping; `f0af1aa` Update journal for ticket fetch training.
+
+**Executive Insert**
 
 - Added `ExecutiveService` with `insertExecutive` carrying the trainer's four step comments (prepare user, fetch manager, attach both to executive, pass to repository).
 - Added `ExecutiveRepository` and the `ExecutiveController` starter, which prepares a manager id, an executive, and login details and calls the service.
@@ -499,7 +539,7 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Running needs Maven, Hibernate/Spring jars, and MySQL, so the app could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-05: Executive Insert With User Flow
+**Executive Insert With User Flow**
 
 - Implemented the full `insertExecutive` flow: validate the manager id through `ExecutiveRepository.getManagerById` with `ResourceNotFoundException`, persist the `User`, re-fetch the complete user row with the JPQL `getUserByUsername` query, attach user and manager to the executive, and persist it.
 - Added `UserRepository` with `insert` and `getUserByUsername`, `ResourceNotFoundException`, and the `User`/`Executive` model updates.
@@ -507,7 +547,7 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Running needs Maven, Hibernate/Spring jars, and MySQL, so the app could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-05: Ticket Creation With Customer
+**Ticket Creation With Customer**
 
 - Added `TicketService` with step-commented `insertTicket`: fetch the customer by id (invalid id throws `ResourceNotFoundException`), prepare the ticket with `OPEN` status, attach the customer, and persist it.
 - Added `TicketRepository` and the `TicketController` starter, which files an "Internet shutdown" ticket for customer id `1`.
@@ -521,7 +561,7 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Running needs Maven, Hibernate/Spring jars, and MySQL, so the app could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-05: Ticket Fetch With DTO
+**Ticket Fetch With DTO**
 
 - Added `TicketRespDto` and `TicketMapper` converting ticket entities (customer name/username, executive id/job title) to DTOs.
 - Added `fetchTicketInfoV1` (all tickets) and the `fetchTicketInfoV2` join-query placeholder in `TicketRepository`.
@@ -531,7 +571,11 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Running needs Maven, Hibernate/Spring jars, and MySQL, so the app could not be run here.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-06: Spring Boot Customer POST API
+### 2026-10-06
+
+Commits (branch `spring-boot`): `fb6f234` Add Spring Boot helpdesk backend with customer POST API; `20067cb` Update journal for Spring Boot backend training; `5857616` Add basic CRUD APIs for customer; `8d80e10` Update journal for customer CRUD APIs training; `5750a19` Add global handler for invalid IDs; `4a84739` Update journal for global handler training; `23dbee5` Add error DTO response with ResponseEntity; `b0d8558` Update journal for error DTO training.
+
+**Spring Boot Customer POST API**
 
 - Added the trainer's `helpdesk_backend` Spring Boot project (Boot 3.5.16, Java 21, Maven wrapper) with Web, Data JPA, MySQL, Security, Lombok, and Validation starters.
 - Added `Customer` entity (Lombok + JPA), `CustomerRepository` (`JpaRepository`), `CustomerService`, and `CustomerController` with `POST /api/customer/add` returning the saved record with its generated id.
@@ -539,27 +583,31 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Verified with the `mvnw` wrapper: Maven bootstrapped, project compiles, app booted with Tomcat on port 8080, and `POST /api/customer/add` with raw JSON returned HTTP 200 plus the saved record with its generated id.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-06: Customer CRUD APIs
+**Customer CRUD APIs**
 
 - Added `GET /api/customer/all`, `GET /api/customer/{id}`, and `DELETE /api/customer/{id}` to the controller with `getAll`, `getById`, and `deleteById` in the service using the free `JpaRepository` methods.
 - Added `ResourceNotFoundException` thrown for an invalid customer id.
 - Exercised all four endpoints live: `GET /all` returned 200 with 5 records, `GET /1` returned 200 with the record, `POST` returned 200 with the new record, `DELETE /1` returned 200 with an empty body, and `GET /1` afterwards returned the trainer's exact 500 JSON because the exception carries no status mapping — kept exactly as he wrote it.
 - Known issue: none in code; the 500 on missing ids is his implementation as shown.
 
-### 2026-10-06: Global Handler for Invalid IDs
+**Global Handler for Invalid IDs**
 
 - Added `GlobalExceptionHandler` (`@ControllerAdvice`) mapping `ResourceNotFoundException` to 400 with the message body, kept exactly as he wrote it.
 - `deleteById` now validates through `getById` first, so deleting a missing id throws instead of silently passing.
 - Exercised live after reboot: `GET /all` 200, `GET /3` 200 with the record, `GET /1`, `GET /2`, and `DELETE /999` (all missing) each return 400 with `Invalid customer id`, and `DELETE /3` returns 200 empty. The old 500 JSON is gone.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-06: Error DTO Response
+**Error DTO Response**
 
 - Added `ErrorDto` record (`message`, `comments`, `timestamp`) fulfilling his own "always reply the object not the string" comment; the handler now returns the DTO with 400 and `"Id not found in DB"`.
 - Rebooted and verified live: `GET /1` returns 400 with `{"message":"Invalid customer id","comments":"Id not found in DB","timestamp":"..."}`, and `GET /all` still returns 200 with the records.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-07: Executive POST API With Validation
+### 2026-10-07
+
+Commits (branch `spring-boot`): `7d43b8a` Add executive POST API with validation; `09a15b0` Update journal for executive validation training; `b507731` Refine validation errors to field message map; `875e0a1` Update journal for validation refinement training; `175dabb` Add executive POST with linked user; `579a450` Update journal for executive user training; `45bff13` Add manager POST with connected executive flow; `a267e97` Update journal for manager flow training; `fd9bb06` Add customer POST with user scaffolding; `09b0606` Add customer POST API with linked user; `95edb01` Update journal for customer user training; `597efa9` Add customer update record API; `b6e514e` Update journal for customer update training.
+
+**Executive POST API With Validation**
 
 - Added `ExecutiveDto` record with `@NotBlank`, `@NotNull`, `@Email`, and `@Size` validations, `ExecutiveMapper`, `Executive` entity, `JobTitle` enum, `ExecutiveRepository`, and `ExecutiveService` mapping DTO to entity.
 - Added `ExecutiveController` with `POST /api/executive/add` (`@Valid @RequestBody`); added `@Repository` to the customer repository and a port note in properties.
@@ -568,27 +616,31 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Environment note: one boot attempt failed with MySQL `Communications link failure` while MySQL80 showed Running but accepted no connections; after a service restart the identical code booted and verified clean — code faultless, database was the cause.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-07: Manager POST With Connected Executive
+**Manager POST With Connected Executive**
 
 - Added `Manager` entity, `ManagerDto`, `ManagerMapper`, `ManagerRepository`, and `ManagerService` creating the linked user first (`Role.MANAGER`).
 - `ExecutiveService` now takes the manager id from the path, validates it, and attaches user plus manager to the executive; `Executive` gained the `manager` link.
 - Rebooted and verified live: manager POST 200 with linked user; executive POST with valid manager id 200; bad manager id 400. One 500 seen mid-testing was a duplicate-username row from earlier test data, confirmed in the server log — code faultless.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-07: Customer POST With Linked User
+**Customer POST With Linked User**
 
 - Added `CustomerDto`, `CustomerMapper`, and the user link on `Customer`; the customer POST now persists the user first and returns the customer with its managed user attached.
 - Rebooted and verified live: customer POST 200 carrying the persisted user; older rows show `user:null` as before.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-07: Customer Update Record
+**Customer Update Record**
 
 - Added `PUT /api/customer/{id}` with partial name/city update; empty updates throw `InvalidCallException` mapped to 400 with the DTO.
 - Added `CustomerUpdateDto` and stamped `updatedAt` on the customer via `@UpdateTimestamp`.
 - Rebooted and verified live: PUT with fields 200 with changed record and fresh timestamp; PUT `{}` 400 with `Update op terminated`.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-08: Ticket POST, Assign, and Paginated Fetch
+### 2026-10-08
+
+Commits (branch `spring-boot`): `f629d4e` Add ticket POST and executive assign; `b10f303` Add ticket fetch with pagination; `2eed592` Add ticket fetch by customer username; `624e537` Update journal for ticket APIs training; `00162c3` Add ticket fetch by executive username; `ac2f269` Update journal for executive username fetch training; `93fb30b` Add customer plan case study scaffolding; `c15e2d5` Update journal for customer plan scaffolding training.
+
+**Ticket POST, Assign, and Paginated Fetch**
 
 - Added `Ticket` entity, `TicketDto`, `TicketMapper`, `TicketRepository`, and `TicketService` with ticket POST (validated customer, `OPEN` status) and executive assign flow.
 - Added `TicketInfoDto` joined DTO with `Pageable` fetch by customer id and by customer username (optional page/size defaults).
@@ -596,13 +648,13 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 - Queries use inner joins to executive, so unassigned tickets are excluded by design — kept exactly as he wrote it.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-08: Ticket Fetch By Executive Username
+**Ticket Fetch By Executive Username**
 
 - Added `TicketInfoDtoV2` with the exact assessment field list and the joined fetch by executive username with optional page/size defaults.
 - Rebooted and verified live: username query returns 200 with full ticket-executive-customer rows; unknown username returns 200 empty.
 - Known issue: none; kept the trainer's style and comments as shown.
 
-### 2026-10-08: Customer Plan Case Study Scaffolding
+**Customer Plan Case Study Scaffolding**
 
 - Added `Plan` and `CustomerPlan` entities with `PlanType` enum for the customer-plan case study.
 - Added `PlanController` and `CustomerPlanController` stubs carrying his assignment comments (plan insert, plans-by-username fetch).
