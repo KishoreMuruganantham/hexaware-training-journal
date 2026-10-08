@@ -63,7 +63,7 @@ flowchart TD
 | `junit` | `MavenDemo` with JUnit tests (2026-09-28) | `hex_fsd_sept-2026/commits/junit` (5 new commits) | `165b165` |
 | `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
-| `spring-boot` | `helpdesk_backend` Boot project with ticket APIs (2026-10-06/08) | `hex_fsd_sept-2026/commits/spring-boot` (14 new commits) | `ac2f269` |
+| `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs (2026-10-06/08) | `hex_fsd_sept-2026/commits/spring-boot` (15 new commits) | `c15e2d5` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -538,7 +538,7 @@ Commits (branch `spring-boot`): `7d43b8a` Add executive POST API with validation
 
 ### 2026-10-08
 
-Commits (branch `spring-boot`): `f629d4e` Add ticket POST and executive assign; `b10f303` Add ticket fetch with pagination; `2eed592` Add ticket fetch by customer username; `624e537` Update journal for ticket APIs training; `00162c3` Add ticket fetch by executive username; `ac2f269` Update journal for executive username fetch training.
+Commits (branch `spring-boot`): `f629d4e` Add ticket POST and executive assign; `b10f303` Add ticket fetch with pagination; `2eed592` Add ticket fetch by customer username; `624e537` Update journal for ticket APIs training; `00162c3` Add ticket fetch by executive username; `ac2f269` Update journal for executive username fetch training; `93fb30b` Add customer plan case study scaffolding; `c15e2d5` Update journal for customer plan scaffolding training.
 
 **Ticket POST, Assign, and Paginated Fetch** (branch `spring-boot`)
 
@@ -556,6 +556,13 @@ Commits (branch `spring-boot`): `f629d4e` Add ticket POST and executive assign; 
 - Code and journal live on the `spring-boot` branch; only this README entry is merged here.
 - Released as `v0.30.0` on the `spring-boot` branch.
 
+**Customer Plan Case Study Scaffolding** (branch `spring-boot`)
+
+- Added `Plan` and `CustomerPlan` entities with `PlanType` enum, plus controller stubs carrying his next-assignment comments.
+- Rebooted and verified live: app boots clean with existing endpoints green.
+- Code and journal live on the `spring-boot` branch; only this README entry is merged here.
+- Released as `v0.31.0` on the `spring-boot` branch.
+
 ## Known Issues and Limits
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
@@ -565,7 +572,7 @@ Commits (branch `spring-boot`): `f629d4e` Add ticket POST and executive assign; 
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`–`v0.30.0` on `spring-boot`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`–`v0.31.0` on `spring-boot`.
 
 ## Repository Information
 
