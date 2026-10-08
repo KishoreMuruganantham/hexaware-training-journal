@@ -228,6 +228,8 @@ helpdesk_backend/
     │   │   ├── controller/CustomerController.java
     │   │   ├── controller/ExecutiveController.java
     │   │   ├── controller/ManagerController.java
+    │   │   ├── controller/CustomerPlanController.java
+    │   │   ├── controller/PlanController.java
     │   │   ├── controller/TicketController.java
     │   │   ├── service/CustomerService.java
     │   │   ├── service/ExecutiveService.java
@@ -242,6 +244,8 @@ helpdesk_backend/
     │   │   ├── model/Customer.java
     │   │   ├── model/Executive.java
     │   │   ├── model/Manager.java
+    │   │   ├── model/CustomerPlan.java
+    │   │   ├── model/Plan.java
     │   │   ├── model/User.java
     │   │   ├── model/Ticket.java
     │   │   ├── dto/request/ExecutiveDto.java
@@ -258,6 +262,7 @@ helpdesk_backend/
     │   │   ├── mapper/TicketMapper.java
     │   │   ├── enums/JobTitle.java
     │   │   ├── enums/Role.java
+    │   │   ├── enums/PlanType.java
     │   │   ├── enums/Priority.java
     │   │   ├── enums/Status.java
     │   │   ├── config/GlobalExceptionHandler.java
@@ -595,6 +600,13 @@ Daily training notes, schedules, exercises, and milestones will be added over ti
 
 - Added `TicketInfoDtoV2` with the exact assessment field list and the joined fetch by executive username with optional page/size defaults.
 - Rebooted and verified live: username query returns 200 with full ticket-executive-customer rows; unknown username returns 200 empty.
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-10-08: Customer Plan Case Study Scaffolding
+
+- Added `Plan` and `CustomerPlan` entities with `PlanType` enum for the customer-plan case study.
+- Added `PlanController` and `CustomerPlanController` stubs carrying his assignment comments (plan insert, plans-by-username fetch).
+- Rebooted and verified live: app boots clean, existing endpoints still green.
 - Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information

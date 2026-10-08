@@ -1,5 +1,15 @@
 # Release Notes
 
+## 0.31.0 - 2026-10-08
+
+### Added
+
+- Customer plan case study scaffolding with entities and assignment stubs.
+
+### Verified
+
+- Rebooted and exercised live (outputs in history).
+
 ## 0.30.0 - 2026-10-08
 
 ### Added
