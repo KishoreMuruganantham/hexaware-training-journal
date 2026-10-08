@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.17 - 2026-10-08
+
+### Changed
+
+- Recorded the 2026-10-08 executive-username fetch training from the `spring-boot` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.16 - 2026-10-08
 
 ### Changed
