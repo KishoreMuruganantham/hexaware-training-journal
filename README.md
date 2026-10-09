@@ -254,8 +254,11 @@ helpdesk_backend/
     │   │   ├── dto/request/CustomerUpdateDto.java
     │   │   ├── dto/request/TicketDto.java
     │   │   ├── dto/response/ErrorDto.java
+    │   │   ├── dto/response/JobTitleExecutiveCountDto.java
     │   │   ├── dto/response/TicketInfoDto.java
     │   │   ├── dto/response/TicketInfoDtoV2.java
+    │   │   ├── dto/response/TicketRespDto.java
+    │   │   ├── dto/response/TicketStatusStatDto.java
     │   │   ├── mapper/ExecutiveMapper.java
     │   │   ├── mapper/ManagerMapper.java
     │   │   ├── mapper/CustomerMapper.java
@@ -363,7 +366,7 @@ cd helpdesk_backend
 .\mvnw.cmd spring-boot:run
 ```
 
-The app starts Tomcat on port 8080 using the `helpdesk_db` database (created automatically) with the datasource from `application.properties`. Security auto-configuration is excluded in the trainer's starter. Customer endpoints: `POST /api/customer/add` with raw JSON saves and returns the record with its generated id; `GET /api/customer/all` lists all records; `GET /api/customer/{id}` fetches one (`ResourceNotFoundException` for a bad id); `DELETE /api/customer/{id}` removes it. `POST /api/executive/add` takes an `ExecutiveDto` (`@Valid`), maps it to an `Executive`, and saves it; bad input returns 400 with the field messages. `POST /api/manager/add` creates the linked user first (`Role.MANAGER`) and saves the manager; `POST /api/executive/add/{managerId}` validates the manager and attaches user plus manager to the executive. `PUT /api/customer/{id}` partially updates name/city and stamps `updatedAt`; an empty update returns 400 with the DTO. Ticket endpoints: `POST /api/ticket/add/{customerId}` files a ticket; `PUT /api/ticket/assign/{executiveId}/{ticketId}` assigns it; `GET /api/ticket/v1/{customerId}?page=&size=` and `GET /api/ticket/v2?username=&page=&size=` return joined DTO pages. `GET /api/ticket/executive?username=&page=&size=` returns the assessment DTO list by executive username.
+The app starts Tomcat on port 8080 using the `helpdesk_db` database (created automatically) with the datasource from `application.properties`. Security auto-configuration is excluded in the trainer's starter. Customer endpoints: `POST /api/customer/add` with raw JSON saves and returns the record with its generated id; `GET /api/customer/all` lists all records; `GET /api/customer/{id}` fetches one (`ResourceNotFoundException` for a bad id); `DELETE /api/customer/{id}` removes it. `POST /api/executive/add` takes an `ExecutiveDto` (`@Valid`), maps it to an `Executive`, and saves it; bad input returns 400 with the field messages. `POST /api/manager/add` creates the linked user first (`Role.MANAGER`) and saves the manager; `POST /api/executive/add/{managerId}` validates the manager and attaches user plus manager to the executive. `PUT /api/customer/{id}` partially updates name/city and stamps `updatedAt`; an empty update returns 400 with the DTO. Ticket endpoints: `POST /api/ticket/add/{customerId}` files a ticket; `PUT /api/ticket/assign/{executiveId}/{ticketId}` assigns it; `GET /api/ticket/v1/{customerId}?page=&size=` and `GET /api/ticket/v2?username=&page=&size=` return joined DTO pages. `GET /api/ticket/executive?username=&page=&size=` returns the assessment DTO list by executive username. `GET /api/manager/jobtitle/stat/executive/count` groups executives by job title with counts and `PUT /api/jobtitle/update/{executiveId}?jobTitle=` updates an executive's job title. `GET /api/ticket/status/customers/stat` returns ticket-status counts with joined customer counts, `GET /api/ticket/by-priority?priority=` fetches tickets through the `findByPriority` derived query, and `GET /api/ticket/filter?priority=&status=&fromDate=&toDate=` applies optional priority, status, and date-range filters with the dates converted to UTC instants.
 
 Before running, create the database:
 
@@ -659,6 +662,19 @@ Commits (branch `spring-boot`): `f629d4e` Add ticket POST and executive assign; 
 - Added `Plan` and `CustomerPlan` entities with `PlanType` enum for the customer-plan case study.
 - Added `PlanController` and `CustomerPlanController` stubs carrying his assignment comments (plan insert, plans-by-username fetch).
 - Rebooted and verified live: app boots clean, existing endpoints still green.
+- Known issue: none; kept the trainer's style and comments as shown.
+
+### 2026-10-09
+
+Commits (branch `spring-boot`): `5790d5c` Add group by with executive update; `2e811be` Add group by for ticket status; `a747596` Add ticket fetch by priority; `7c103b0` Add dynamic filter API.
+
+**Group By Stats, Derived Queries, and Dynamic Filter**
+
+- Added `GET /api/manager/jobtitle/stat/executive/count` returning `JobTitleExecutiveCountDto` from an `@Query` that groups executives by non-null `jobTitle`, plus `PUT /api/jobtitle/update/{executiveId}?jobTitle=` that fetches the executive, sets the new title, and saves it.
+- Added `GET /api/ticket/status/customers/stat` returning `TicketStatusStatDto` from an `@Query` that groups tickets by status with the joined customer count.
+- Added the trainer's derived query methods `findByPriority`, `findByStatus`, and `findByPriorityAndStatus` with field hints on `Ticket`, and `GET /api/ticket/by-priority?priority=` mapping through `TicketMapper.convertEntityToDto` into `TicketRespDto`.
+- Added `GET /api/ticket/filter?priority=&status=&fromDate=&toDate=` with every parameter optional — the repository `@Query` uses `?1 IS NULL OR ...` null-safe predicates and the service converts `LocalDate` bounds to UTC instants with `atStartOfDay(ZoneOffset.UTC)`.
+- Rebooted and verified live: by-priority `HIGH` 200 with ticket 1; no-param filter 200 with all 3 tickets; `status=OPEN` 200 with 3; combined priority/status/date filter 200 with 1; status stat 200 (`OPEN` → 3 customers); job-title stat 200 with an empty list on the current data; a missing executive id on the update route returns 400 through the global handler.
 - Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information

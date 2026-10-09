@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.33.0 - 2026-10-09
+
+### Added
+
+- Group-by stats: executives per job title with a job-title update API, and ticket status with customer counts.
+- Derived query methods `findByPriority`, `findByStatus`, `findByPriorityAndStatus` with `GET /api/ticket/by-priority`.
+- Dynamic filter API `GET /api/ticket/filter` with optional priority, status, and date range.
+
+### Verified
+
+- Rebooted and exercised live (outputs in history).
+
 ## 0.32.0 - 2026-10-08
 
 ### Changed
