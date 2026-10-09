@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.19 - 2026-10-09
+
+### Changed
+
+- Recorded the 2026-10-09 group-by, derived-query, and dynamic-filter training from the `spring-boot` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.18 - 2026-10-08
 
 ### Changed
