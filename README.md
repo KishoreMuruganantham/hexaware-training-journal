@@ -666,7 +666,7 @@ Commits (branch `spring-boot`): `f629d4e` Add ticket POST and executive assign; 
 
 ### 2026-10-09
 
-Commits (branch `spring-boot`): `5790d5c` Add group by with executive update; `2e811be` Add group by for ticket status; `a747596` Add ticket fetch by priority; `7c103b0` Add dynamic filter API.
+Commits (branch `spring-boot`): `5790d5c` Add group by with executive update; `2e811be` Add group by for ticket status; `a747596` Add ticket fetch by priority; `7c103b0` Add dynamic filter API; `e69fd0f` Update journal for group by, derived queries and dynamic filter training.
 
 **Group By Stats, Derived Queries, and Dynamic Filter**
 
