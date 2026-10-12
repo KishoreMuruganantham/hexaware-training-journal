@@ -63,7 +63,7 @@ flowchart TD
 | `junit` | `MavenDemo` with JUnit tests (2026-09-28) | `hex_fsd_sept-2026/commits/junit` (5 new commits) | `165b165` |
 | `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
-| `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs (2026-10-06/09) | `hex_fsd_sept-2026/commits/spring-boot` (19 new commits) | `63f6c50` |
+| `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs (2026-10-06/12) | `hex_fsd_sept-2026/commits/spring-boot` (24 new commits) | `ec1c1d4` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -577,6 +577,22 @@ Commits (branch `spring-boot`): `5790d5c` Add group by with executive update; `2
 - Code and journal live on the `spring-boot` branch; only this README entry is merged here.
 - Released as `v0.33.0` on the `spring-boot` branch.
 
+### 2026-10-12
+
+Commits (branch `spring-boot`): `52dc03f` Add Part 1: Spring Security - in memory auth; `d173f39` Add Part 2: Spring Security filter chain; `82516e6` Add Part 2: Spring Security - password encoder and auth provider; `8e59ed8` Add Postman collection till security impl; `5875ee2` Add full POST APIs with ownership checks; `cc8f705` Update journal for Spring Security and ownership checks training.
+
+**Spring Security and Ownership Checks** (branch `spring-boot`)
+
+- Added Spring Security to `helpdesk_backend`: `SecurityConfig` builds the `SecurityFilterChain` with CSRF disabled, HTTP Basic enabled, and role matchers - permitAll for customer signup, admin onboarding and the ticket filter/stat reads, `CUSTOMER` for customer reads, `MANAGER` for executive add and ticket assign, `ADMIN` for manager add - backed by a `DaoAuthenticationProvider` and a `BCryptPasswordEncoder`.
+- Added `MyUserDetailsService` that loads the active `User` through `UserRepository.loadUserByUsername`, with the `User` model supplying the account flags the provider needs; the earlier in-memory user demo stays in the file as his commented step.
+- Added the `HelpDesk` Postman collection at the repository root covering the secured ticket, assign, admin and manager flows.
+- Added `AdminController` with `POST /api/admin/add` through `AdminDto` and `UserService.addAdmin`, storing the ADMIN user with a BCrypt-encoded password.
+- Added the `OwnershipException` with a `GlobalExceptionHandler` mapping it to the error DTO, and the ownership check in `TicketService.assignExecutive` that verifies the executive belongs to the logged-in manager's team before assigning.
+- Reworked the POST APIs around the logged-in user: ticket add and executive add take the username from `Principal` and resolve the customer or manager through the new `getByUsername` repository lookups instead of path ids, and executive passwords are BCrypt-encoded at creation.
+- Rebooted and verified live: unauthenticated customer reads and manager add return 401, a wrong role returns 403, the full chain works (admin onboards a manager, manager onboards an executive, customer signs up and raises a ticket, manager assigns his own executive - every step 200), assigning another manager's executive returns 400 `Operation not allowed! contact admin`, wrong password returns 401, and new users are stored with BCrypt hashes.
+- Code and journal live on the `spring-boot` branch; only this README entry is merged here.
+- Released as `v0.34.0` on the `spring-boot` branch.
+
 ## Known Issues and Limits
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
@@ -586,7 +602,7 @@ Commits (branch `spring-boot`): `5790d5c` Add group by with executive update; `2
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.33.0` on `spring-boot`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.34.0` on `spring-boot`.
 
 ## Repository Information
 
