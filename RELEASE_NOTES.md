@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.34.0 - 2026-10-12
+
+### Added
+
+- Spring Security wiring: security filter chain with HTTP Basic and CSRF disabled, BCrypt password encoding, DB-backed user details service, and role rules for the customer, manager, executive, and admin flows.
+- Admin onboarding API (`POST /api/admin/add`) and an ownership check on ticket assignment that rejects another manager's executive, plus the trainer's `HelpDesk` Postman collection at the repository root.
+- Ticket add and executive add now resolve the customer or manager from the logged-in `Principal` instead of a path id.
+
+### Verified
+
+- Rebooted and exercised live (outputs in history).
+
 ## 0.33.0 - 2026-10-09
 
 ### Added
