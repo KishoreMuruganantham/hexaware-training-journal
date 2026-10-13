@@ -694,7 +694,7 @@ Commits (branch `spring-boot`): `52dc03f` Add Part 1: Spring Security - in memor
 
 ### 2026-10-13
 
-Commits (branch `spring-boot`): `9241ce0` Add JWT auth.
+Commits (branch `spring-boot`): `9241ce0` Add JWT auth; `204316d` Update journal for JWT authentication training.
 
 **JWT Authentication**
 
