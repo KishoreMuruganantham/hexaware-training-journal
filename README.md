@@ -63,7 +63,7 @@ flowchart TD
 | `junit` | `MavenDemo` with JUnit tests (2026-09-28) | `hex_fsd_sept-2026/commits/junit` (5 new commits) | `165b165` |
 | `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
-| `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs (2026-10-06/12) | `hex_fsd_sept-2026/commits/spring-boot` (24 new commits) | `ec1c1d4` |
+| `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs (2026-10-06/13) | `hex_fsd_sept-2026/commits/spring-boot` (25 new commits) | `af7a71f` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -593,6 +593,20 @@ Commits (branch `spring-boot`): `52dc03f` Add Part 1: Spring Security - in memor
 - Code and journal live on the `spring-boot` branch; only this README entry is merged here.
 - Released as `v0.34.0` on the `spring-boot` branch.
 
+### 2026-10-13
+
+Commits (branch `spring-boot`): `9241ce0` Add JWT auth; `204316d` Update journal for JWT authentication training.
+
+**JWT Authentication** (branch `spring-boot`)
+
+- Added the `jjwt` 0.9.1 library with `javax.xml.bind` jaxb-api and `org.glassfish.jaxb` jaxb-runtime in `pom.xml` so JWT works on Java 21.
+- Added `JwtUtility` that signs HS256 tokens with his in-file secret key, subject = logged-in username, and a 24-hour expiry, plus `validateToken`, `extractUsername`, and `extractExpiration` helpers.
+- Added `AuthController` with `GET /api/auth/login` marked `authenticated()` in the filter chain: Spring checks the credentials first (HTTP Basic is still enabled), and the controller replies with a `TokenDto` carrying the token, expiry time, and issue time.
+- Added `JwtFilter` as a `OncePerRequestFilter` registered before `UsernamePasswordAuthenticationFilter`: it reads `Authorization: Bearer <token>`, validates it against `JwtUtility`, loads the user through `MyUserDetailsService`, and sets the `SecurityContextHolder` authentication with that user's authorities - so tokens now satisfy the same role rules as Basic.
+- Rebooted and verified live: login returns 401 with no credentials or a wrong password and 200 with valid Basic credentials carrying the token; the Bearer token gets 200 on `GET /api/customer/19` while no credentials still give 401 and Basic still works; an ADMIN token gets 403 on the customer read and a CUSTOMER token 403 on `POST /api/manager/add`; ticket add with the Bearer token returns 200 (ticket 8 appears in the filter); open reads, status stat, and signup stay 200.
+- Code and journal live on the `spring-boot` branch; only this README entry is merged here.
+- Released as `v0.35.0` on the `spring-boot` branch.
+
 ## Known Issues and Limits
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
@@ -602,7 +616,7 @@ Commits (branch `spring-boot`): `52dc03f` Add Part 1: Spring Security - in memor
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.34.0` on `spring-boot`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.35.0` on `spring-boot`.
 
 ## Repository Information
 

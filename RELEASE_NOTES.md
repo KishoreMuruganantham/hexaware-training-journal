@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.21 - 2026-10-13
+
+### Changed
+
+- Recorded the 2026-10-13 JWT authentication training from the `spring-boot` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.20 - 2026-10-12
 
 ### Changed
