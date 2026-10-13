@@ -692,6 +692,19 @@ Commits (branch `spring-boot`): `52dc03f` Add Part 1: Spring Security - in memor
 - Rebooted and verified live: unauthenticated customer reads and manager add return 401, a wrong role returns 403, the full chain works (admin onboards a manager, manager onboards an executive, customer signs up and raises a ticket, manager assigns his own executive - every step 200), assigning another manager's executive returns 400 `Operation not allowed! contact admin`, wrong password returns 401, and new users are stored with BCrypt hashes.
 - Known issue: none; kept the trainer's style and comments as shown.
 
+### 2026-10-13
+
+Commits (branch `spring-boot`): `9241ce0` Add JWT auth.
+
+**JWT Authentication**
+
+- Added the `jjwt` 0.9.1 library with `javax.xml.bind` jaxb-api and `org.glassfish.jaxb` jaxb-runtime in `pom.xml` so JWT works on Java 21.
+- Added `JwtUtility` that signs HS256 tokens with his in-file secret key, subject = logged-in username, and a 24-hour expiry, plus `validateToken`, `extractUsername`, and `extractExpiration` helpers.
+- Added `AuthController` with `GET /api/auth/login` marked `authenticated()` in the filter chain: Spring checks the credentials first (HTTP Basic is still enabled), and the controller replies with a `TokenDto` carrying the token, expiry time, and issue time.
+- Added `JwtFilter` as a `OncePerRequestFilter` registered before `UsernamePasswordAuthenticationFilter`: it reads `Authorization: Bearer <token>`, validates it against `JwtUtility`, loads the user through `MyUserDetailsService`, and sets the `SecurityContextHolder` authentication with that user's authorities - so tokens now satisfy the same role rules as Basic.
+- Rebooted and verified live: login returns 401 with no credentials or a wrong password and 200 with valid Basic credentials carrying the token; the Bearer token gets 200 on `GET /api/customer/19` while no credentials still give 401 and Basic still works; an ADMIN token gets 403 on the customer read and a CUSTOMER token 403 on `POST /api/manager/add`; ticket add with the Bearer token returns 200 (ticket 8 appears in the filter); open reads, status stat, and signup stay 200.
+- Known issue: a malformed `Bearer` token surfaces as a 500 because `JwtFilter` does not catch the parser exceptions; kept exactly as he wrote it.
+
 ## Repository Information
 
 - Owner: Kishore Muruganantham

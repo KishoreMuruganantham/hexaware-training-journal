@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.35.0 - 2026-10-13
+
+### Added
+
+- JWT authentication: `JwtUtility` mints HS256 tokens with a 24-hour expiry, `GET /api/auth/login` issues a `TokenDto` after the HTTP Basic login, and a `JwtFilter` in front of the Spring auth filter turns `Authorization: Bearer` tokens into authenticated sessions carrying the user's authorities.
+- `jjwt` 0.9.1 with jaxb-api and jaxb-runtime dependencies in `pom.xml`.
+
+### Verified
+
+- Rebooted and exercised live (outputs in history).
+
 ## 0.34.0 - 2026-10-12
 
 ### Added
