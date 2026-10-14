@@ -1,5 +1,19 @@
 # Release Notes
 
+## 0.36.0 - 2026-10-14
+
+### Added
+
+- Mockito unit tests for the ticket fetch: `TicketServiceTest` with `@Mock` repositories and an `@InjectMocks` service covering the happy path (size assertions plus `times`/`verifyNoMoreInteractions` checks) and the invalid-id `assertThrows` case; `assertEquals` in `contextLoads`.
+
+### Changed
+
+- `getTicketsByCustomerId` validates the customer id first and throws `ResourceNotFoundException` for unknown ids, and the executive-username ticket query joins the manager.
+
+### Verified
+
+- `mvnw test` 3/3 green and live endpoints re-exercised (outputs in history).
+
 ## 0.35.0 - 2026-10-13
 
 ### Added

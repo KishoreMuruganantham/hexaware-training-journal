@@ -705,6 +705,19 @@ Commits (branch `spring-boot`): `9241ce0` Add JWT auth; `204316d` Update journal
 - Rebooted and verified live: login returns 401 with no credentials or a wrong password and 200 with valid Basic credentials carrying the token; the Bearer token gets 200 on `GET /api/customer/19` while no credentials still give 401 and Basic still works; an ADMIN token gets 403 on the customer read and a CUSTOMER token 403 on `POST /api/manager/add`; ticket add with the Bearer token returns 200 (ticket 8 appears in the filter); open reads, status stat, and signup stay 200.
 - Known issue: a malformed `Bearer` token surfaces as a 500 because `JwtFilter` does not catch the parser exceptions; kept exactly as he wrote it.
 
+### 2026-10-14
+
+Commits (branch `spring-boot`): `99594a7` Add test case get tickets with mocking.
+
+**Mockito Ticket Fetch Tests**
+
+- Added `TicketServiceTest` with `@ExtendWith(MockitoExtension.class)`: `@InjectMocks TicketService` with `@Mock TicketRepository` and `@Mock CustomerRepository`, stubbing `findById` and `getTicketByCustomerId` with `PageRequest.of(0,5)` so the happy path asserts the returned list sizes and verifies every interaction with `times(...)` and `verifyNoMoreInteractions`.
+- Added the invalid-id test that stubs `findById` to throw, asserts `ResourceNotFoundException` with `assertThrows`, and confirms the ticket repository is never touched.
+- Changed `getTicketsByCustomerId` to validate the customer first - `customerRepository.findById(...).orElseThrow(ResourceNotFoundException("Customer Id Invalid"))` - before running the paged query, so an unknown id now fails fast instead of returning an empty list.
+- Added `JOIN e.manager m` to the `getTicketByExecutiveUsername` query, a `//e.manager m` alias comment on `Executive.manager`, and an `assertEquals` line in the existing `contextLoads` test.
+- Verified: `mvnw test` runs 3/3 green (`contextLoads` plus both mock tests, BUILD SUCCESS); live, `GET /api/ticket/v1/19?page=0&size=5` still 200 with the joined row, an unknown id 99999 now returns 400 `Customer Id Invalid`, the executive-username fetch with the new manager join 200, JWT login and Bearer reads 200, and the filter, status stat, by-priority, and job-title stat endpoints 200.
+- Known issue: none; kept the trainer's style and comments as shown.
+
 ## Repository Information
 
 - Owner: Kishore Muruganantham
