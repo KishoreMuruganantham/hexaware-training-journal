@@ -707,7 +707,7 @@ Commits (branch `spring-boot`): `9241ce0` Add JWT auth; `204316d` Update journal
 
 ### 2026-10-14
 
-Commits (branch `spring-boot`): `99594a7` Add test case get tickets with mocking; `1756ece` Update journal for Mockito ticket tests training; `ad6050f` Add test case save ticket.
+Commits (branch `spring-boot`): `99594a7` Add test case get tickets with mocking; `1756ece` Update journal for Mockito ticket tests training; `ad6050f` Add test case save ticket; `37dd678` Update journal for save ticket test training.
 
 **Mockito Ticket Fetch Tests**
 
