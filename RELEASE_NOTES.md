@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.23 - 2026-10-14
+
+### Changed
+
+- Recorded the second 2026-10-14 Mockito save-ticket-test training from the `spring-boot` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.22 - 2026-10-14
 
 ### Changed
