@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.37.0 - 2026-10-14
+
+### Added
+
+- `saveTest` in `TicketServiceTest`: mocked `getByUsername` and `save` with `times(1)` verification around `TicketService.add`, covering the write path with stubs instead of a database.
+- Step-by-step `System.out.println` markers in `TicketService.add`, kept as shown.
+
+### Verified
+
+- `mvnw test` 4/4 green and the live ticket add and reads re-exercised (outputs in history).
+
 ## 0.36.0 - 2026-10-14
 
 ### Added

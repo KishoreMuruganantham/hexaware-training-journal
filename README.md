@@ -707,7 +707,7 @@ Commits (branch `spring-boot`): `9241ce0` Add JWT auth; `204316d` Update journal
 
 ### 2026-10-14
 
-Commits (branch `spring-boot`): `99594a7` Add test case get tickets with mocking; `1756ece` Update journal for Mockito ticket tests training.
+Commits (branch `spring-boot`): `99594a7` Add test case get tickets with mocking; `1756ece` Update journal for Mockito ticket tests training; `ad6050f` Add test case save ticket.
 
 **Mockito Ticket Fetch Tests**
 
@@ -716,6 +716,14 @@ Commits (branch `spring-boot`): `99594a7` Add test case get tickets with mocking
 - Changed `getTicketsByCustomerId` to validate the customer first - `customerRepository.findById(...).orElseThrow(ResourceNotFoundException("Customer Id Invalid"))` - before running the paged query, so an unknown id now fails fast instead of returning an empty list.
 - Added `JOIN e.manager m` to the `getTicketByExecutiveUsername` query, a `//e.manager m` alias comment on `Executive.manager`, and an `assertEquals` line in the existing `contextLoads` test.
 - Verified: `mvnw test` runs 3/3 green (`contextLoads` plus both mock tests, BUILD SUCCESS); live, `GET /api/ticket/v1/19?page=0&size=5` still 200 with the joined row, an unknown id 99999 now returns 400 `Customer Id Invalid`, the executive-username fetch with the new manager join 200, JWT login and Bearer reads 200, and the filter, status stat, by-priority, and job-title stat endpoints 200.
+- Known issue: none; kept the trainer's style and comments as shown.
+
+**Mockito Save Ticket Test**
+
+- Added `saveTest` to `TicketServiceTest`: stubs `customerRepository.getByUsername("john")` to return a `Customer` and `ticketRepository.save(any(Ticket.class))`, calls `add(customerUsername, ticketDto)` with a real `TicketDto`, then verifies each repository call happens exactly once - showing that a mocked save never touches the database while the call still flows through the service.
+- Added his step-by-step `System.out.println` markers inside `TicketService.add` between the customer fetch, dto mapping, customer attach, OPEN status, and save steps, kept exactly as he left them from the session.
+- Re-indented the invalid-id test method declaration to match the class style.
+- Verified: `mvnw test` runs 4/4 green (`contextLoads`, both fetch tests, and the new save test, BUILD SUCCESS); live, a Bearer-authenticated ticket add still returns 200 (ticket 9 in today's filter), v1 and the customer read 200, status stat shows OPEN 9, and the unknown id still 400 `Customer Id Invalid`.
 - Known issue: none; kept the trainer's style and comments as shown.
 
 ## Repository Information
