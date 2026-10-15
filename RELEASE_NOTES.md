@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.24 - 2026-10-15
+
+### Changed
+
+- Recorded the 2026-10-15 SonarCloud cleanup and plan batch training from the `spring-boot` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.23 - 2026-10-14
 
 ### Changed
