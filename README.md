@@ -726,6 +726,21 @@ Commits (branch `spring-boot`): `99594a7` Add test case get tickets with mocking
 - Verified: `mvnw test` runs 4/4 green (`contextLoads`, both fetch tests, and the new save test, BUILD SUCCESS); live, a Bearer-authenticated ticket add still returns 200 (ticket 9 in today's filter), v1 and the customer read 200, status stat shows OPEN 9, and the unknown id still 400 `Customer Id Invalid`.
 - Known issue: none; kept the trainer's style and comments as shown.
 
+### 2026-10-15
+
+**Standalone Helpdesk Repo — SonarCloud Cleanup and Plan Batch API** (source: `imtiyaz-hirani/helpdesk_backend` branch `main`, all 8 commits mirrored)
+
+- The trainer stood up a **separate `helpdesk_backend` repo** for the SonarCloud session; all 8 of its commits are mirrored here on top of the existing helpdesk code.
+- Initial import for SonarCloud adds the `sonar-maven-plugin` 5.8.0.7211 to `pom.xml` and an `assignExecutiveTest` in `TicketServiceTest` (mocks `executiveRepository.findById` and `ticketRepository.findById`/`save`, builds the manager ownership chain, verifies one call each) - test count now 5.
+- **Secret handling**: the hardcoded `SECRET_KEY` in `JwtUtility` became `@Value("${jwt.secret}")` sourced from `application.properties`; the properties file was briefly removed from git, reinstated, and `.gitignore` gained `src/main/resources` entries.
+- **Sonar low-priority fixes**: `SECRET_KEY` renamed to `secretKey`; login `issueTime` now `LocalDateTime.now(ZoneId.of("UTC"))`; `PlanType` constants uppercased (`BASIC_10MBPS` ... `ENTERPRISE_1MBPS`, kept exactly as he renamed them).
+- **Loggers**: `TicketService` gets `@Slf4j` with `log.info` replacing the step-by-step `System.out.println` markers; `GlobalExceptionHandler` gets an SLF4J logger with `log.warn` on not-found and per-field validation failures.
+- **Plan add in batch**: new `POST /api/plan/batch/add` restricted to `hasAuthority("ADMIN")` accepts a `List<PlanDto>` (planName, planType, price with validation), maps through the new `PlanMapper`, and saves via the new `PlanService` (`@Transactional(rollbackFor = Exception.class)`) and `PlanRepository`; the `Plan` entity gains a non-null `planName` column, a catch-all `@ExceptionHandler(Exception.class)` was added, and `SecurityConfig` gets `@EnableTransactionManagement`.
+- Verified: `mvnw test` 5/5 green (BUILD SUCCESS); live, ticket add and reads still 200, admin batch insert returns 200 and lands two rows in `plan`, CUSTOMER token on the batch endpoint 403, bad enum value 400 through the new catch-all handler, login `issueTime` now UTC, and the unknown customer id still 400 `Customer Id Invalid`.
+- Known issue: none; kept the trainer's style, comments, and naming exactly as committed.
+
+Commits (branch `spring-boot`, source `imtiyaz-hirani/helpdesk_backend`): `dbc6461` Add initial commit for SonarCloud; `c546ecd` Add secret transferred to properties; `6a19f31` Add secrets fixed - properties removed from git; `2cd4ba9` Add properties reinstated; `383a0d2` Add variable renamed; `0f4cd62` Add low priority codes fixed for Sonar; `756c89c` Add loggers added; `c444e12` Add plan add in batch.
+
 ## Repository Information
 
 - Owner: Kishore Muruganantham

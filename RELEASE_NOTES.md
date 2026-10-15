@@ -1,5 +1,15 @@
 # Release Notes
 
+## 0.38.0 - 2026-10-15
+
+### Added
+
+- Mirrored all 8 commits of the trainer's new standalone `helpdesk_backend` repo: the SonarCloud import (`sonar-maven-plugin`, `assignExecutiveTest`), the JWT secret moved to `application.properties` via `@Value("${jwt.secret}")`, Sonar low-priority fixes (field rename, UTC login timestamp, uppercased `PlanType` constants), SLF4J loggers replacing printlns, and the ADMIN-only `POST /api/plan/batch/add` with `PlanDto`, `PlanMapper`, `PlanService` (`@Transactional`), `PlanRepository`, a `planName` column, and a catch-all exception handler.
+
+### Verified
+
+- `mvnw test` 5/5 green; live smoke: ticket reads/writes 200, admin batch insert 200 (two `plan` rows), CUSTOMER token 403 on the batch endpoint, bad enum 400 via the catch-all handler, UTC login timestamps.
+
 ## 0.37.0 - 2026-10-14
 
 ### Added
