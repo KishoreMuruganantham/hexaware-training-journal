@@ -1,5 +1,15 @@
 # Release Notes
 
+## 0.42.0 - 2026-10-23
+
+### Added
+
+- Mirrored the trainer's commit `3d3274c` (`JS Fundamentals: course case study`): `"type": "module"` in `package.json`, the closing `// Compute the max price of the products in the array.` comment in `src/04-arrays.js`, and the new `src/learning-app/` ES-modules case study (`courses.mjs`, `courseUtil.mjs`, `app.mjs`) with display, find, filter, count, delete, fee-total, and fee-sort utilities.
+
+### Verified
+
+- `node js-fundamentals/src/learning-app/app.mjs` exits 0: id 2 found, `Number of courses for web dev category 3`, `Fee for all courses 237000`, delete of id 1 leaves 9 courses, DESC sort puts the 35000 course first.
+
 ## 0.41.0 - 2026-10-23
 
 ### Added
