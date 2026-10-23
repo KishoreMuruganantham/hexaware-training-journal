@@ -65,7 +65,7 @@ flowchart TD
 | `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
 | `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs (2026-10-06/15) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4617b01` |
-| `JS-fundamentals` | `js-fundamentals` Node project with variables and functions (2026-10-23) | `hex_fsd_sept-2026/commits/JS-fundamentals` (1 new commit) | `5e1ee4b` |
+| `JS-fundamentals` | `js-fundamentals` Node project with variables, functions, objects, and arrays (2026-10-23) | `hex_fsd_sept-2026/commits/JS-fundamentals` (2 new commits) | `1f43a54` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -648,7 +648,7 @@ Commits (branch `spring-boot`): `99594a7` Add test case get tickets with mocking
 
 ### 2026-10-23
 
-Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `5e1ee4b` Add journal commit hash to 2026-10-23 history entry.
+Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `5e1ee4b` Add journal commit hash to 2026-10-23 history entry; `70888e2` JS Fundamentals: objects + arrays find and filter; `935e9b3` Update journal for JS objects and arrays training; `1f43a54` Add journal commit hash to 2026-10-23 objects and arrays entry.
 
 **JS Fundamentals: Variables and Functions** (branch `JS-fundamentals`)
 
@@ -661,6 +661,16 @@ Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Funct
 - Code and journal live on the `JS-fundamentals` branch; only this README entry is merged here.
 - Released as `v0.39.0` on the `JS-fundamentals` branch.
 
+**JS Fundamentals: Objects and Arrays - Find and Filter** (branch `JS-fundamentals`)
+
+- Mirrored his next commit `1501911` `JS Fundamentals: objects + arrays find and filter` on the same branch, same day.
+- Added `src/03-objects.js`: the `product` object literal (id, name, price, category), a clone taken with the spread operator `const prod = {...product}`, the 10% discount `product.price = product.price * 0.9`, and the output showing the original dropped to 18000 while the clone keeps 20000.
+- Added `src/04-arrays.js`: the `products` array of 10 mobile objects, `forEach` iteration, a spread clone, the `find` operation for `id = 205` printing `product with id : 205 does not exist`, and the `filter` operation printing `No matching products`.
+- Verified: both scripts run on Node v22.14.0 with exit 0 (`id is 1 Price is 18000`, clone at 20000, all 10 products printed, `No matching products`).
+- Known issue: none; kept the trainer's style, comments, naming, and spacing exactly as committed - including his `// display products having price > 20000` comment above a `p.price > 30000` filter.
+- Code and journal live on the `JS-fundamentals` branch; only this README entry is merged here.
+- Released as `v0.40.0` on the `JS-fundamentals` branch.
+
 ## Known Issues and Limits
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
@@ -670,7 +680,7 @@ Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Funct
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.38.0` on `spring-boot`, `v0.39.0` on `JS-fundamentals`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.38.0` on `spring-boot`, `v0.39.0`-`v0.40.0` on `JS-fundamentals`.
 
 ## Repository Information
 

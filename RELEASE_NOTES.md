@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.26 - 2026-10-23
+
+### Changed
+
+- Recorded the 2026-10-23 JS objects and arrays find-and-filter training from the `JS-fundamentals` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.25 - 2026-10-23
 
 ### Changed
