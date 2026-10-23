@@ -775,7 +775,7 @@ Commits (branch `spring-boot`, source `imtiyaz-hirani/helpdesk_backend`): `dbc64
 - Verified: `node js-fundamentals/src/learning-app/app.mjs` exits 0 - `getById(courses, 2)` returns Python for Data Science, `Number of courses for web dev category 3`, `Fee for all courses 237000`, the delete of id 1 leaves 9 courses in the after-delete listing, and `sortByFee(courses, 'DESC')` puts Machine Learning Fundamentals (35000) first.
 - Known issue: `sortByFee` mutates the array it is given (his `courses.sort`), so the original `courses` is re-ordered after the sort call; kept exactly as he wrote it.
 
-Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `70888e2` JS Fundamentals: objects + arrays find and filter; `935e9b3` Update journal for JS objects and arrays training; `1b7bf1d` JS Fundamentals: map and reduce; `73aec3a` Add reduce practice for price filter comment; `e889f9a` Update journal for JS map and reduce training; `788fc80` JS Fundamentals: course case study.
+Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `70888e2` JS Fundamentals: objects + arrays find and filter; `935e9b3` Update journal for JS objects and arrays training; `1b7bf1d` JS Fundamentals: map and reduce; `73aec3a` Add reduce practice for price filter comment; `e889f9a` Update journal for JS map and reduce training; `788fc80` JS Fundamentals: course case study; `9e8e16a` Update journal for JS course case study training.
 
 ## Repository Information
 
