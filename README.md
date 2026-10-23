@@ -759,7 +759,7 @@ Commits (branch `spring-boot`, source `imtiyaz-hirani/helpdesk_backend`): `dbc64
 - Verified: both scripts run on Node v22.14.0 with exit 0 (`id is 1 Price is 18000`, clone at 20000, all 10 products printed, `product with id : 205 does not exist`, `No matching products`).
 - Known issue: none; kept the trainer's style, comments, naming, and spacing exactly as committed - including his `// display products having price > 20000` comment sitting above a `p.price > 30000` filter, which is why nothing matches.
 
-Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `70888e2` JS Fundamentals: objects + arrays find and filter.
+Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `70888e2` JS Fundamentals: objects + arrays find and filter; `935e9b3` Update journal for JS objects and arrays training.
 
 ## Repository Information
 
