@@ -752,7 +752,7 @@ Commits (branch `spring-boot`, source `imtiyaz-hirani/helpdesk_backend`): `dbc64
 - Verified: `node js-fundamentals/src/01-variables.js` and `node js-fundamentals/src/02-functions.js` both exit 0 (string and number types, visitors 10, bill 1180, final bill 1062, area of circle 314 in both forms).
 - Known issue: none; kept the trainer's style, comments, naming, and spacing exactly as committed, including the implicit global `str_output`.
 
-Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions.
+Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training.
 
 ## Repository Information
 
