@@ -53,6 +53,7 @@ flowchart TD
     JU --> SC[spring-core - Spring Core and HelpDesk]
     SC --> HJ[hibernate-jpa - Hibernate and JPA]
     HJ --> SB[spring-boot - Boot REST backend]
+    M --> JSF[JS-fundamentals - JavaScript basics]
     M --> QQ[feat/quitq-ecommerce-model - QuitQ model]
 ```
 
@@ -64,6 +65,7 @@ flowchart TD
 | `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
 | `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs (2026-10-06/15) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4617b01` |
+| `JS-fundamentals` | `js-fundamentals` Node project with variables and functions (2026-10-23) | `hex_fsd_sept-2026/commits/JS-fundamentals` (1 new commit) | `5e1ee4b` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -644,6 +646,21 @@ Commits (branch `spring-boot`): `99594a7` Add test case get tickets with mocking
 - Code and journal live on the `spring-boot` branch; only this README entry is merged here.
 - Released as `v0.38.0` on the `spring-boot` branch.
 
+### 2026-10-23
+
+Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `5e1ee4b` Add journal commit hash to 2026-10-23 history entry.
+
+**JS Fundamentals: Variables and Functions** (branch `JS-fundamentals`)
+
+- Started the HTML, CSS, and JavaScript module with the trainer's new `JS-fundamentals` branch, created from his `spring-boot` branch, mirroring his commit `d1183a5` `JS Fundamentals: variables + Functions`.
+- Added the `js-fundamentals` Node project with the trainer's default `package.json`.
+- Added `src/01-variables.js`: `const storeName` and `let visitors` with `typeof` output, `visitors = visitors + 10` value assignment, the commented-out `storeName` re-assignment kept to show a `const` variable cannot be re-assigned, and the template literal `the store ${storeName} has ${visitors} visitors`.
+- Added `src/02-functions.js`: the standard `addTax(amount)`, the `addTaxArrow` arrow function, the commented-out `bill` function replaced by an arrow function with a default `discount = 10` parameter composing `addTaxArrow`, and `areaCircle` / `areaOfCircle` computed from the `pi` constant.
+- Verified: both scripts run on Node v22.14.0 with exit 0 (string and number types, visitors 10, `My total bill is 1180`, `Final bill is 1062`, ` Area of circle is 314` from both forms).
+- Known issue: none; kept the trainer's style, comments, naming, and spacing exactly as committed, including the implicit global `str_output`.
+- Code and journal live on the `JS-fundamentals` branch; only this README entry is merged here.
+- Released as `v0.39.0` on the `JS-fundamentals` branch.
+
 ## Known Issues and Limits
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
@@ -653,7 +670,7 @@ Commits (branch `spring-boot`): `99594a7` Add test case get tickets with mocking
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.38.0` on `spring-boot`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.38.0` on `spring-boot`, `v0.39.0` on `JS-fundamentals`.
 
 ## Repository Information
 
@@ -661,7 +678,7 @@ Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9
 - Training: Hexaware Technologies
 - Language: Java
 - Java version: 21
-- Branches: `main`, `pl-sql`, `junit`, `spring-core`, `hibernate-jpa`, `spring-boot`, `java-fundamentals`, `feat/quitq-ecommerce-model`
+- Branches: `main`, `pl-sql`, `junit`, `spring-core`, `hibernate-jpa`, `spring-boot`, `JS-fundamentals`, `java-fundamentals`, `feat/quitq-ecommerce-model`
 - Visibility: Private
 
 ## Case Study Projects

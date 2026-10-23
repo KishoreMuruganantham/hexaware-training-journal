@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.25 - 2026-10-23
+
+### Changed
+
+- Recorded the 2026-10-23 JS fundamentals variables and functions training from the `JS-fundamentals` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.24 - 2026-10-15
 
 ### Changed
