@@ -767,7 +767,7 @@ Commits (branch `spring-boot`, source `imtiyaz-hirani/helpdesk_backend`): `dbc64
 - Verified: `node js-fundamentals/src/05-reduce-practice.js` exits 0 - PCO X5 Pro 22999 and Infinix Zero 30 21999 printed, `Products above 20000 : 2`, `Total price of products above 20000: 44998`.
 - Known issue: none; the mirrored file is byte-identical to his, and the `reduce` solution lives in its own practice file so the trainer's code is untouched.
 
-Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `70888e2` JS Fundamentals: objects + arrays find and filter; `935e9b3` Update journal for JS objects and arrays training; `1b7bf1d` JS Fundamentals: map and reduce; `73aec3a` Add reduce practice for price filter comment.
+Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `70888e2` JS Fundamentals: objects + arrays find and filter; `935e9b3` Update journal for JS objects and arrays training; `1b7bf1d` JS Fundamentals: map and reduce; `73aec3a` Add reduce practice for price filter comment; `e889f9a` Update journal for JS map and reduce training.
 
 ## Repository Information
 
