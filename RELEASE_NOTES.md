@@ -1,5 +1,15 @@
 # Release Notes
 
+## 0.40.0 - 2026-10-23
+
+### Added
+
+- Mirrored the trainer's commit `1501911` (`JS Fundamentals: objects + arrays find and filter`): `src/03-objects.js` with the `product` object, spread clone, and 10% price discount, plus `src/04-arrays.js` with the 10-item `products` array, `forEach`, spread clone, `find` by id, and `filter` by price.
+
+### Verified
+
+- Both scripts run on Node v22.14.0 with exit 0: original price 18000 after the discount while the clone keeps 20000, all 10 products printed, `product with id : 205 does not exist`, and `No matching products`.
+
 ## 0.39.0 - 2026-10-23
 
 ### Added

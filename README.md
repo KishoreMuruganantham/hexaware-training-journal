@@ -752,7 +752,14 @@ Commits (branch `spring-boot`, source `imtiyaz-hirani/helpdesk_backend`): `dbc64
 - Verified: `node js-fundamentals/src/01-variables.js` and `node js-fundamentals/src/02-functions.js` both exit 0 (string and number types, visitors 10, bill 1180, final bill 1062, area of circle 314 in both forms).
 - Known issue: none; kept the trainer's style, comments, naming, and spacing exactly as committed, including the implicit global `str_output`.
 
-Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training.
+**JS Fundamentals: Objects and Arrays - Find and Filter** (source: `imtiyaz-hirani/hex_fsd_sept-2026` branch `JS-fundamentals`, commit `1501911`, both files byte-identical to the trainer's blobs)
+
+- Added `src/03-objects.js`: the `product` object literal (id, name, price, category), a clone taken with the spread operator `const prod = {...product}`, the 10% discount `product.price = product.price * 0.9`, and the console output showing the original dropped to 18000 while the clone keeps 20000.
+- Added `src/04-arrays.js`: the `products` array of 10 mobile objects, `forEach` iteration, a spread clone of the array, the `find` operation for `id = 205` printing `product with id : 205 does not exist`, and the `filter` operation printing `No matching products`, kept exactly as he wrote them.
+- Verified: both scripts run on Node v22.14.0 with exit 0 (`id is 1 Price is 18000`, clone at 20000, all 10 products printed, `product with id : 205 does not exist`, `No matching products`).
+- Known issue: none; kept the trainer's style, comments, naming, and spacing exactly as committed - including his `// display products having price > 20000` comment sitting above a `p.price > 30000` filter, which is why nothing matches.
+
+Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `70888e2` JS Fundamentals: objects + arrays find and filter.
 
 ## Repository Information
 
