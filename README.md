@@ -759,7 +759,15 @@ Commits (branch `spring-boot`, source `imtiyaz-hirani/helpdesk_backend`): `dbc64
 - Verified: both scripts run on Node v22.14.0 with exit 0 (`id is 1 Price is 18000`, clone at 20000, all 10 products printed, `product with id : 205 does not exist`, `No matching products`).
 - Known issue: none; kept the trainer's style, comments, naming, and spacing exactly as committed - including his `// display products having price > 20000` comment sitting above a `p.price > 30000` filter, which is why nothing matches.
 
-Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `70888e2` JS Fundamentals: objects + arrays find and filter; `935e9b3` Update journal for JS objects and arrays training.
+**JS Fundamentals: Map and Reduce** (source: `imtiyaz-hirani/hex_fsd_sept-2026` branch `JS-fundamentals`, commit `cd5fed5`, file byte-identical to the trainer's blob)
+
+- Mirrored his commit `cd5fed5` `JS Fundamentals: map and reduce` in `src/04-arrays.js`: he normalized the spacing (`p=> p` to `p => p`, ternaries re-indented), added the `map op` section building `nameArry` of names and a mapped `Product : ${p.name} , with price= ${p.price}` string list, and added the `reduce op` section summing every price with `products.reduce((sum, p) => sum + p.price, 0)`.
+- Verified: `node js-fundamentals/src/04-arrays.js` exits 0 - all 10 names printed, all 10 `Product :` lines printed, `Total price: 180991`.
+- Added `src/05-reduce-practice.js` solving the comment he left open (`// display products having price > 20000`) with `reduce` instead of `filter`: an accumulator array collecting the matches, a `reduce` count, and a `reduce` total of just those prices - using his stated 20000 threshold rather than the 30000 in the code.
+- Verified: `node js-fundamentals/src/05-reduce-practice.js` exits 0 - PCO X5 Pro 22999 and Infinix Zero 30 21999 printed, `Products above 20000 : 2`, `Total price of products above 20000: 44998`.
+- Known issue: none; the mirrored file is byte-identical to his, and the `reduce` solution lives in its own practice file so the trainer's code is untouched.
+
+Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `70888e2` JS Fundamentals: objects + arrays find and filter; `935e9b3` Update journal for JS objects and arrays training; `1b7bf1d` JS Fundamentals: map and reduce; `73aec3a` Add reduce practice for price filter comment.
 
 ## Repository Information
 

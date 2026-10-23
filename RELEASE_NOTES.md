@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.41.0 - 2026-10-23
+
+### Added
+
+- Mirrored the trainer's commit `cd5fed5` (`JS Fundamentals: map and reduce`) in `src/04-arrays.js`: spacing normalization, the `map op` section (name array plus mapped `Product : ... , with price= ...` strings), and the `reduce op` section summing all prices.
+- New `src/05-reduce-practice.js` solving the trainer's open comment (`// display products having price > 20000`) with `reduce`: accumulator array, match count, and matched-price total.
+
+### Verified
+
+- `04-arrays.js` exits 0 with `Total price: 180991`; `05-reduce-practice.js` exits 0 printing PCO X5 Pro and Infinix Zero 30, `Products above 20000 : 2`, `Total price of products above 20000: 44998`.
+
 ## 0.40.0 - 2026-10-23
 
 ### Added
