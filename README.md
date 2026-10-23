@@ -741,6 +741,19 @@ Commits (branch `spring-boot`): `99594a7` Add test case get tickets with mocking
 
 Commits (branch `spring-boot`, source `imtiyaz-hirani/helpdesk_backend`): `dbc6461` Add initial commit for SonarCloud; `c546ecd` Add secret transferred to properties; `6a19f31` Add secrets fixed - properties removed from git; `2cd4ba9` Add properties reinstated; `383a0d2` Add variable renamed; `0f4cd62` Add low priority codes fixed for Sonar; `756c89c` Add loggers added; `c444e12` Add plan add in batch; `d4044e3` Update journal for SonarCloud cleanup and plan batch training.
 
+### 2026-10-23
+
+**JS Fundamentals: Variables and Functions** (source: `imtiyaz-hirani/hex_fsd_sept-2026` branch `JS-fundamentals`, commit `d1183a5`, all 3 files byte-identical to the trainer's blobs)
+
+- Started the HTML, CSS, and JavaScript module with the trainer's new `JS-fundamentals` branch, created from his `spring-boot` branch just as this branch was created from `spring-boot` here.
+- Added the `js-fundamentals` Node project with the trainer's default `package.json`.
+- Added `src/01-variables.js`: `const storeName` and `let visitors` with `typeof` output, `visitors = visitors + 10` value assignment, the commented-out `storeName` re-assignment showing a `const` variable cannot be re-assigned, and the template literal `the store ${storeName} has ${visitors} visitors`.
+- Added `src/02-functions.js`: the standard `addTax(amount)` returning `amount * 1.18`, the `addTaxArrow` arrow function, the commented-out `bill` function replaced by an arrow function with a default `discount = 10` parameter that composes `addTaxArrow`, and `areaCircle` / `areaOfCircle` computed from the `pi` constant.
+- Verified: `node js-fundamentals/src/01-variables.js` and `node js-fundamentals/src/02-functions.js` both exit 0 (string and number types, visitors 10, bill 1180, final bill 1062, area of circle 314 in both forms).
+- Known issue: none; kept the trainer's style, comments, naming, and spacing exactly as committed, including the implicit global `str_output`.
+
+Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions.
+
 ## Repository Information
 
 - Owner: Kishore Muruganantham

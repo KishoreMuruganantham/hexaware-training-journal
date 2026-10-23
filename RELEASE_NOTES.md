@@ -1,5 +1,15 @@
 # Release Notes
 
+## 0.39.0 - 2026-10-23
+
+### Added
+
+- New `JS-fundamentals` branch holding the trainer's first JavaScript commit `d1183a5` (`JS Fundamentals: variables + Functions`): the `js-fundamentals` Node project with `src/01-variables.js` (`const`/`let`, `typeof`, value assignment, template literal) and `src/02-functions.js` (standard function, arrow functions, default discount parameter, circle area).
+
+### Verified
+
+- Both scripts run on Node v22.14.0 with exit 0: visitors 10, `My total bill is 1180` from both forms, `Final bill is 1062`, and ` Area of circle is 314` from both forms.
+
 ## 0.38.0 - 2026-10-15
 
 ### Added
