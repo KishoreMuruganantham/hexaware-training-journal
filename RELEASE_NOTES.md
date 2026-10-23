@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.27 - 2026-10-23
+
+### Changed
+
+- Recorded the 2026-10-23 JS map and reduce training, plus the `reduce` practice solving the trainer's open comment, from the `JS-fundamentals` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.26 - 2026-10-23
 
 ### Changed

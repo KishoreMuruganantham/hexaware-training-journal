@@ -65,7 +65,7 @@ flowchart TD
 | `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
 | `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs (2026-10-06/15) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4617b01` |
-| `JS-fundamentals` | `js-fundamentals` Node project with variables, functions, objects, and arrays (2026-10-23) | `hex_fsd_sept-2026/commits/JS-fundamentals` (2 new commits) | `1f43a54` |
+| `JS-fundamentals` | `js-fundamentals` Node project with variables, functions, objects, arrays, map and reduce (2026-10-23) | `hex_fsd_sept-2026/commits/JS-fundamentals` (3 new commits) | `f92bb03` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -648,7 +648,7 @@ Commits (branch `spring-boot`): `99594a7` Add test case get tickets with mocking
 
 ### 2026-10-23
 
-Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `5e1ee4b` Add journal commit hash to 2026-10-23 history entry; `70888e2` JS Fundamentals: objects + arrays find and filter; `935e9b3` Update journal for JS objects and arrays training; `1f43a54` Add journal commit hash to 2026-10-23 objects and arrays entry.
+Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `5e1ee4b` Add journal commit hash to 2026-10-23 history entry; `70888e2` JS Fundamentals: objects + arrays find and filter; `935e9b3` Update journal for JS objects and arrays training; `1f43a54` Add journal commit hash to 2026-10-23 objects and arrays entry; `1b7bf1d` JS Fundamentals: map and reduce; `73aec3a` Add reduce practice for price filter comment; `e889f9a` Update journal for JS map and reduce training; `f92bb03` Add journal commit hash to 2026-10-23 map and reduce entry.
 
 **JS Fundamentals: Variables and Functions** (branch `JS-fundamentals`)
 
@@ -671,6 +671,16 @@ Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Funct
 - Code and journal live on the `JS-fundamentals` branch; only this README entry is merged here.
 - Released as `v0.40.0` on the `JS-fundamentals` branch.
 
+**JS Fundamentals: Map and Reduce** (branch `JS-fundamentals`)
+
+- Mirrored his commit `cd5fed5` `JS Fundamentals: map and reduce` in `src/04-arrays.js`: spacing normalized (`p=> p` to `p => p`, ternaries re-indented), the new `map op` section building `nameArry` of names plus mapped `Product : ${p.name} , with price= ${p.price}` strings, and the new `reduce op` section summing every price with `products.reduce((sum, p) => sum + p.price, 0)`.
+- Verified: `node js-fundamentals/src/04-arrays.js` exits 0 - all 10 names and all 10 `Product :` lines printed, `Total price: 180991`.
+- Added `src/05-reduce-practice.js` solving the comment he left open (`// display products having price > 20000`) with `reduce` rather than `filter`: an accumulator array collecting the matches, a `reduce` count, and a `reduce` total of those prices only - using his stated 20000 threshold instead of the 30000 in the code.
+- Verified: `node js-fundamentals/src/05-reduce-practice.js` exits 0 - PCO X5 Pro 22999 and Infinix Zero 30 21999 printed, `Products above 20000 : 2`, `Total price of products above 20000: 44998`.
+- Known issue: none; the mirrored file stays byte-identical to his, and the `reduce` solution lives in its own practice file so the trainer's code is untouched.
+- Code and journal live on the `JS-fundamentals` branch; only this README entry is merged here.
+- Released as `v0.41.0` on the `JS-fundamentals` branch.
+
 ## Known Issues and Limits
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
@@ -680,7 +690,7 @@ Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Funct
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.38.0` on `spring-boot`, `v0.39.0`-`v0.40.0` on `JS-fundamentals`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.38.0` on `spring-boot`, `v0.39.0`-`v0.41.0` on `JS-fundamentals`.
 
 ## Repository Information
 
