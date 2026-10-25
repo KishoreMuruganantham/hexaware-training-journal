@@ -1,5 +1,15 @@
 # Release Notes
 
+## 0.45.0 - 2026-10-25
+
+### Added
+
+- `src/05-reduce-practice.js` now also solves the trainer's open comment `// Compute the max price of the products in the array.` with `reduce`: one pass for the max price number, one for the product holding it. His `src/04-arrays.js` stays byte-identical with the comment unanswered.
+
+### Verified
+
+- `node js-fundamentals/src/05-reduce-practice.js` exits 0 - `Max price: 22999`, `Product with max price: PCO X5 Pro , price= 22999`.
+
 ## 0.42.0 - 2026-10-23
 
 ### Added

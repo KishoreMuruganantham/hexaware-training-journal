@@ -777,6 +777,16 @@ Commits (branch `spring-boot`, source `imtiyaz-hirani/helpdesk_backend`): `dbc64
 
 Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Functions; `7557e19` Update journal for JS fundamentals training; `70888e2` JS Fundamentals: objects + arrays find and filter; `935e9b3` Update journal for JS objects and arrays training; `1b7bf1d` JS Fundamentals: map and reduce; `73aec3a` Add reduce practice for price filter comment; `e889f9a` Update journal for JS map and reduce training; `788fc80` JS Fundamentals: course case study; `9e8e16a` Update journal for JS course case study training.
 
+### 2026-10-25
+
+**Max Price Reduce Practice** (own practice on `JS-fundamentals`, no trainer commit)
+
+- Solved the comment he left open at the end of `src/04-arrays.js`, `// Compute the max price of the products in the array.`, inside `src/05-reduce-practice.js` with `reduce`: `products.reduce((max, p) => (p.price > max ? p.price : max), products[0].price)` returns the number, and a second reduce with the same shape keeps the whole product instead.
+- The mirrored `04-arrays.js` is untouched and byte-identical to his - the comment stays unanswered in his file, as with the price filter practice.
+- Verified: `node js-fundamentals/src/05-reduce-practice.js` exits 0 - `Max price: 22999` and `Product with max price: PCO X5 Pro , price= 22999` printed after the earlier filter, count, and total output.
+
+Commits (branch `JS-fundamentals`): `a4dc24d` Add reduce practice for max price comment.
+
 ## Repository Information
 
 - Owner: Kishore Muruganantham
