@@ -13,6 +13,8 @@ import com.springboot.helpdesk.service.TicketService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import com.springboot.helpdesk.dto.response.TicketCustomerFilterDto;
+import org.springframework.data.domain.Page;
 
 import java.security.Principal;
 import java.time.Instant;
@@ -100,6 +102,16 @@ public class TicketController {
                                                    @RequestParam(value = "toDate", required = false)LocalDate toDate
                                                    ){
         return ticketService.dynamicFilterTicket(priority,status, fromDate, toDate);
+    }
+
+    @GetMapping("/api/ticket/search")
+    public Page<TicketCustomerFilterDto> getTicketByCustomerPriorityAndCustomerName(
+            @RequestParam("priority") Priority priority,
+            @RequestParam("customer_name") String customerName,
+            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+            @RequestParam(name = "size", required = false, defaultValue = "10") Integer size
+    ) {
+        return ticketService.getTicketByCustomerPriorityAndCustomerName(priority, customerName, page, size);
     }
 }
 /*

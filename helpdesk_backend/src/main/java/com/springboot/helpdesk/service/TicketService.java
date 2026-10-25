@@ -16,6 +16,9 @@ import com.springboot.helpdesk.model.Ticket;
 import com.springboot.helpdesk.repository.CustomerRepository;
 import com.springboot.helpdesk.repository.ExecutiveRepository;
 import com.springboot.helpdesk.repository.TicketRepository;
+import com.springboot.helpdesk.dto.response.TicketCustomerFilterDto;
+import com.springboot.helpdesk.exception.InvalidCallException;
+import org.springframework.data.domain.Page;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -103,7 +106,23 @@ public class TicketService {
                 .toList();
     }
 
-
+    public Page<TicketCustomerFilterDto> getTicketByCustomerPriorityAndCustomerName(Priority priority, String customerName, Integer page, Integer size) {
+        
+        if (priority==null) {
+            throw new InvalidCallException("Priority cannot be null");
+        }
+        if (customerName == null || customerName.isBlank()) {
+            throw new InvalidCallException("Customer Name cannot be null or blank");
+        }
+        if (page == null || page < 0) {
+            throw new InvalidCallException("Page cannot be null or negative");
+        }
+        if (size == null || size < 1 || size > 100) {
+            throw new InvalidCallException("Size must be between 1 and 100");
+        }
+        Pageable pageable =  PageRequest.of(page,size);
+        return ticketRepository.getTicketByCustomerPriorityAndCustomerName(priority,customerName,pageable);
+    }
 
     public List<TicketRespDto> dynamicFilterTicket(Priority priority,
                                                    Status status,

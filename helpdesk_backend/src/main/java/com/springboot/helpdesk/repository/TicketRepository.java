@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import com.springboot.helpdesk.dto.response.TicketCustomerFilterDto;
+import org.springframework.data.domain.Page; 
 
 import java.time.Instant;
 import java.util.List;
@@ -67,11 +69,18 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<TicketInfoDtoV2> getTicketByExecutiveUsername(String executiveUsername, Pageable pageable);
 
     @Query("""
-            select t.status as status,count(c.id) as numberOfCustomers
-            from Ticket t JOIN t.customer c
-            group by t.status
+            select new com.springboot.helpdesk.dto.response.TicketCustomerFilterDto(
+            t.subject,
+            t.priority,
+            c.name,
+            t.status
+            )
+            from Ticket t
+            JOIN t.customer c
+            where t.priority = ?1
+            AND lower(c.name) = lower(?2)
             """)
-    List<TicketStatusStatDto> getTicketStatusStatWithNumCustomers();
+    Page<TicketCustomerFilterDto> getTicketByCustomerPriorityAndCustomerName(Priority priority, String customerName, Pageable pageable);
 
 
 
@@ -87,4 +96,12 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
                                             Status status,
                                             Instant fromDate,
                                             Instant toDate);
+                                        
+
+     @Query("""
+                select t.status as status, count(c.id) as numberOfCustomers
+                from Ticket t JOIN t.customer c
+                group by t.status
+                """)
+     List<TicketStatusStatDto> getTicketStatusStatWithNumCustomers();                 
 }
