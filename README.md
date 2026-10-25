@@ -785,7 +785,7 @@ Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Funct
 - The mirrored `04-arrays.js` is untouched and byte-identical to his - the comment stays unanswered in his file, as with the price filter practice.
 - Verified: `node js-fundamentals/src/05-reduce-practice.js` exits 0 - `Max price: 22999` and `Product with max price: PCO X5 Pro , price= 22999` printed after the earlier filter, count, and total output.
 
-Commits (branch `JS-fundamentals`): `a4dc24d` Add reduce practice for max price comment.
+Commits (branch `JS-fundamentals`): `a4dc24d` Add reduce practice for max price comment; `ec0f17d` Update journal for max price reduce practice.
 
 ## Repository Information
 
