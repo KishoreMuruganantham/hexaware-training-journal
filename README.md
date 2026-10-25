@@ -753,7 +753,7 @@ Commits (branch `spring-boot`, source `imtiyaz-hirani/helpdesk_backend`): `dbc64
 - Verified: `mvnw test` 5/5 green (BUILD SUCCESS); live, exact-case and lower-case customer names both return the 3 LOW tickets for Smoke Customer, `page=0&size=1` and `page=1&size=1` return different rows with `totalElements=3` and `totalPages=3`, `MEDIUM` and an unknown customer return `totalElements=0`, `page=9` past the last page returns empty content, `priority=BOGUS` returns 400 `Invalid data passed`, and blank name, `page=-1`, and `size=500` each return 400 with the guard message.
 - Known issue: Spring logs `Serializing PageImpl instances as-is is not supported` for this endpoint; the documented fix is `@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)`, not applied yet. The pre-existing `executive.manager_id` foreign-key DDL warning in the dev database is unrelated to this change.
 
-Commits (branch `spring-boot`): `1c6aa41` Add ticket search by priority and customer name.
+Commits (branch `spring-boot`): `1c6aa41` Add ticket search by priority and customer name; `8d8685a` Update journal for ticket search case study.
 
 ## Repository Information
 
