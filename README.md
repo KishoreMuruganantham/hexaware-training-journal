@@ -64,7 +64,7 @@ flowchart TD
 | `junit` | `MavenDemo` with JUnit tests (2026-09-28) | `hex_fsd_sept-2026/commits/junit` (5 new commits) | `165b165` |
 | `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
-| `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs (2026-10-06/15) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4617b01` |
+| `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs, plus the ticket search case study (2026-10-06/25) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `2cc6031` |
 | `JS-fundamentals` | `js-fundamentals` Node project with fundamentals, arrays, map/reduce, and the `learning-app` case study (2026-10-23) | `hex_fsd_sept-2026/commits/JS-fundamentals` (4 new commits) | `d93bba3` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
@@ -691,6 +691,22 @@ Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Funct
 - Code and journal live on the `JS-fundamentals` branch; only this README entry is merged here.
 - Released as `v0.42.0` on the `JS-fundamentals` branch.
 
+### 2026-10-25
+
+Commits (branch `spring-boot`): `1c6aa41` Add ticket search by priority and customer name; `8d8685a` Update journal for ticket search case study; `2cc6031` Add journal commit hash to 2026-10-25 ticket search entry.
+
+**Ticket Search Case Study - Priority and Customer Name** (branch `spring-boot`, own case study)
+
+- Practiced the Employee/Company style case study against the helpdesk domain: `GET /api/ticket/search` reads `priority` and `customer_name` as request params with `page`/`size` defaulting to `0`/`10`.
+- Added the `TicketCustomerFilterDto` record for the response with `ticket_subject`, `priority`, `customer_name`, `status`.
+- Added the JPQL `select new ...TicketCustomerFilterDto(t.subject, t.priority, c.name, t.status) from Ticket t JOIN t.customer c where t.priority = ?1 AND lower(c.name) = lower(?2)` returning a `Page<...>` so the repository handles pagination.
+- Added service guards throwing `InvalidCallException` for a null priority, a blank customer name, a negative page, and a size outside 1..100 - the existing `GlobalExceptionHandler` turns each into a 400 with its own message.
+- Debugging: the first run failed at startup with `Could not create query ... where t.piority = ?1` - a typo in the entity field name, fixed to `t.priority` (javac had passed, which is why it looked like a compile error). A second typo in the DTO, `ticekt_subject`, was corrected to `ticket_subject` to match the required response structure.
+- Verified: `mvnw test` 5/5 green (BUILD SUCCESS); live, exact-case and lower-case customer names both return the 3 LOW tickets for Smoke Customer, `page=0&size=1` and `page=1&size=1` return different rows with `totalElements=3` and `totalPages=3`, `MEDIUM` and an unknown customer return `totalElements=0`, `page=9` past the last page returns empty content, `priority=BOGUS` returns 400 `Invalid data passed`, and blank name, `page=-1`, and `size=500` each return 400 with the guard message.
+- Known issue: Spring logs `Serializing PageImpl instances as-is is not supported` for this endpoint; the documented fix is `@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)`, not applied yet. The pre-existing `executive.manager_id` foreign-key DDL warning in the dev database is unrelated to this change.
+- Code and journal live on the `spring-boot` branch; only this README entry is merged here.
+- Released as `v0.43.0` on the `spring-boot` branch.
+
 ## Known Issues and Limits
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
@@ -700,7 +716,7 @@ Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Funct
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.38.0` on `spring-boot`, `v0.39.0`-`v0.42.0` on `JS-fundamentals`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.43.0` on `spring-boot`, `v0.39.0`-`v0.42.0` on `JS-fundamentals`.
 
 ## Repository Information
 

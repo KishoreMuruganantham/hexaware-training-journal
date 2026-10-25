@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.29 - 2026-10-25
+
+### Changed
+
+- Recorded the 2026-10-25 ticket search case study (`GET /api/ticket/search` with priority + customer name, pagination, DTO response, and the `t.piority` startup fix) from the `spring-boot` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.28 - 2026-10-23
 
 ### Changed
