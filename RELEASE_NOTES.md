@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.31 - 2026-10-25
+
+### Changed
+
+- Recorded the max price `reduce` practice solving the trainer's open comment from the `JS-fundamentals` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.30 - 2026-10-25
 
 ### Changed

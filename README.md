@@ -65,7 +65,7 @@ flowchart TD
 | `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
 | `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs, plus the ticket search case study (2026-10-06/25) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4e03e6a` |
-| `JS-fundamentals` | `js-fundamentals` Node project with fundamentals, arrays, map/reduce, and the `learning-app` case study (2026-10-23) | `hex_fsd_sept-2026/commits/JS-fundamentals` (4 new commits) | `d93bba3` |
+| `JS-fundamentals` | `js-fundamentals` Node project with fundamentals, arrays, map/reduce, and the `learning-app` case study (2026-10-23/25) | `hex_fsd_sept-2026/commits/JS-fundamentals` (4 new commits) | `139e9e0` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -717,6 +717,16 @@ Commits (branch `spring-boot`): `1c6aa41` Add ticket search by priority and cust
 
 Commits (branch `spring-boot`): `1f52f40` Serialize pages as VIA_DTO for stable JSON; `545f558` Update journal for VIA_DTO page serialization; `4e03e6a` Add journal commit hash to 2026-10-25 page serialization entry.
 
+**Max Price Reduce Practice** (branch `JS-fundamentals`, own practice)
+
+- Solved the comment the trainer left open at the end of `src/04-arrays.js`, `// Compute the max price of the products in the array.`, inside `src/05-reduce-practice.js` with `reduce`: `products.reduce((max, p) => (p.price > max ? p.price : max), products[0].price)` returns the number, and a second reduce with the same shape keeps the whole product instead.
+- The mirrored `04-arrays.js` is untouched and byte-identical to him - the comment stays unanswered in his file, as with the price filter practice.
+- Verified: `node js-fundamentals/src/05-reduce-practice.js` exits 0 - `Max price: 22999` and `Product with max price: PCO X5 Pro , price= 22999` printed after the earlier filter, count, and total output.
+- Code and journal live on the `JS-fundamentals` branch; only this README entry is merged here.
+- Released as `v0.45.0` on the `JS-fundamentals` branch.
+
+Commits (branch `JS-fundamentals`): `a4dc24d` Add reduce practice for max price comment; `ec0f17d` Update journal for max price reduce practice; `139e9e0` Add journal commit hash to 2026-10-25 max price entry.
+
 ## Known Issues and Limits
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
@@ -726,7 +736,7 @@ Commits (branch `spring-boot`): `1f52f40` Serialize pages as VIA_DTO for stable 
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.42.0` on `JS-fundamentals`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`.
 
 ## Repository Information
 
