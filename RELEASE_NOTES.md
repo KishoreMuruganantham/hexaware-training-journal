@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.30 - 2026-10-25
+
+### Changed
+
+- Recorded the `VIA_DTO` page serialization fix (`@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)`) from the `spring-boot` branch in the history and branch guide.
+- No source code changed on `main`.
+
 ## 0.10.29 - 2026-10-25
 
 ### Changed

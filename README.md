@@ -64,7 +64,7 @@ flowchart TD
 | `junit` | `MavenDemo` with JUnit tests (2026-09-28) | `hex_fsd_sept-2026/commits/junit` (5 new commits) | `165b165` |
 | `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
-| `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs, plus the ticket search case study (2026-10-06/25) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `2cc6031` |
+| `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs, plus the ticket search case study (2026-10-06/25) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4e03e6a` |
 | `JS-fundamentals` | `js-fundamentals` Node project with fundamentals, arrays, map/reduce, and the `learning-app` case study (2026-10-23) | `hex_fsd_sept-2026/commits/JS-fundamentals` (4 new commits) | `d93bba3` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
@@ -703,9 +703,19 @@ Commits (branch `spring-boot`): `1c6aa41` Add ticket search by priority and cust
 - Added service guards throwing `InvalidCallException` for a null priority, a blank customer name, a negative page, and a size outside 1..100 - the existing `GlobalExceptionHandler` turns each into a 400 with its own message.
 - Debugging: the first run failed at startup with `Could not create query ... where t.piority = ?1` - a typo in the entity field name, fixed to `t.priority` (javac had passed, which is why it looked like a compile error). A second typo in the DTO, `ticekt_subject`, was corrected to `ticket_subject` to match the required response structure.
 - Verified: `mvnw test` 5/5 green (BUILD SUCCESS); live, exact-case and lower-case customer names both return the 3 LOW tickets for Smoke Customer, `page=0&size=1` and `page=1&size=1` return different rows with `totalElements=3` and `totalPages=3`, `MEDIUM` and an unknown customer return `totalElements=0`, `page=9` past the last page returns empty content, `priority=BOGUS` returns 400 `Invalid data passed`, and blank name, `page=-1`, and `size=500` each return 400 with the guard message.
-- Known issue: Spring logs `Serializing PageImpl instances as-is is not supported` for this endpoint; the documented fix is `@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)`, not applied yet. The pre-existing `executive.manager_id` foreign-key DDL warning in the dev database is unrelated to this change.
+- Known issue: Spring logged `Serializing PageImpl instances as-is is not supported` for this endpoint; the documented fix `@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)` was applied in the `Stable Page Serialization (VIA_DTO)` entry below. The pre-existing `executive.manager_id` foreign-key DDL warning in the dev database is unrelated to this change.
 - Code and journal live on the `spring-boot` branch; only this README entry is merged here.
 - Released as `v0.43.0` on the `spring-boot` branch.
+
+**Stable Page Serialization (VIA_DTO)** (branch `spring-boot`, own change)
+
+- Applied `@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)` on `HelpdeskBackendApplication`, addressing the `Serializing PageImpl instances as-is is not supported` warning raised by the search endpoint.
+- The response is now the stable `{"content": [...], "page": {"size", "number", "totalElements", "totalPages"}}` structure; the internal `pageable`/`sort`/`offset` boilerplate is gone.
+- Verified: `mvnw test` green (exit 0); live, the warning no longer appears in the application log, `page=1&size=1` returns `{"page":{"size":1,"number":1,"totalElements":3,"totalPages":3}}` with the right row, and the `priority=BOGUS` 400 (`Invalid data passed`) and blank-name 400 (`Customer Name cannot be null or blank`) are unchanged.
+- Code and journal live on the `spring-boot` branch; only this README entry is merged here.
+- Released as `v0.44.0` on the `spring-boot` branch.
+
+Commits (branch `spring-boot`): `1f52f40` Serialize pages as VIA_DTO for stable JSON; `545f558` Update journal for VIA_DTO page serialization; `4e03e6a` Add journal commit hash to 2026-10-25 page serialization entry.
 
 ## Known Issues and Limits
 
@@ -716,7 +726,7 @@ Commits (branch `spring-boot`): `1c6aa41` Add ticket search by priority and cust
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.43.0` on `spring-boot`, `v0.39.0`-`v0.42.0` on `JS-fundamentals`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.42.0` on `JS-fundamentals`.
 
 ## Repository Information
 
