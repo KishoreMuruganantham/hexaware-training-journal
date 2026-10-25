@@ -759,7 +759,7 @@ Commits (branch `spring-boot`, source `imtiyaz-hirani/helpdesk_backend`): `dbc64
 - The response is now the stable `{"content": [...], "page": {"size", "number", "totalElements", "totalPages"}}` structure; the internal `pageable`/`sort`/`offset` boilerplate is gone.
 - Verified: `mvnw test` green (exit 0); live, the warning no longer appears in the application log, `page=1&size=1` returns `{"page":{"size":1,"number":1,"totalElements":3,"totalPages":3}}` with the right row, and the `priority=BOGUS` 400 (`Invalid data passed`) and blank-name 400 (`Customer Name cannot be null or blank`) are unchanged.
 
-Commits (branch `spring-boot`): `1c6aa41` Add ticket search by priority and customer name; `8d8685a` Update journal for ticket search case study; `1f52f40` Serialize pages as VIA_DTO for stable JSON.
+Commits (branch `spring-boot`): `1c6aa41` Add ticket search by priority and customer name; `8d8685a` Update journal for ticket search case study; `1f52f40` Serialize pages as VIA_DTO for stable JSON; `545f558` Update journal for VIA_DTO page serialization.
 
 ## Repository Information
 
