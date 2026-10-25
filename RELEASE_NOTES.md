@@ -1,5 +1,15 @@
 # Release Notes
 
+## 0.44.0 - 2026-10-25
+
+### Changed
+
+- Added `@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)` on `HelpdeskBackendApplication`, so `Page` responses serialize as the stable `{"content": [...], "page": {"size", "number", "totalElements", "totalPages"}}` structure instead of the unstable as-is `PageImpl` shape; the `Serializing PageImpl instances as-is is not supported` warning no longer appears.
+
+### Verified
+
+- `mvnw test` green (exit 0); live, the warning is absent from the log, `page=1&size=1` returns `page.totalPages=3` with the correct row, and the existing 400 responses (bad enum, blank name) are unchanged.
+
 ## 0.43.0 - 2026-10-25
 
 ### Added

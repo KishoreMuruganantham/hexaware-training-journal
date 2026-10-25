@@ -751,9 +751,15 @@ Commits (branch `spring-boot`, source `imtiyaz-hirani/helpdesk_backend`): `dbc64
 - Added service guards throwing `InvalidCallException` for a null priority, a blank customer name, a negative page, and a size outside 1..100 - the existing `GlobalExceptionHandler` turns each into a 400 with its own message.
 - Debugging: the first run failed at startup with `Could not create query ... where t.piority = ?1` - a typo in the entity field name, fixed to `t.priority` (javac had passed, which is why it looked like a compile error). A second typo in the DTO, `ticekt_subject`, was corrected to `ticket_subject` to match the required response structure.
 - Verified: `mvnw test` 5/5 green (BUILD SUCCESS); live, exact-case and lower-case customer names both return the 3 LOW tickets for Smoke Customer, `page=0&size=1` and `page=1&size=1` return different rows with `totalElements=3` and `totalPages=3`, `MEDIUM` and an unknown customer return `totalElements=0`, `page=9` past the last page returns empty content, `priority=BOGUS` returns 400 `Invalid data passed`, and blank name, `page=-1`, and `size=500` each return 400 with the guard message.
-- Known issue: Spring logs `Serializing PageImpl instances as-is is not supported` for this endpoint; the documented fix is `@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)`, not applied yet. The pre-existing `executive.manager_id` foreign-key DDL warning in the dev database is unrelated to this change.
+- Known issue: Spring logged `Serializing PageImpl instances as-is is not supported` for this endpoint; the documented fix `@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)` was applied in the `Stable Page Serialization (VIA_DTO)` entry below. The pre-existing `executive.manager_id` foreign-key DDL warning in the dev database is unrelated to this change.
 
-Commits (branch `spring-boot`): `1c6aa41` Add ticket search by priority and customer name; `8d8685a` Update journal for ticket search case study.
+**Stable Page Serialization (VIA_DTO)** (own change on `spring-boot`)
+
+- Applied `@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)` on `HelpdeskBackendApplication`, addressing the `Serializing PageImpl instances as-is is not supported` warning raised by the search endpoint.
+- The response is now the stable `{"content": [...], "page": {"size", "number", "totalElements", "totalPages"}}` structure; the internal `pageable`/`sort`/`offset` boilerplate is gone.
+- Verified: `mvnw test` green (exit 0); live, the warning no longer appears in the application log, `page=1&size=1` returns `{"page":{"size":1,"number":1,"totalElements":3,"totalPages":3}}` with the right row, and the `priority=BOGUS` 400 (`Invalid data passed`) and blank-name 400 (`Customer Name cannot be null or blank`) are unchanged.
+
+Commits (branch `spring-boot`): `1c6aa41` Add ticket search by priority and customer name; `8d8685a` Update journal for ticket search case study; `1f52f40` Serialize pages as VIA_DTO for stable JSON.
 
 ## Repository Information
 
