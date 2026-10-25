@@ -1,5 +1,20 @@
 # Release Notes
 
+## 0.43.0 - 2026-10-25
+
+### Added
+
+- `GET /api/ticket/search` case study endpoint: `priority` and `customer_name` request params with `page`/`size` defaults, a `Page<TicketCustomerFilterDto>` response carrying `ticket_subject`, `priority`, `customer_name`, `status`, a JPQL `JOIN t.customer` filter using `lower()` for case-insensitive name matching, and `InvalidCallException` guards for a blank name, negative page, and size outside 1..100.
+
+### Fixed
+
+- JPQL typo `t.piority` that stopped Spring Data creating the query and failed context startup; corrected to `t.priority`.
+- DTO JSON field `ticekt_subject` corrected to `ticket_subject` to match the required response structure.
+
+### Verified
+
+- `mvnw test` 5/5 green (BUILD SUCCESS); live: exact and lower-case names return the 3 LOW tickets for Smoke Customer, paging returns distinct rows with `totalElements=3`, `MEDIUM` and an unknown customer return `totalElements=0`, and `priority=BOGUS`, blank name, `page=-1`, `size=500` each return 400.
+
 ## 0.38.0 - 2026-10-15
 
 ### Added

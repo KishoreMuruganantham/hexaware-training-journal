@@ -741,6 +741,20 @@ Commits (branch `spring-boot`): `99594a7` Add test case get tickets with mocking
 
 Commits (branch `spring-boot`, source `imtiyaz-hirani/helpdesk_backend`): `dbc6461` Add initial commit for SonarCloud; `c546ecd` Add secret transferred to properties; `6a19f31` Add secrets fixed - properties removed from git; `2cd4ba9` Add properties reinstated; `383a0d2` Add variable renamed; `0f4cd62` Add low priority codes fixed for Sonar; `756c89c` Add loggers added; `c444e12` Add plan add in batch; `d4044e3` Update journal for SonarCloud cleanup and plan batch training.
 
+### 2026-10-25
+
+**Ticket Search Case Study - Priority and Customer Name** (own case study on `spring-boot`, no trainer commit)
+
+- Practiced the Employee/Company style case study against the helpdesk domain: `GET /api/ticket/search` reads `priority` and `customer_name` as request params with `page`/`size` defaulting to `0`/`10`.
+- Added the `TicketCustomerFilterDto` record for the response with `ticket_subject`, `priority`, `customer_name`, `status`.
+- Added the JPQL `select new ...TicketCustomerFilterDto(t.subject, t.priority, c.name, t.status) from Ticket t JOIN t.customer c where t.priority = ?1 AND lower(c.name) = lower(?2)` returning a `Page<...>` so the repository handles pagination.
+- Added service guards throwing `InvalidCallException` for a null priority, a blank customer name, a negative page, and a size outside 1..100 - the existing `GlobalExceptionHandler` turns each into a 400 with its own message.
+- Debugging: the first run failed at startup with `Could not create query ... where t.piority = ?1` - a typo in the entity field name, fixed to `t.priority` (javac had passed, which is why it looked like a compile error). A second typo in the DTO, `ticekt_subject`, was corrected to `ticket_subject` to match the required response structure.
+- Verified: `mvnw test` 5/5 green (BUILD SUCCESS); live, exact-case and lower-case customer names both return the 3 LOW tickets for Smoke Customer, `page=0&size=1` and `page=1&size=1` return different rows with `totalElements=3` and `totalPages=3`, `MEDIUM` and an unknown customer return `totalElements=0`, `page=9` past the last page returns empty content, `priority=BOGUS` returns 400 `Invalid data passed`, and blank name, `page=-1`, and `size=500` each return 400 with the guard message.
+- Known issue: Spring logs `Serializing PageImpl instances as-is is not supported` for this endpoint; the documented fix is `@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)`, not applied yet. The pre-existing `executive.manager_id` foreign-key DDL warning in the dev database is unrelated to this change.
+
+Commits (branch `spring-boot`): `1c6aa41` Add ticket search by priority and customer name.
+
 ## Repository Information
 
 - Owner: Kishore Muruganantham
