@@ -80,3 +80,12 @@ console.log(`Products above 20000 : ${costlyCount}`)
 // reduce can also total just those prices (same idea as the trainer's sum, but only above 20000) 
 const costlyTotal = products.reduce((sum, p) => (p.price > 20000 ? sum + p.price : sum), 0)
 console.log(`Total price of products above 20000: ${costlyTotal}`)
+
+// reduce can also find the maximum : keep whichever price is larger so far 
+// comment solved from 04-arrays.js : Compute the max price of the products in the array. 
+const maxPrice = products.reduce((max, p) => (p.price > max ? p.price : max), products[0].price)
+console.log(`Max price: ${maxPrice}`)
+
+// same reduce, keeping the whole product instead of just the number 
+const maxProduct = products.reduce((top, p) => (p.price > top.price ? p : top), products[0])
+console.log(`Product with max price: ${maxProduct.name} , price= ${maxProduct.price}`)
