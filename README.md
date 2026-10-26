@@ -66,6 +66,7 @@ flowchart TD
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
 | `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs, plus the ticket search case study (2026-10-06/25) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4e03e6a` |
 | `JS-fundamentals` | `js-fundamentals` Node project with fundamentals, arrays, map/reduce, and the `learning-app` case study (2026-10-23/25) | `hex_fsd_sept-2026/commits/JS-fundamentals` (4 new commits) | `139e9e0` |
+| `react` | `react-ui` Vite + React 19 scaffold and the first component (2026-10-26) | `hex_fsd_sept-2026/commits/react` (1 new commit) | `9da5d9e` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -727,6 +728,21 @@ Commits (branch `spring-boot`): `1f52f40` Serialize pages as VIA_DTO for stable 
 
 Commits (branch `JS-fundamentals`): `a4dc24d` Add reduce practice for max price comment; `ec0f17d` Update journal for max price reduce practice; `139e9e0` Add journal commit hash to 2026-10-25 max price entry.
 
+### 2026-10-26
+
+Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Postman workspace files ignored; `221b268` Update journal for react project setup training; `9da5d9e` Add journal commit hash to 2026-10-26 react setup entry.
+
+**React Project Setup** (branch `react`, mirrors his commit `a38d61a`)
+
+- He started a new trainer branch `react`, forked from his `JS-fundamentals` line at `1501911` (the objects + arrays commit, not the branch tip); the journal's `react` branch was created from its own `JS-fundamentals` tip `139e9e0` so the map/reduce, course case study, and practice work all stay reachable.
+- Mirrored his commit `a38d61a` `react project setup` (pushed 2026-10-26 10:22:11 +0530), 17 files, all byte-identical: the root `.gitignore` (Vite template - `logs`, `react-ui/node_modules`, `dist`, `.vscode/*`, `.idea`) and the `react-ui/` Vite + React 19 scaffold - `package.json` with `react` ^19.3.1 and `vite` ^8.3.4 plus the `dev`/`build`/`lint`/`preview` scripts, the 2447-line `package-lock.json`, `vite.config.js`, `eslint.config.js`, `index.html`, `public/` icons, and `src/` with `main.jsx`, `App.jsx`, `App.css`, `index.css`, and `assets/`.
+- His `App.jsx` is the first component: `const App = () => { //component` returning `<h1>My react app</h1>`, `<p>Your full array:{nums}</p>`, and the array `[1,4,7,2,3,8,9,6,4]` iterated with `nums.map((n,index)=>(<li key={index}>{n}</li>))` - kept exactly as written, including the `<li>` with no wrapping `<ul>`.
+- Root `.gitignore` clash: his commit *adds* a root `.gitignore` where the journal already had its own (from `ea2b587`), so his file replaced ours byte-identical per the mirror rule. The Postman protection it carried moved into `postman/.gitignore` and `.postman/.gitignore` (`*` plus `!.gitignore`) in `e2e738a`, and the remaining IDE-only rules moved to the local `.git/info/exclude`.
+- Verified: `git diff trainer/react HEAD -- .gitignore react-ui` empty (blobs byte-identical); `npm ci` installs 143 packages; `npm run build` succeeds (`built in 3.55s`, `dist/assets/index-e6QXcESr.js` 219.68 kB); `npm run lint` exits 0; `git status` stays clean and `git add -A --dry-run` stages only the three intentionally-untracked files.
+- Known issues: his `main.jsx` never imports `./index.css` and `App.jsx` never imports `./App.css`, so the template styling will not render until he adds the imports (mirrored as-is); `postman/` and `.postman/` content is protected only by the new nested files, not by the root `.gitignore` any more.
+- Code and journal live on the `react` branch; only this README entry is merged here.
+- Released as `v0.46.0` on the `react` branch.
+
 ## Known Issues and Limits
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
@@ -736,7 +752,7 @@ Commits (branch `JS-fundamentals`): `a4dc24d` Add reduce practice for max price 
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0` on `react`.
 
 ## Repository Information
 
@@ -744,7 +760,7 @@ Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9
 - Training: Hexaware Technologies
 - Language: Java
 - Java version: 21
-- Branches: `main`, `pl-sql`, `junit`, `spring-core`, `hibernate-jpa`, `spring-boot`, `JS-fundamentals`, `java-fundamentals`, `feat/quitq-ecommerce-model`
+- Branches: `main`, `pl-sql`, `junit`, `spring-core`, `hibernate-jpa`, `spring-boot`, `JS-fundamentals`, `react`, `java-fundamentals`, `feat/quitq-ecommerce-model`
 - Visibility: Private
 
 ## Case Study Projects

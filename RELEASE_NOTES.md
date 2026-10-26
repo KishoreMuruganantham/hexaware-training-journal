@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.32 - 2026-10-26
+
+### Changed
+
+- Recorded the trainer's new `react` branch and its `react project setup` commit (`a38d61a`) in the history, added a `react` row to the branch guide, and extended the release history to `v0.46.0`.
+- No source code changed on `main`.
+
 ## 0.10.31 - 2026-10-25
 
 ### Changed
