@@ -787,6 +787,19 @@ Commits (branch `JS-fundamentals`): `906a396` JS Fundamentals: variables + Funct
 
 Commits (branch `JS-fundamentals`): `a4dc24d` Add reduce practice for max price comment; `ec0f17d` Update journal for max price reduce practice.
 
+### 2026-10-26
+
+Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Postman workspace files ignored.
+
+**React Project Setup** (branch `react`, mirrors his commit `a38d61a`)
+
+- He started a new trainer branch `react`, forked from his `JS-fundamentals` line at `1501911` (the objects + arrays commit, not the branch tip); the journal's `react` branch was created from this branch's own tip `139e9e0` so the map/reduce, course case study, and practice work all stay reachable.
+- Mirrored his commit `a38d61a` `react project setup` (pushed 2026-10-26 10:22:11 +0530), 17 files, all byte-identical: the root `.gitignore` (Vite template - `logs`, `*.log`, `react-ui/node_modules`, `dist`, `*.local`, `.vscode/*`, `.idea`, `.DS_Store`) and the `react-ui/` Vite + React 19 scaffold - `package.json` with `react` ^19.3.1, `react-dom` ^19.3.1, `vite` ^8.3.4, `@vitejs/plugin-react` ^6.1.2, `eslint` ^10.13.0 and the `dev`/`build`/`lint`/`preview` scripts, the 2447-line `package-lock.json`, `vite.config.js`, `eslint.config.js` (flat config), `index.html`, `public/` icons, and `src/` with `main.jsx`, `App.jsx`, `App.css`, `index.css`, and `assets/`.
+- His `App.jsx` is the first component: `const App = () => { //component` returning `<h1>My react app</h1>`, `<p>Your full array:{nums}</p>`, and the array `[1,4,7,2,3,8,9,6,4]` iterated with `nums.map((n,index)=>(<li key={index}>{n}</li>))` - kept exactly as written, including the `<li>` with no wrapping `<ul>`.
+- Root `.gitignore` clash: his commit *adds* a root `.gitignore` where the journal already had its own (from `ea2b587`), so his file replaced ours byte-identical per the mirror rule. The Postman protection that rule carried was re-homed into `postman/.gitignore` and `.postman/.gitignore` (`*` plus `!.gitignore`) in the follow-up commit `e2e738a`, and the remaining IDE-only rules (`out/`, `bin/`, Eclipse `.classpath`/`.project`/`.settings`) were moved to the local `.git/info/exclude`.
+- Verified: `git diff trainer/react HEAD -- .gitignore react-ui` is empty (blobs byte-identical); `npm ci` in `react-ui/` installs 143 packages; `npm run build` succeeds (`built in 3.55s`, `dist/assets/index-e6QXcESr.js` 219.68 kB); `npm run lint` exits 0; `git status` stays clean because his ignore rules cover `dist/` and `node_modules`, and `git add -A --dry-run` now stages only the three intentionally-untracked files.
+- Known issues: his `main.jsx` never imports `./index.css` and `App.jsx` never imports `./App.css`, so the template styling will not render until he adds the imports (mirrored as-is); `postman/` and `.postman/` content is protected only by the new nested files, not by the root `.gitignore` any more.
+
 ## Repository Information
 
 - Owner: Kishore Muruganantham

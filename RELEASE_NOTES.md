@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.46.0 - 2026-10-26
+
+### Added
+
+- New `react` branch mirroring the trainer's new `react` branch (forked from his JS line at `1501911`), created from this journal's `JS-fundamentals` tip so all earlier work stays reachable.
+- Mirrored his commit `a38d61a` `react project setup`: the root `.gitignore` (Vite template rules) and the `react-ui/` Vite + React 19 scaffold - `package.json`, `package-lock.json`, `vite.config.js`, `eslint.config.js`, `index.html`, `src/main.jsx`, `src/App.jsx` (his first component iterating an array with `map`), `App.css`, `index.css`, and the `public/` and `assets/` images. All 17 files byte-identical to his blobs.
+- `postman/.gitignore` and `.postman/.gitignore` (`*`, `!.gitignore`) keeping local Postman workspace files ignored now that the root `.gitignore` mirrors his; the remaining IDE-only rules moved to the local `.git/info/exclude`.
+
+### Verified
+
+- `git diff trainer/react HEAD -- .gitignore react-ui` empty; `npm ci` (143 packages), `npm run build` (`built in 3.55s`, 219.68 kB bundle), and `npm run lint` all exit 0; `git status` clean apart from the three intentionally-untracked files.
+
 ## 0.45.0 - 2026-10-25
 
 ### Added
