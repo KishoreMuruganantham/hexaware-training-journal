@@ -789,7 +789,7 @@ Commits (branch `JS-fundamentals`): `a4dc24d` Add reduce practice for max price 
 
 ### 2026-10-26
 
-Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Postman workspace files ignored; `221b268` Update journal for react project setup training.
+Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Postman workspace files ignored; `221b268` Update journal for react project setup training; `e4cc6ed` multi component layout.
 
 **React Project Setup** (branch `react`, mirrors his commit `a38d61a`)
 
@@ -799,6 +799,13 @@ Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Po
 - Root `.gitignore` clash: his commit *adds* a root `.gitignore` where the journal already had its own (from `ea2b587`), so his file replaced ours byte-identical per the mirror rule. The Postman protection that rule carried was re-homed into `postman/.gitignore` and `.postman/.gitignore` (`*` plus `!.gitignore`) in the follow-up commit `e2e738a`, and the remaining IDE-only rules (`out/`, `bin/`, Eclipse `.classpath`/`.project`/`.settings`) were moved to the local `.git/info/exclude`.
 - Verified: `git diff trainer/react HEAD -- .gitignore react-ui` is empty (blobs byte-identical); `npm ci` in `react-ui/` installs 143 packages; `npm run build` succeeds (`built in 3.55s`, `dist/assets/index-e6QXcESr.js` 219.68 kB); `npm run lint` exits 0; `git status` stays clean because his ignore rules cover `dist/` and `node_modules`, and `git add -A --dry-run` now stages only the three intentionally-untracked files.
 - Known issues: his `main.jsx` never imports `./index.css` and `App.jsx` never imports `./App.css`, so the template styling will not render until he adds the imports (mirrored as-is); `postman/` and `.postman/` content is protected only by the new nested files, not by the root `.gitignore` any more.
+
+**Multi Component Layout** (branch `react`, mirrors his commit `6e0a902`)
+
+- Mirrored his commit `6e0a902` `multi component layout` (pushed 2026-10-26 11:49:38 +0530), 6 files, byte-identical: `index.html` gains the Bootstrap 5.3.3 CDN `<link>` (with `integrity` and `crossorigin`), `App.jsx` becomes the parent component laying out a Bootstrap grid (`container-fluid` / `row` / `col-md-10` + `col-md-2`, then `col-md-4` + `col-md-8`, plus two empty `col-md-12` rows) around four imported children, and the new `src/components/` holds `Navbar.jsx` (brand link `SupportFlow-HelpDesk`), `Auth.jsx` (the `btn-outline theme-inverse` `Inverse` button), `Nums.jsx` (his array moved out of `App`, still `nums.map((n, index) => (<li key={index}>{n}</li>))`), and `Todos.jsx` (the static Bootstrap `table` with the Mark/Otto/@mdo rows).
+- Kept exactly as written: the trailing space in `className="navbar "`, the two empty `col-md-12` rows, every new file ending without a final newline, and `import Todos from "./components/todos"` - a lowercase path for the `Todos.jsx` file.
+- Verified: `git diff trainer/react HEAD -- react-ui` is empty (the whole project byte-identical to his tree); `npm run build` succeeds (`built in 992ms`, `dist/assets/index-DgJUQaYg.js` 221.38 kB); `npm run lint` exits 0; `git status` still shows only the three intentionally-untracked files.
+- Known issues: `import Todos from "./components/todos"` resolves here because Windows is case-insensitive, but it will fail on Linux or any case-sensitive checkout since the file is `Todos.jsx`; `main.jsx` still never imports `./index.css`, so Bootstrap now styles the page from the CDN while his own `index.css` and `App.css` remain unused.
 
 ## Repository Information
 

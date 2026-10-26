@@ -1,5 +1,15 @@
 # Release Notes
 
+## 0.47.0 - 2026-10-26
+
+### Added
+
+- Mirrored his commit `6e0a902` `multi component layout`: Bootstrap 5.3.3 CDN link in `index.html`, `App.jsx` refactored into a parent component driving a Bootstrap grid, and four new children under `react-ui/src/components/` - `Navbar.jsx`, `Auth.jsx`, `Nums.jsx` (the array iteration moved out of `App`), and `Todos.jsx` (static Bootstrap table). 6 files, byte-identical to his blobs.
+
+### Verified
+
+- `git diff trainer/react HEAD -- react-ui` empty; `npm run build` (`built in 992ms`, 221.38 kB bundle) and `npm run lint` exit 0; `git status` clean apart from the three intentionally-untracked files.
+
 ## 0.46.0 - 2026-10-26
 
 ### Added
