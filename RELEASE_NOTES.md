@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.33 - 2026-10-26
+
+### Changed
+
+- Recorded the trainer's `multi component layout` commit (`6e0a902`) in the history, updated the `react` branch guide row, and extended the release history to `v0.47.0`.
+- No source code changed on `main`.
+
 ## 0.10.32 - 2026-10-26
 
 ### Changed

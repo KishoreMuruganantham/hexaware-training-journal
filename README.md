@@ -66,7 +66,7 @@ flowchart TD
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
 | `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs, plus the ticket search case study (2026-10-06/25) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4e03e6a` |
 | `JS-fundamentals` | `js-fundamentals` Node project with fundamentals, arrays, map/reduce, and the `learning-app` case study (2026-10-23/25) | `hex_fsd_sept-2026/commits/JS-fundamentals` (4 new commits) | `139e9e0` |
-| `react` | `react-ui` Vite + React 19 scaffold and the first component (2026-10-26) | `hex_fsd_sept-2026/commits/react` (1 new commit) | `9da5d9e` |
+| `react` | `react-ui` Vite + React 19 scaffold with the parent component and four children (2026-10-26) | `hex_fsd_sept-2026/commits/react` (2 new commits) | `0e2b55a` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -730,7 +730,7 @@ Commits (branch `JS-fundamentals`): `a4dc24d` Add reduce practice for max price 
 
 ### 2026-10-26
 
-Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Postman workspace files ignored; `221b268` Update journal for react project setup training; `9da5d9e` Add journal commit hash to 2026-10-26 react setup entry.
+Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Postman workspace files ignored; `221b268` Update journal for react project setup training; `9da5d9e` Add journal commit hash to 2026-10-26 react setup entry; `e4cc6ed` multi component layout; `a51186c` Update journal for multi component layout training; `0e2b55a` Add journal commit hash to 2026-10-26 multi component entry.
 
 **React Project Setup** (branch `react`, mirrors his commit `a38d61a`)
 
@@ -743,6 +743,15 @@ Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Po
 - Code and journal live on the `react` branch; only this README entry is merged here.
 - Released as `v0.46.0` on the `react` branch.
 
+**Multi Component Layout** (branch `react`, mirrors his commit `6e0a902`)
+
+- Mirrored his commit `6e0a902` `multi component layout` (pushed 2026-10-26 11:49:38 +0530), 6 files, byte-identical: `index.html` gains the Bootstrap 5.3.3 CDN `<link>` (with `integrity` and `crossorigin`), `App.jsx` becomes the parent component laying out a Bootstrap grid (`container-fluid` / `row` / `col-md-10` + `col-md-2`, then `col-md-4` + `col-md-8`, plus two empty `col-md-12` rows) around four imported children, and the new `src/components/` holds `Navbar.jsx` (brand link `SupportFlow-HelpDesk`), `Auth.jsx` (the `btn-outline theme-inverse` `Inverse` button), `Nums.jsx` (his array moved out of `App`, still `nums.map((n, index) => (<li key={index}>{n}</li>))`), and `Todos.jsx` (the static Bootstrap `table` with the Mark/Otto/@mdo rows).
+- Kept exactly as written: the trailing space in `className="navbar "`, the two empty `col-md-12` rows, every new file ending without a final newline, and `import Todos from "./components/todos"` - a lowercase path for the `Todos.jsx` file.
+- Verified: `git diff trainer/react HEAD -- react-ui` is empty (the whole project byte-identical to his tree); `npm run build` succeeds (`built in 992ms`, `dist/assets/index-DgJUQaYg.js` 221.38 kB); `npm run lint` exits 0; `git status` still shows only the three intentionally-untracked files.
+- Known issues: `import Todos from "./components/todos"` resolves here because Windows is case-insensitive, but it will fail on Linux or any case-sensitive checkout since the file is `Todos.jsx`; `main.jsx` still never imports `./index.css`, so Bootstrap now styles the page from the CDN while his own `index.css` and `App.css` remain unused.
+- Code and journal live on the `react` branch; only this README entry is merged here.
+- Released as `v0.47.0` on the `react` branch.
+
 ## Known Issues and Limits
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
@@ -752,7 +761,7 @@ Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Po
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0` on `react`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.47.0` on `react`.
 
 ## Repository Information
 
