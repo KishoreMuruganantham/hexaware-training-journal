@@ -789,7 +789,7 @@ Commits (branch `JS-fundamentals`): `a4dc24d` Add reduce practice for max price 
 
 ### 2026-10-26
 
-Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Postman workspace files ignored.
+Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Postman workspace files ignored; `221b268` Update journal for react project setup training.
 
 **React Project Setup** (branch `react`, mirrors his commit `a38d61a`)
 
