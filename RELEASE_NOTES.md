@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.34 - 2026-10-27
+
+### Changed
+
+- Recorded the five remaining `react` branch commits (`state variables`, `reading input`, `iterating over object array`, `delete and add op in array`, `edit op`) in the history, updated the `react` branch guide row to `fcf396e`, added the 2026-10-27 history heading, and extended the release history to `v0.48.0`.
+- No source code changed on `main`.
+
 ## 0.10.33 - 2026-10-26
 
 ### Changed

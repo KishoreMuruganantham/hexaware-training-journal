@@ -66,7 +66,7 @@ flowchart TD
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
 | `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs, plus the ticket search case study (2026-10-06/25) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4e03e6a` |
 | `JS-fundamentals` | `js-fundamentals` Node project with fundamentals, arrays, map/reduce, and the `learning-app` case study (2026-10-23/25) | `hex_fsd_sept-2026/commits/JS-fundamentals` (4 new commits) | `139e9e0` |
-| `react` | `react-ui` Vite + React 19 scaffold with the parent component and four children (2026-10-26) | `hex_fsd_sept-2026/commits/react` (2 new commits) | `0e2b55a` |
+| `react` | `react-ui` Vite + React 19 app: parent layout, forms with state, and course list add/edit/delete (2026-10-26/27) | `hex_fsd_sept-2026/commits/react` (7 new commits) | `fcf396e` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -730,7 +730,7 @@ Commits (branch `JS-fundamentals`): `a4dc24d` Add reduce practice for max price 
 
 ### 2026-10-26
 
-Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Postman workspace files ignored; `221b268` Update journal for react project setup training; `9da5d9e` Add journal commit hash to 2026-10-26 react setup entry; `e4cc6ed` multi component layout; `a51186c` Update journal for multi component layout training; `0e2b55a` Add journal commit hash to 2026-10-26 multi component entry.
+Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Postman workspace files ignored; `221b268` Update journal for react project setup training; `9da5d9e` Add journal commit hash to 2026-10-26 react setup entry; `e4cc6ed` multi component layout; `a51186c` Update journal for multi component layout training; `0e2b55a` Add journal commit hash to 2026-10-26 multi component entry; `4ff13b4` state variables; `333273a` reading input.
 
 **React Project Setup** (branch `react`, mirrors his commit `a38d61a`)
 
@@ -752,6 +752,48 @@ Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Po
 - Code and journal live on the `react` branch; only this README entry is merged here.
 - Released as `v0.47.0` on the `react` branch.
 
+**State Variables** (branch `react`, mirrors his commit `4086125`)
+
+- Mirrored his commit `4086125` `state variables` (pushed 2026-10-26 13:00:35 +0530), 1 file byte-identical: `Nums.jsx` imports `useState` and keeps two copies of the array side by side - the plain `nums` marked `// normal variable that holds array` and `const [numsArry, setNumsArry] = useState([...])` marked `// state variable that is saved in reacts context` - plus `numsClone` for the reset.
+- Added his `sortFn(direction)` `switch`: `ASC` and `DESC` sort ascending/descending through `setNumsArry([...numsArry.sort(...)])`, `default` restores from `numsClone`; three Bootstrap buttons (`Sort-ASC`, `RESET`, `Sort-DESC`) wire to it, and the list now renders `<span>` per number instead of `<li>`.
+- Kept exactly as written, including the in-place `sort` inside the spread and his `// {... obj} [...arry]` note.
+- Verified: `git diff trainer/react HEAD -- react-ui` empty; `npm run build` succeeds.
+
+**Reading Input** (branch `react`, mirrors his commit `8b083e9`)
+
+- Mirrored his commit `8b083e9` `reading input` (pushed 2026-10-26 15:20:09 +0530), 3 files byte-identical: new `components/AddTicket.jsx`, `App.jsx` rendering it in a `col-md-4`, and a blank-line removal in `Nums.jsx`.
+- `AddTicket` holds three `useState` fields (`subject`, `issue`, `priority`) over `priorityValues = ['HIGH', 'MEDIUM', 'LOW']`, renders a Bootstrap card `Reading Input`, and `processInput(e)` starts with `e.preventDefault()` then `console.log`s the values; his trailing comment and missing final newline kept as-is.
+- Verified: `git diff trainer/react HEAD -- react-ui` empty; `npm run build` succeeds.
+- Code and journal live on the `react` branch; only this README entry is merged here.
+- Released as `v0.48.0` on the `react` branch (part 1 of the 2026-10-26 work).
+
+### 2026-10-27
+
+Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delete and add op in array; `418fe41` edit op; `d5da995` Update journal for react state and crud training; `fcf396e` Add journal commit hash to 2026-10-27 react state and crud entry.
+
+**Iterating Over Object Array** (branch `react`, mirrors his commit `b15b316`)
+
+- Mirrored his commit `b15b316` `iterating over object array` (pushed 2026-10-27 10:30:31 +0530), 3 files byte-identical: new `src/data/courses.js` exporting `courseData` (10 courses with `id`, `name`, `fee`, `instructorName`, `category`), new `components/CourseList.jsx`, and `App.jsx` importing it.
+- `CourseList` seeds `useState(courseData)` and maps it into a Bootstrap `table` (`#`, `Name`, `Fee`, `Instructor Name`, `Category`) rendering `INR. {c.fee}` per row; `App.jsx` swaps the previous child out by commenting it - `{/* <Todos /> */}` - and puts `<CourseList />` in the `col-md-8`.
+- Kept exactly as written: both new files end without a final newline, with two stray blank lines before `</tbody>`.
+- Verified: `git diff trainer/react HEAD -- react-ui` empty; `npm run build` succeeds.
+
+**Delete and Add Op in Array** (branch `react`, mirrors his commit `321c769`)
+
+- Mirrored his commit `321c769` `delete and add op in array` (pushed 2026-10-27 11:57:26 +0530), 2 files byte-identical: `index.html` gains the bootstrap-icons font CSS and the Bootstrap 5.3.8 bundle `<script>` (written after `</body>`), and `CourseList.jsx` grows from 38 to 121 lines.
+- `CourseList` gains `onDelete` (`setCourses([...courses.filter(c => c.id !== courseId)])`) and `addCourse` (builds `courseObj` with `'id': Math.ceil((Math.random()*10000))` and `setCourses([courseObj, ...courses])`), four more `useState` fields, a `card-header` `Add Course` button that clears the form and opens modal `#staticBackdrop`, and the modal with four controlled inputs.
+- Row actions: `bi bi-trash3` wired to `onDelete`, the pencil icon present but not yet wired, both wrapped in `<a href="javascript:void(0)">` - kept as written.
+- Verified: `git diff trainer/react HEAD -- react-ui` empty; `npm run build` succeeds.
+
+**Edit Op** (branch `react`, mirrors his commit `abc6c9f`)
+
+- Mirrored his commit `abc6c9f` `edit op` (pushed 2026-10-27 14:35:16 +0530), 1 file byte-identical: `CourseList.jsx` +39/-4 adds `id` and `onAdd` state.
+- `onEdit(course)` loads a row into the form with `onAdd = false`; `editCourse()` filters the old `id` out and `setCourses([newObj, ...temp])` preserving the `id`; the pencil icon now opens the modal, and the footer switches on `onAdd ? Add : Edit` so one modal serves both operations.
+- Verified: `git diff trainer/react HEAD -- react-ui` is empty - the whole project byte-identical to his `abc6c9f` tree; `npm run build` succeeds (`built in 1.42s`, 227.26 kB); `git status` shows only the three intentionally-untracked files.
+- Known issues: `npm run lint` exits 1 with 3 `no-unused-vars` errors all in his own code - `App.jsx` `'Todos' is defined but never used` (he commented out `<Todos />` but kept the import), `Nums.jsx` `'nums'` and `'setNumsClone'` unused - mirrored as-is, never edited. The earlier known issues still stand: the lowercase `./components/todos` import breaks on case-sensitive filesystems, `main.jsx` never imports `./index.css`, and `fee` stays a string in state.
+- Code and journal live on the `react` branch; only this README entry is merged here.
+- Released as `v0.48.0` on the `react` branch.
+
 ## Known Issues and Limits
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
@@ -761,7 +803,7 @@ Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Po
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.47.0` on `react`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.48.0` on `react`.
 
 ## Repository Information
 
