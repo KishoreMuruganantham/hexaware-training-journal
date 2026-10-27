@@ -1,5 +1,18 @@
 # Release Notes
 
+## 0.10.36 - 2026-10-27
+
+### Added
+
+- `.github/workflows/sonarcloud.yml`: SonarQube Cloud analysis on pushes to `main` and on manual dispatch - checkout with full history, JDK 21, scanner package cache, a `javac` compile step feeding `sonar.java.binaries`, and `SonarSource/sonarqube-scan-action@v7` with `SONAR_HOST_URL: https://sonarcloud.io` and `-Dsonar.qualitygate.wait=true` so a failed Quality Gate fails the job.
+- `sonar-project.properties`: project key `KishoreMuruganantham_hexaware-training-journal`, organization `kishoremuruganantham`, `sonar.sources=.` with exclusions for build output, IDE files, and binary assets.
+- The SonarQube Cloud token lives only in the repository Actions secret `SONAR_TOKEN` (set with `gh secret set`, validated against `api/authentication/validate`); nothing secret is committed.
+
+### Verified
+
+- Both Java source roots compile with javac 21 before scanning (`src` 5 classes with the MySQL driver, `JavaFundamentals` 42 classes, exit 0).
+- The organization `kishoremuruganantham` and the project `KishoreMuruganantham_hexaware-training-journal` already exist in SonarQube Cloud (0 analyses before this release).
+
 ## 0.10.35 - 2026-10-27
 
 ### Changed

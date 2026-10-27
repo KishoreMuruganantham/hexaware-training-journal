@@ -809,6 +809,18 @@ Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delet
 - Code and journal live on the `react` branch; only this README entry is merged here.
 - Released as `v0.49.0` on the `react` branch.
 
+Commits (branch `main`): `22fa0b6` Add SonarCloud GitHub Actions workflow.
+
+**SonarCloud GitHub Actions Workflow** (branch `main`, own setup)
+
+- Added `.github/workflows/sonarcloud.yml` following the SonarQube Cloud GitHub Actions docs: triggers on pushes to `main` plus `workflow_dispatch`, `permissions: contents: read`, checkout with `fetch-depth: 0` (full history for blame), JDK 21 temurin, a cache for `~/.sonar/cache`, then `SonarSource/sonarqube-scan-action@v7` with `SONAR_HOST_URL: https://sonarcloud.io`.
+- The token is never in a file: the scan reads `SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}`, stored as a repository Actions secret with `gh secret set SONAR_TOKEN` and validated against SonarCloud (`api/authentication/validate` returns `valid: true`) - the env-var convention AGENTS.md already requires for SonarQube config.
+- Added `sonar-project.properties` with `sonar.projectKey=KishoreMuruganantham_hexaware-training-journal`, `sonar.organization=kishoremuruganantham`, `sonar.sources=.`, and exclusions for `out/`, `out-fund/`, `node_modules`, `dist`, `lib/`, `.idea/`, `*.iml`, `*.jar`, `*.mwb`. The project already exists in the organization (3 projects, 0 analyses at setup time).
+- Because the journal's Java is plain `javac` rather than Maven, a `Compile Java sources` step builds both source roots (`src` with the MySQL driver jar -> `out`, `JavaFundamentals/src` -> `out-fund`) so `sonar.java.binaries` resolves - verified locally first with javac 21: both compile exit 0 (5 + 42 classes).
+- The scan runs with `-Dsonar.qualitygate.wait=true`, so the workflow itself fails when the Quality Gate fails instead of reporting a green run.
+- Known limits: SonarQube Cloud's free plan analyses the `main` branch only, so the `react`/`JS-fundamentals`/`spring-boot` branches are not scanned; pull request decoration additionally needs the SonarQube Cloud GitHub App bound to the repository.
+- Released as `v0.10.36` on `main`.
+
 ## Known Issues and Limits
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
@@ -818,7 +830,7 @@ Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delet
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.49.0` on `react`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`-`v0.10.36` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.49.0` on `react`.
 
 ## Repository Information
 
