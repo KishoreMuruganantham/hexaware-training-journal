@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.10.37 - 2026-10-27
+
+### Fixed
+
+- Pinned every action in `.github/workflows/sonarcloud.yml` to a full commit SHA with a version comment (`actions/checkout` v6, `actions/setup-java` v5, `actions/cache` v5, `SonarSource/sonarqube-scan-action` v7), clearing SonarQube Cloud's `githubactions:S7637` finding against our own workflow and the Node 20 deprecation warning.
+
+### Verified
+
+- First analysis run `40501212862` uploaded 1030 ncloc and failed only on the Quality Gate (expected on a first analysis where all code is new); second run `40501956338` is green - `SonarQube Scan` succeeded in 1m 19s with Quality Gate **OK** on all five conditions (`new_reliability_rating`, `new_security_rating`, `new_maintainability_rating` = 1, `new_duplicated_lines_density` = 0.0% < 3, `new_security_hotspots_reviewed` = 100%).
+- 6 issues remain open, all in the trainer's mirrored Java and never edited here: 3 `BLOCKER` `java:S2095` in `CustomerDao.java`, 2 `MAJOR` `java:S2159` in `EmployeeService.java`, 1 `MAJOR` `java:S2068` in `DBConnection.java` - recorded as known issues, excluded from the gate because they are not new code.
+
 ## 0.10.36 - 2026-10-27
 
 ### Added

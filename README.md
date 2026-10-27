@@ -809,7 +809,7 @@ Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delet
 - Code and journal live on the `react` branch; only this README entry is merged here.
 - Released as `v0.49.0` on the `react` branch.
 
-Commits (branch `main`): `22fa0b6` Add SonarCloud GitHub Actions workflow; `7e45b5b` Update journal for SonarCloud workflow setup.
+Commits (branch `main`): `22fa0b6` Add SonarCloud GitHub Actions workflow; `7e45b5b` Update journal for SonarCloud workflow setup; `9062620` Pin GitHub Actions to full commit SHAs.
 
 **SonarCloud GitHub Actions Workflow** (branch `main`, own setup)
 
@@ -819,9 +819,16 @@ Commits (branch `main`): `22fa0b6` Add SonarCloud GitHub Actions workflow; `7e45
 - Because the journal's Java is plain `javac` rather than Maven, a `Compile Java sources` step builds both source roots (`src` with the MySQL driver jar -> `out`, `JavaFundamentals/src` -> `out-fund`) so `sonar.java.binaries` resolves - verified locally first with javac 21: both compile exit 0 (5 + 42 classes).
 - The scan runs with `-Dsonar.qualitygate.wait=true`, so the workflow itself fails when the Quality Gate fails instead of reporting a green run.
 - Known limits: SonarQube Cloud's free plan analyses the `main` branch only, so the `react`/`JS-fundamentals`/`spring-boot` branches are not scanned; pull request decoration additionally needs the SonarQube Cloud GitHub App bound to the repository.
-- Released as `v0.10.36` on `main`.
+- First run (`40501212862`) analysed successfully and uploaded, then failed the job on `QUALITY GATE STATUS: FAILED` - expected on a first analysis, where every file counts as new code. It also surfaced `githubactions:S7637` ("Use full commit SHA hash for this dependency") against our own workflow, the only issue of the 7 found that the journal is allowed to touch.
+- Fixed in `9062620` `Pin GitHub Actions to full commit SHAs`: all four steps now reference full commit SHAs with a version comment (`actions/checkout` v6, `actions/setup-java` v5, `actions/cache` v5, `SonarSource/sonarqube-scan-action` v7), which also clears the Node 20 deprecation warning on `setup-java`/`cache`.
+- Second run (`40501956338`) is green: `SonarQube Scan` succeeded in 1m 19s and the Quality Gate reports **OK** on all five conditions - `new_reliability_rating` 1, `new_security_rating` 1, `new_maintainability_rating` 1, `new_duplicated_lines_density` 0.0% (threshold 3), `new_security_hotspots_reviewed` 100%.
+- The 6 issues left open are all in the trainer's mirrored Java and are never edited here: 3 `BLOCKER` `java:S2095` unclosed `CallableStatement` in `src/com/dao/CustomerDao.java`, 2 `MAJOR` `java:S2159` `equals` between unrelated types in `JavaFundamentals/src/com/service/EmployeeService.java`, and 1 `MAJOR` `java:S2068` hard-coded password in `src/com/utility/DBConnection.java`. They sit in overall code, not new code, so they do not fail the gate.
+- Screenshots of the green run were captured in the session (the Actions summary page renders signed out); the SonarQube Cloud dashboard needs a logged-in session because the project is private.
+- Released as `v0.10.36` on `main` (workflow setup) and `v0.10.37` on `main` (pin fix and first analysis).
 
 ## Known Issues and Limits
+
+- SonarQube Cloud reports 6 open issues in the mirrored Java (`java:S2095` x3 in `CustomerDao`, `java:S2159` x2 in `EmployeeService`, `java:S2068` in `DBConnection`); trainer files are never edited, so they stay open - they are not new code and do not fail the Quality Gate.
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
 - `emp_name_by_department(?)` remains a placeholder in the Java code, as in the trainer's commit.
