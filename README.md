@@ -822,7 +822,7 @@ Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Po
 
 ### 2026-10-27
 
-Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delete and add op in array; `418fe41` edit op; `d5da995` Update journal for react state and crud training.
+Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delete and add op in array; `418fe41` edit op; `d5da995` Update journal for react state and crud training; `fcf396e` Add journal commit hash to 2026-10-27 react state and crud entry; `563e914` users case study; `97f306d` Implement users case study dashboard.
 
 **Iterating Over Object Array** (branch `react`, mirrors his commit `b15b316`)
 
@@ -844,6 +844,20 @@ Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delet
 - `onEdit(course)` loads a row into the form and sets `onAdd = false`; `editCourse()` copies `courses`, filters out the old `id`, and `setCourses([newObj, ...temp])` with the same `id` preserved; the pencil icon now calls `onEdit(c)` and opens the modal, and the footer button switches on `onAdd ? <Add .../> : <Edit .../>` so one modal serves both operations.
 - Verified: `git diff trainer/react HEAD -- react-ui` is empty - the whole project byte-identical to his `abc6c9f` tree; `npm run build` succeeds (`built in 1.42s`, `dist/assets/index-COFNvzDA.js` 227.26 kB); `git status` still shows only the three intentionally-untracked files.
 - Known issues: `npm run lint` now exits 1 with 3 `no-unused-vars` errors that are all in his own code - `App.jsx 6:8` `'Todos' is defined but never used` (he commented out `<Todos />` but kept the import), `Nums.jsx 4:11` `'nums' is assigned a value but never used`, and `Nums.jsx 6:23` `'setNumsClone' is assigned a value but never used` - all mirrored as-is because the trainer's files are never edited. The earlier known issues still stand: the lowercase `./components/todos` import breaks on case-sensitive filesystems, `main.jsx` never imports `./index.css`, and `fee` is fed from a text input so it stays a string in state.
+
+**Users Case Study** (branch `react`, mirrors his commit `5db0a6f`)
+
+- Mirrored his commit `5db0a6f` `users case study` (pushed 2026-10-27 15:26:11 +0530), 3 files byte-identical: new `src/data/users.js` (the 10 JSONPlaceholder users with nested `address.city` and `company.name`), new `users-cs/Dashboard.jsx` as an **empty 8-line stub** - just `<div className="container-fluid"><div className="row"><div className="col-md-12"></div></div></div>` - and `App.jsx` importing `UsersDashboard from "./users-cs/Dashboard"`, rendering `<UsersDashboard />`, and commenting out the entire previous layout (Navbar/Auth row, Nums/CourseList row, AddTicket row) while keeping all six old imports.
+- Verified: `git diff 5db0a6f HEAD -- react-ui` empty; `npm run build` succeeds.
+- Known issues carried over: those six now-unused imports are what push `npm run lint` to 8 `no-unused-vars` errors (6 in his `App.jsx` + his 2 in `Nums.jsx`) - his code, mirrored as-is, never edited; the new `users-cs/` files add no lint errors.
+
+**Users Case Study Layout** (branch `react`, own implementation `97f306d`)
+
+- Filled his empty `Dashboard.jsx` stub and added `users-cs/UsersTable.jsx` - own work, not mirrored, following the layout he sketched and written in his `CourseList` style. This is a deliberate deviation from the byte-identical mirror rule (his empty stub edited instead of left blank), recorded here the same way the root `.gitignore` clash was.
+- `Dashboard.jsx`: `container-fluid` with a `row` split into `col-md-2` (the tall side panel - card `Users Case Study` with a `list-group` of GET / ADD / DELETE / EDIT) and `col-md-10` holding two stacked rows - `row 1` renders `<Navbar />`, `row 2` renders `<UsersTable />` - matching his sketch.
+- `UsersTable.jsx`: `useState([...users])` seeded from his `data/users.js`, six form fields (`name`, `username`, `city`, `website`, `companyName`, plus `id`/`selectedId`), and the same `onAdd` flag pattern he used - `getUsers()` reloads the file, `onDelete()` filters by `selectedId`, `addUser()` builds the object nested the way the data file is shaped (`'address': { 'city': city }`, `'company': { 'name': companyName }`), `onEdit()` loads a row into the form with `setOnAdd(false)`, and `editUser()` filters the old `id` out then `setUsersList([newObj, ...temp])`.
+- Table columns are `Sr / Name / Username / City / Website / Company Name` with rows clickable to set `selectedId` (`table-active` highlight), the `GET / ADD / DELETE / EDIT` line and the `Tip:-  city: u.address.city` note under it, and one `#staticBackdrop` modal whose footer switches on `onAdd ? Add : Edit` - the exact shape of his course modal.
+- Verified: `npm run build` succeeds (457ms, `dist/assets/index-oFuZ8puR.js` 228.77 kB); `npm run lint` reports no errors in either `users-cs/` file (the 8 it reports are all in his code); `git status` clean apart from the three intentionally-untracked files.
 
 ## Repository Information
 

@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.49.0 - 2026-10-27
+
+### Added
+
+- Mirrored his commit `5db0a6f` `users case study` byte-identical: new `react-ui/src/data/users.js` (10 JSONPlaceholder users with nested `address.city` and `company.name`), an empty `users-cs/Dashboard.jsx` stub, and `App.jsx` rendering `<UsersDashboard />` with the old layout commented out.
+- Implemented the layout he sketched in own commit `97f306d`: filled his `Dashboard.jsx` stub with the `col-md-2` side panel (GET/ADD/DELETE/EDIT) plus `col-md-10` holding Navbar over the users table, and added `users-cs/UsersTable.jsx` with GET/ADD/DELETE/EDIT over `data/users.js`, a clickable row selection, nested `address.city`/`company.name` handling, and one `#staticBackdrop` modal switched by an `onAdd` flag - all written in his `CourseList` style.
+- Recorded as a deliberate deviation: his empty stub was edited rather than left byte-identical, noted in the journal like the root `.gitignore` clash.
+
+### Verified
+
+- `npm run build` succeeds (457ms, 228.77 kB bundle); `npm run lint` reports zero errors in the new `users-cs/` files - the 8 it reports (6 unused imports in his `App.jsx` after he commented out the old layout, plus his 2 in `Nums.jsx`) are all his own code, mirrored as-is.
+
 ## 0.48.0 - 2026-10-27
 
 ### Added
