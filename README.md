@@ -822,7 +822,7 @@ Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Po
 
 ### 2026-10-27
 
-Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delete and add op in array; `418fe41` edit op; `d5da995` Update journal for react state and crud training; `fcf396e` Add journal commit hash to 2026-10-27 react state and crud entry; `563e914` users case study; `97f306d` Implement users case study dashboard.
+Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delete and add op in array; `418fe41` edit op; `d5da995` Update journal for react state and crud training; `fcf396e` Add journal commit hash to 2026-10-27 react state and crud entry; `563e914` users case study; `97f306d` Implement users case study dashboard; `71049df` Update journal for users case study layout.
 
 **Iterating Over Object Array** (branch `react`, mirrors his commit `b15b316`)
 
