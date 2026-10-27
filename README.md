@@ -789,7 +789,7 @@ Commits (branch `JS-fundamentals`): `a4dc24d` Add reduce practice for max price 
 
 ### 2026-10-26
 
-Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Postman workspace files ignored; `221b268` Update journal for react project setup training; `e4cc6ed` multi component layout; `a51186c` Update journal for multi component layout training.
+Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Postman workspace files ignored; `221b268` Update journal for react project setup training; `e4cc6ed` multi component layout; `a51186c` Update journal for multi component layout training; `4ff13b4` state variables; `333273a` reading input.
 
 **React Project Setup** (branch `react`, mirrors his commit `a38d61a`)
 
@@ -806,6 +806,44 @@ Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Po
 - Kept exactly as written: the trailing space in `className="navbar "`, the two empty `col-md-12` rows, every new file ending without a final newline, and `import Todos from "./components/todos"` - a lowercase path for the `Todos.jsx` file.
 - Verified: `git diff trainer/react HEAD -- react-ui` is empty (the whole project byte-identical to his tree); `npm run build` succeeds (`built in 992ms`, `dist/assets/index-DgJUQaYg.js` 221.38 kB); `npm run lint` exits 0; `git status` still shows only the three intentionally-untracked files.
 - Known issues: `import Todos from "./components/todos"` resolves here because Windows is case-insensitive, but it will fail on Linux or any case-sensitive checkout since the file is `Todos.jsx`; `main.jsx` still never imports `./index.css`, so Bootstrap now styles the page from the CDN while his own `index.css` and `App.css` remain unused.
+
+**State Variables** (branch `react`, mirrors his commit `4086125`)
+
+- Mirrored his commit `4086125` `state variables` (pushed 2026-10-26 13:00:35 +0530), 1 file byte-identical: `Nums.jsx` imports `useState` and keeps two copies of the array side by side - `const nums = [1, 4, 7, 2, 3, 8, 9, 6, 4] // normal variable that holds array` and `const [numsArry, setNumsArry] = useState([...]) // state variable that is saved in reacts context` - plus `const [numsClone, setNumsClone] = useState([...numsArry])` for the reset.
+- Added his `sortFn(direction)` `switch`: `ASC` calls `setNumsArry([...numsArry.sort((a, b) => a - b)])`, `DESC` sorts `b - a`, and `default` restores from `numsClone`; three Bootstrap buttons (`Sort-ASC`, `RESET`, `Sort-DESC`) wire to it, and the list now renders `<span>{n} &nbsp; &nbsp;</span>` per number instead of `<li>`.
+- Kept exactly as written: the in-place `sort` inside the spread, the `// {... obj} [...arry]` note after the `default` break, and the trailing-space/semicolon style.
+- Verified: `git diff trainer/react HEAD -- react-ui` still empty (byte-identical); `npm run build` succeeds.
+
+**Reading Input** (branch `react`, mirrors his commit `8b083e9`)
+
+- Mirrored his commit `8b083e9` `reading input` (pushed 2026-10-26 15:20:09 +0530), 3 files byte-identical: new `components/AddTicket.jsx`, `App.jsx` importing it and rendering `<AddTicket />` in the first empty `col-md-12` row as `col-md-4`, and a single blank-line removal in `Nums.jsx`.
+- `AddTicket` holds three `useState` fields (`subject`, `issue`, `priority`) over `priorityValues = ['HIGH', 'MEDIUM', 'LOW']`, renders a Bootstrap card titled `Reading Input` with a form (text input, textarea, select), and `processInput(e)` starts with `e.preventDefault()` then `console.log`s the three values; his trailing `// input type="date" input type="radio"` comment and the missing final newline kept as-is.
+- Verified: `git diff trainer/react HEAD -- react-ui` empty; `npm run build` succeeds.
+
+### 2026-10-27
+
+Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delete and add op in array; `418fe41` edit op.
+
+**Iterating Over Object Array** (branch `react`, mirrors his commit `b15b316`)
+
+- Mirrored his commit `b15b316` `iterating over object array` (pushed 2026-10-27 10:30:31 +0530), 3 files byte-identical: new `src/data/courses.js` exporting `courseData` (10 courses with `id`, `name`, `fee`, `instructorName`, `category` - instructors Rajesh Kumar, Priya Sharma, Amit Patel), new `components/CourseList.jsx`, and `App.jsx` importing `CourseList`.
+- `CourseList` seeds `useState(courseData)` and maps it into a Bootstrap `table` (`#`, `Name`, `Fee`, `Instructor Name`, `Category`) rendering `INR. {c.fee}` per row; `App.jsx` swaps the previous child out by commenting it - `{/* <Todos /> */}` - and puts `<CourseList />` in the `col-md-8`.
+- Kept exactly as written: `courses.js` and `CourseList.jsx` both end without a final newline, and the two stray blank lines before `</tbody>`.
+- Verified: `git diff trainer/react HEAD -- react-ui` empty; `npm run build` succeeds.
+
+**Delete and Add Op in Array** (branch `react`, mirrors his commit `321c769`)
+
+- Mirrored his commit `321c769` `delete and add op in array` (pushed 2026-10-27 11:57:26 +0530), 2 files byte-identical: `index.html` gains the bootstrap-icons font CSS and the Bootstrap 5.3.8 bundle `<script>` (written after `</body>`, before `</html>`), and `CourseList.jsx` grows from 38 to 121 lines.
+- `CourseList` gains `onDelete` (`setCourses([...courses.filter(c => c.id !== courseId)])`) and `addCourse` (builds `courseObj` with `'id': Math.ceil((Math.random()*10000))` and `setCourses([courseObj, ...courses])`), four more `useState` fields for the form, a `card-header` `Add Course` button that clears the fields and opens modal `#staticBackdrop`, and the modal itself with four controlled inputs.
+- Row actions: `bi bi-trash3` wired to `onDelete`, `bi pencil-square` present but not yet wired; both wrapped in `<a href="javascript:void(0)" onClick={(e) => e.preventDefault()}>` with inline `textDecoration: 'none'` - kept as written.
+- Verified: `git diff trainer/react HEAD -- react-ui` empty; `npm run build` succeeds.
+
+**Edit Op** (branch `react`, mirrors his commit `abc6c9f`)
+
+- Mirrored his commit `abc6c9f` `edit op` (pushed 2026-10-27 14:35:16 +0530), 1 file byte-identical: `CourseList.jsx` +39/-4 adds `const [id, setId] = useState("")` and `const [onAdd, setOnAdd] = useState(false)`.
+- `onEdit(course)` loads a row into the form and sets `onAdd = false`; `editCourse()` copies `courses`, filters out the old `id`, and `setCourses([newObj, ...temp])` with the same `id` preserved; the pencil icon now calls `onEdit(c)` and opens the modal, and the footer button switches on `onAdd ? <Add .../> : <Edit .../>` so one modal serves both operations.
+- Verified: `git diff trainer/react HEAD -- react-ui` is empty - the whole project byte-identical to his `abc6c9f` tree; `npm run build` succeeds (`built in 1.42s`, `dist/assets/index-COFNvzDA.js` 227.26 kB); `git status` still shows only the three intentionally-untracked files.
+- Known issues: `npm run lint` now exits 1 with 3 `no-unused-vars` errors that are all in his own code - `App.jsx 6:8` `'Todos' is defined but never used` (he commented out `<Todos />` but kept the import), `Nums.jsx 4:11` `'nums' is assigned a value but never used`, and `Nums.jsx 6:23` `'setNumsClone' is assigned a value but never used` - all mirrored as-is because the trainer's files are never edited. The earlier known issues still stand: the lowercase `./components/todos` import breaks on case-sensitive filesystems, `main.jsx` never imports `./index.css`, and `fee` is fed from a text input so it stays a string in state.
 
 ## Repository Information
 

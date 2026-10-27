@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.48.0 - 2026-10-27
+
+### Added
+
+- Mirrored five more commits of his `react` branch, all byte-identical to his blobs: `4086125` `state variables` (`useState` array plus ASC/RESET/DESC sort buttons in `Nums.jsx`), `8b083e9` `reading input` (new `AddTicket.jsx` form with `preventDefault` and three controlled fields), `b15b316` `iterating over object array` (new `data/courses.js` with 10 courses and `CourseList.jsx` rendering them in a table), `321c769` `delete and add op in array` (bootstrap-icons + Bootstrap bundle in `index.html`, `onDelete`/`addCourse` and the `#staticBackdrop` modal), and `abc6c9f` `edit op` (`onEdit`/`editCourse` with an `onAdd` flag switching the modal footer between Add and Edit).
+- 10 files across the five commits; `git diff trainer/react HEAD -- react-ui` is empty, so the whole project matches his `abc6c9f` tree.
+
+### Verified
+
+- `npm run build` succeeds (`built in 1.42s`, 227.26 kB bundle); `git status` clean apart from the three intentionally-untracked files.
+- `npm run lint` now exits 1 with 3 `no-unused-vars` errors that are all in his own mirrored code (`Todos` imported but unused in `App.jsx`, `nums` and `setNumsClone` unused in `Nums.jsx`) - recorded as known issues, not fixed, since trainer files are never edited.
+
 ## 0.47.0 - 2026-10-26
 
 ### Added
