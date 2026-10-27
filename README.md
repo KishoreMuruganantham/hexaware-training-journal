@@ -66,7 +66,7 @@ flowchart TD
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
 | `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs, plus the ticket search case study (2026-10-06/25) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4e03e6a` |
 | `JS-fundamentals` | `js-fundamentals` Node project with fundamentals, arrays, map/reduce, and the `learning-app` case study (2026-10-23/25) | `hex_fsd_sept-2026/commits/JS-fundamentals` (4 new commits) | `139e9e0` |
-| `react` | `react-ui` Vite + React 19 app: parent layout, forms with state, and course list add/edit/delete (2026-10-26/27) | `hex_fsd_sept-2026/commits/react` (7 new commits) | `fcf396e` |
+| `react` | `react-ui` Vite + React 19 app: parent layout, forms with state, course list CRUD, and the users case study dashboard (2026-10-26/27) | `hex_fsd_sept-2026/commits/react` (8 new commits) | `295b881` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -769,7 +769,7 @@ Commits (branch `react`): `4fe0a74` react project setup; `e2e738a` Keep local Po
 
 ### 2026-10-27
 
-Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delete and add op in array; `418fe41` edit op; `d5da995` Update journal for react state and crud training; `fcf396e` Add journal commit hash to 2026-10-27 react state and crud entry.
+Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delete and add op in array; `418fe41` edit op; `d5da995` Update journal for react state and crud training; `fcf396e` Add journal commit hash to 2026-10-27 react state and crud entry; `563e914` users case study; `97f306d` Implement users case study dashboard; `71049df` Update journal for users case study layout; `295b881` Add journal commit hash to 2026-10-27 users case study entry.
 
 **Iterating Over Object Array** (branch `react`, mirrors his commit `b15b316`)
 
@@ -794,6 +794,21 @@ Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delet
 - Code and journal live on the `react` branch; only this README entry is merged here.
 - Released as `v0.48.0` on the `react` branch.
 
+**Users Case Study** (branch `react`, mirrors his commit `5db0a6f`)
+
+- Mirrored his commit `5db0a6f` `users case study` (pushed 2026-10-27 15:26:11 +0530), 3 files byte-identical: new `src/data/users.js` (the 10 JSONPlaceholder users with nested `address.city` and `company.name`), new `users-cs/Dashboard.jsx` as an empty 8-line stub, and `App.jsx` importing `UsersDashboard`, rendering it, and commenting out the previous layout while keeping all six old imports.
+- Verified: `git diff 5db0a6f HEAD -- react-ui` empty; `npm run build` succeeds.
+- Known issues: those six now-unused imports push `npm run lint` to 8 `no-unused-vars` errors (6 in his `App.jsx` + his 2 in `Nums.jsx`) - his code, mirrored as-is, never edited.
+
+**Users Case Study Layout** (branch `react`, own implementation `97f306d`)
+
+- Filled his empty `Dashboard.jsx` stub and added `users-cs/UsersTable.jsx` - own work in his `CourseList` style, following the layout he sketched; a deliberate deviation from byte-identical mirroring (his empty stub edited), recorded like the root `.gitignore` clash.
+- `Dashboard.jsx`: `col-md-2` side panel (card `Users Case Study` with GET / ADD / DELETE / EDIT) plus `col-md-10` stacking the `Navbar` row over the users table row.
+- `UsersTable.jsx`: `useState([...users])`, six form fields, `getUsers`/`addUser` (nested `address.city` and `company.name`)/`onDelete` by `selectedId`/`onEdit` + `editUser` switched by an `onAdd` flag, table columns `Sr / Name / Username / City / Website / Company Name` with clickable rows, the `GET / ADD / DELETE / EDIT` line, the `Tip:-  city: u.address.city` note, and one `#staticBackdrop` modal.
+- Verified: `npm run build` succeeds (457ms, 228.77 kB); `npm run lint` reports no errors in the new `users-cs/` files (all 8 it reports are in his code); `git status` clean apart from the three intentionally-untracked files.
+- Code and journal live on the `react` branch; only this README entry is merged here.
+- Released as `v0.49.0` on the `react` branch.
+
 ## Known Issues and Limits
 
 - The salary sort in `JavaFundamentals` uses the trainer's `(int)` cast comparison, kept as shown.
@@ -803,7 +818,7 @@ Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delet
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.48.0` on `react`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`–`v0.10.0` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.49.0` on `react`.
 
 ## Repository Information
 

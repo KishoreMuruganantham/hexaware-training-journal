@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.35 - 2026-10-27
+
+### Changed
+
+- Recorded his `users case study` commit (`5db0a6f`) and the own users case study dashboard implementation (`97f306d`) in the history, updated the `react` branch guide row to `295b881` (8 mirrored commits), and extended the release history to `v0.49.0`.
+- No source code changed on `main`.
+
 ## 0.10.34 - 2026-10-27
 
 ### Changed
