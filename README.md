@@ -861,7 +861,7 @@ Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delet
 
 ### 2026-10-28
 
-Commits (branch `react`): `bf70a21` Router added; `e9fa705` Reapply users case study layout for router; `cfe04c7` Update journal for react router training; `34bcf9a` Add journal commit hash to 2026-10-28 react router entry; `c9d1523` get api; `ab5fae6` post api call.
+Commits (branch `react`): `bf70a21` Router added; `e9fa705` Reapply users case study layout for router; `cfe04c7` Update journal for react router training; `34bcf9a` Add journal commit hash to 2026-10-28 react router entry; `c9d1523` get api; `ab5fae6` post api call; `7e93b80` Update journal for get and post api training.
 
 **Router Added** (branch `react`, mirrors his commit `f762785`)
 
