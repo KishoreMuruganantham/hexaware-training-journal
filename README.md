@@ -898,7 +898,7 @@ Commits (branch `react`): `bf70a21` Router added; `e9fa705` Reapply users case s
 - Verified: `npm run build` succeeds (3.75s, `dist/assets/index-I8KO8Kzo.js` 332.73 kB); `git diff 4c40e4f HEAD -- react-ui` shows only the journal's own `Dashboard.jsx` and `UsersTable.jsx`.
 - Known issues: `npm run lint` went from 8 to 12 errors, all his - the 4 new ones are `'id'`/`'setId'` unused (8:12, 8:16) plus another unused `'err'` + empty `catch` (45:16, 45:21) in `PostDashBoard.jsx` - mirrored as-is. Also note `userId` arrives as a string from the number input and is posted without conversion, and JSONPlaceholder echoes whatever it receives rather than really persisting - both his behavior, recorded not fixed.
 
-Commits (branch `helpdesk-ui`): `b87b341` Helpdesk initial sertup with router and login'.
+Commits (branch `helpdesk-ui`): `b87b341` Helpdesk initial sertup with router and login'; `c042466` Update journal for helpdesk ui setup training.
 
 **Helpdesk UI Initial Setup** (branch `helpdesk-ui`, mirrors his commit `9bb21fd`)
 
