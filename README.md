@@ -861,7 +861,7 @@ Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delet
 
 ### 2026-10-28
 
-Commits (branch `react`): `bf70a21` Router added; `e9fa705` Reapply users case study layout for router; `cfe04c7` Update journal for react router training.
+Commits (branch `react`): `bf70a21` Router added; `e9fa705` Reapply users case study layout for router; `cfe04c7` Update journal for react router training; `34bcf9a` Add journal commit hash to 2026-10-28 react router entry; `c9d1523` get api; `ab5fae6` post api call.
 
 **Router Added** (branch `react`, mirrors his commit `f762785`)
 
@@ -879,6 +879,24 @@ Commits (branch `react`): `bf70a21` Router added; `e9fa705` Reapply users case s
 - Same sketch as before - `col-md-2` side panel card `Users Case Study` with GET / ADD / DELETE / EDIT, `col-md-10` holding `UsersTable` - but the inner `<Navbar />` row is dropped: `App.jsx` now renders the navbar globally above `<Routes>`, so keeping it would have shown two navbars on `/users`.
 - `UsersTable.jsx` is untouched and still works under the router: the route renders `UsersDashboard`, which renders it.
 - Verified: `npm run build` succeeds (565ms, 272.49 kB); `npm run lint` reports no errors in the `users-cs/` files (all 6 are his); `git status` clean apart from the three intentionally-untracked files.
+
+**Get API** (branch `react`, mirrors his commit `b6ef0f6`)
+
+- Mirrored his commit `b6ef0f6` `get api` (pushed 2026-10-28 11:24:56 +0530), 3 files byte-identical: `package.json` gains `"axios": "^1.21.0"` (with the matching `package-lock.json`), and `components/posts/PostDashBoard.jsx` grows from the empty placeholder to a working GET request.
+- `PostDashboard` sets `const apiUrl = 'https://jsonplaceholder.typicode.com/posts'`, seeds `useState([])`, and in a `useEffect(..., [])` runs an `async` `getPostData()` that `await axios.get(apiUrl)` and `setPosts(response.data)` - his commented-out `// console.log(response)` stays inside the `try`, and the `catch (err)` block is deliberately left empty.
+- The render maps `posts` into Bootstrap cards keyed by `index`: `card-header` with `Post ID: {p.id}` and `Post By User ID: {p.userId}` separated by `&nbsp;` runs, `card-title` with `<h4>{p.title}</h4>`, and `{p.body}` underneath - kept exactly as written, including his indentation quirks.
+- Verified: `npm ci` installs axios 1.21.0 (0 vulnerabilities); `npm run build` succeeds (778ms, `dist/assets/index-BZGiFqFP.js` 330.80 kB); `git diff b6ef0f6 HEAD -- react-ui` shows only the journal's own `Dashboard.jsx` and `UsersTable.jsx`.
+- Known issues: `npm run lint` went from 6 to 8 errors, both new ones his - `'err' is defined but never used` (16:20) and `Empty block statement` (16:25) for the empty `catch` in `PostDashBoard.jsx` - mirrored as-is, never edited.
+
+**Post API Call** (branch `react`, mirrors his commit `4c40e4f`)
+
+- Mirrored his commit `4c40e4f` `post api call` (pushed 2026-10-28 12:31:02 +0530), 1 file byte-identical: `components/posts/PostDashBoard.jsx` +82/-15.
+- Four new state fields: `id`/`setId` (0), `userId`/`setUserId` (0), `title`/`setTitle` ("") and `body`/`setBody` ("") - the `id` pair is declared but never used, mirrored as-is.
+- New `addPost()` builds `postObj` (`'title'`, `'body'`, `'userId'`), `await axios.post(apiUrl, postObj)`, then logs his three template strings verbatim - including the `resonse` typo - and prepends `response.data` onto a `[...posts]` copy before `setPosts`; its `catch (err) { }` is a one-liner empty block again.
+- Render gains a `+Add Post` `btn btn-primary` wired with `data-bs-toggle="modal" data-bs-target="#postForm"`, and a Bootstrap `modal fade` `#postForm` (`data-bs-backdrop="static"`) with Title / User Id / Body inputs (`onChange` handlers only, no `value`, so the fields stay uncontrolled), `Close` dismissing and `Add` calling `addPost()` with `data-bs-dismiss="modal"`.
+- The existing cards map is re-indented by his edit (same markup, cleaned-up nesting) - taken exactly as committed.
+- Verified: `npm run build` succeeds (3.75s, `dist/assets/index-I8KO8Kzo.js` 332.73 kB); `git diff 4c40e4f HEAD -- react-ui` shows only the journal's own `Dashboard.jsx` and `UsersTable.jsx`.
+- Known issues: `npm run lint` went from 8 to 12 errors, all his - the 4 new ones are `'id'`/`'setId'` unused (8:12, 8:16) plus another unused `'err'` + empty `catch` (45:16, 45:21) in `PostDashBoard.jsx` - mirrored as-is. Also note `userId` arrives as a string from the number input and is posted without conversion, and JSONPlaceholder echoes whatever it receives rather than really persisting - both his behavior, recorded not fixed.
 
 ## Repository Information
 

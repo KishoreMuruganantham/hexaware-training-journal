@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.51.0 - 2026-10-28
+
+### Added
+
+- Mirrored his commit `b6ef0f6` `get api` byte-identical: `axios` ^1.21.0 in `package.json`/`package-lock.json` and `components/posts/PostDashBoard.jsx` filling the placeholder with a `useEffect` + `async`/`await` `axios.get` against `https://jsonplaceholder.typicode.com/posts`, rendering the results as Bootstrap cards (Post ID, user ID, title, body).
+- Mirrored his commit `4c40e4f` `post api call` byte-identical: `PostDashBoard.jsx` gains `id`/`userId`/`title`/`body` state, an async `addPost()` doing `axios.post` with his console logging and prepending the response to the list, a `+Add Post` button, and the `#postForm` Bootstrap modal (Title / User Id / Body inputs, Close/Add footer).
+
+### Verified
+
+- `npm ci` installs axios 1.21.0 with 0 vulnerabilities; `npm run build` succeeds (3.75s, 332.73 kB after `post api call`).
+- `git diff 4c40e4f HEAD -- react-ui` shows only the journal's own `Dashboard.jsx` and `UsersTable.jsx`; `npm run lint` reports 12 errors, all his (previous 8 plus unused `id`/`setId` and the second empty `catch` in `PostDashBoard.jsx`).
+
 ## 0.50.0 - 2026-10-28
 
 ### Added
