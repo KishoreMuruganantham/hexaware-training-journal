@@ -66,7 +66,7 @@ flowchart TD
 | `hibernate-jpa` | `HibernateJpaApp` entities, JPQL, executive and ticket flows (2026-10-01/05) | `hex_fsd_sept-2026/commits/hibernate-jpa` (9 new commits) | `f0af1aa` |
 | `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs, plus the ticket search case study (2026-10-06/25) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4e03e6a` |
 | `JS-fundamentals` | `js-fundamentals` Node project with fundamentals, arrays, map/reduce, and the `learning-app` case study (2026-10-23/25) | `hex_fsd_sept-2026/commits/JS-fundamentals` (4 new commits) | `139e9e0` |
-| `react` | `react-ui` Vite + React 19 app: parent layout, forms with state, course list CRUD, and the users case study dashboard (2026-10-26/27) | `hex_fsd_sept-2026/commits/react` (8 new commits) | `295b881` |
+| `react` | `react-ui` Vite + React 19 app: layout, forms with state, course list CRUD, users case study, and React Router navigation (2026-10-26/28) | `hex_fsd_sept-2026/commits/react` (9 new commits) | `34bcf9a` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -826,6 +826,28 @@ Commits (branch `main`): `22fa0b6` Add SonarCloud GitHub Actions workflow; `7e45
 - Screenshots of the green run were captured in the session (the Actions summary page renders signed out); the SonarQube Cloud dashboard needs a logged-in session because the project is private.
 - Released as `v0.10.36` on `main` (workflow setup) and `v0.10.37` on `main` (pin fix and first analysis).
 
+### 2026-10-28
+
+Commits (branch `react`): `bf70a21` Router added; `e9fa705` Reapply users case study layout for router; `cfe04c7` Update journal for react router training; `34bcf9a` Add journal commit hash to 2026-10-28 react router entry.
+
+**Router Added** (branch `react`, mirrors his commit `f762785`)
+
+- Mirrored his commit `f762785` `Router added` (pushed 2026-10-28 10:11:12 +0530), 7 files byte-identical: `package.json`/`package-lock.json` gain `react-router` ^7.18.5, `main.jsx` wraps `<App />` in `<BrowserRouter>`, `App.jsx` becomes the router shell, `Navbar.jsx` switches to router `Link`s, and new `components/posts/PostDashBoard.jsx` is an empty placeholder.
+- `App.jsx` renders a global `Navbar` row over a `row mt-4` with his `<Routes>`: `""` -> `<CourseList />`, `users` -> `<UsersDashboard />`, `posts` -> `<PostDashboard />`; the old layout comments are deleted entirely.
+- `Navbar.jsx` is now `navbar navbar-expand-lg bg-body-tertiary` with brand `HelpDesk` and `Home`/`Users`/`Posts` links (`to=""`, `to="/users"`, `to="/posts"`), following the Bootstrap 5.3 navbar docs and his React Router routing guide.
+- His `users-cs/Dashboard.jsx` change was mirrored too - it overwrites the journal's own layout from `97f306d`, reverting that deviation - keeping the empty `container-fluid` plus a placeholder `<h1>sdjfhskdfhsdkjfh</h1>`.
+- Kept exactly as written: the odd `<Routes>` indentation inside the `col-lg-12`, the stray blank lines, `collapse navbar-collapse` with no toggler button, and the `PostDashBoard` misspelling (matched by its import).
+- Verified: `npm ci` installs `react-router` 7.18.5 (0 vulnerabilities); `npm run build` succeeds (565ms, `dist/assets/index-DFD7lxs0.js` 272.49 kB); `git diff f762785 HEAD -- react-ui` shows only the journal's own `UsersTable.jsx`.
+- Known issues: `npm run lint` reports 6 `no-unused-vars` errors, all his - `AddTicket`, `Auth`, `Nums`, `Todos` unused in `App.jsx` after the layout was deleted, plus his 2 in `Nums.jsx` - mirrored as-is; the nav links are also only visible at the `lg` breakpoint and up because there is no toggler. Earlier known issues still stand.
+- Code and journal live on the `react` branch; only this README entry is merged here.
+- Released as `v0.50.0` on the `react` branch.
+
+**Users Case Study Layout For Router** (branch `react`, own implementation `e9fa705`)
+
+- Re-applied the journal's own `Dashboard.jsx` layout after the mirror replaced it with his placeholder - recorded again as a deviation, exactly like the `.gitignore` clash and the 2026-10-27 fill.
+- Same sketch - `col-md-2` GET/ADD/DELETE/EDIT side panel over `col-md-10` with `UsersTable` - minus the inner `<Navbar />` row, since `App` now renders the navbar globally above the routes and keeping it would show two navbars on `/users`.
+- Verified: `npm run build` succeeds (565ms, 272.49 kB); `npm run lint` reports no errors in the `users-cs/` files; `git status` clean apart from the three intentionally-untracked files.
+
 ## Known Issues and Limits
 
 - SonarQube Cloud reports 6 open issues in the mirrored Java (`java:S2095` x3 in `CustomerDao`, `java:S2159` x2 in `EmployeeService`, `java:S2068` in `DBConnection`); trainer files are never edited, so they stay open - they are not new code and do not fail the Quality Gate.
@@ -837,7 +859,7 @@ Commits (branch `main`): `22fa0b6` Add SonarCloud GitHub Actions workflow; `7e45
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`-`v0.10.36` on `main`, `v0.11.0` on `junit`, `v0.12.0`–`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.49.0` on `react`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`-`v0.10.38` on `main`, `v0.11.0` on `junit`, `v0.12.0`-`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.50.0` on `react`.
 
 ## Repository Information
 

@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.10.38 - 2026-10-28
+
+### Changed
+
+- Recorded his `Router added` commit (`f762785`) and the re-applied users case study layout (`e9fa705`) in a new 2026-10-28 history section, updated the `react` branch guide row to `34bcf9a` (9 mirrored commits, dates through 2026-10-28), and extended the release history to `v0.50.0` on `react` and `v0.10.38` on `main`.
+- No source code changed on `main`.
+
 ## 0.10.37 - 2026-10-27
 
 ### Fixed
