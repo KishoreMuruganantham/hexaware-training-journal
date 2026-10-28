@@ -1,5 +1,13 @@
 # Release Notes
 
+## 0.10.39 - 2026-10-28
+
+### Changed
+
+- Recorded his `get api` (`b6ef0f6`) and `post api call` (`4c40e4f`) mirrors on the `react` branch and the new `helpdesk-ui` branch with its initial setup commit (`9bb21fd`) in the 2026-10-28 history section.
+- Added the `helpdesk-ui` branch guide row, updated the `react` row to `96062d9` (13 new commits, dates through 2026-10-28), and extended the release history to `v0.51.0` on `react`, `v0.52.0` on `helpdesk-ui`, and `v0.10.39` on `main`.
+- No source code changed on `main`.
+
 ## 0.10.38 - 2026-10-28
 
 ### Changed
