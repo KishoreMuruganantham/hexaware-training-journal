@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.52.0 - 2026-10-28
+
+### Added
+
+- New `helpdesk-ui` branch (created from the journal's `react` tip), mirroring his commit `9bb21fd` `Helpdesk initial sertup with router and login'` byte-identical: a fresh Vite + React 19 app under `helpdesk-ui/` (21 files, 3392 insertions) with `react-router` routes (`""` -> `Login`, `customer/signup` -> `SignUp`, `*` -> `PageNotFound`), a Bootstrap card login form doing HTTP Basic auth against `config.js`'s `API_SERVER_URL_DEV` (`http://localhost:8080`) and storing the JWT in `localStorage`, plus `SignUp`/`PageNotFound` stubs and `styles/login.css`.
+
+### Verified
+
+- `npm ci` clean (0 vulnerabilities); `npm run build` succeeds (431ms, 317.63 kB); `git diff 9bb21fd HEAD -- helpdesk-ui` empty - all 21 blobs identical to his.
+- `npm run lint` reports 2 errors, both his (unused `errMsg`/`SetErrMsg` in `Login.jsx`).
+
 ## 0.51.0 - 2026-10-28
 
 ### Added
