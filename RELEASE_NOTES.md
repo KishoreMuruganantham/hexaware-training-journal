@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.50.0 - 2026-10-28
+
+### Added
+
+- Mirrored his commit `f762785` `Router added` byte-identical: `react-router` ^7.18.5 in `package.json`/`package-lock.json`, `<BrowserRouter>` in `main.jsx`, `<Routes>` in `App.jsx` (`""` -> `CourseList`, `users` -> `UsersDashboard`, `posts` -> `PostDashboard`), the Bootstrap `navbar-expand-lg` with `Link` navigation (Home/Users/Posts), and the new empty `components/posts/PostDashBoard.jsx`.
+- Re-applied the journal's own users case study layout in `e9fa705`: his placeholder `Dashboard.jsx` replaced again by the `col-md-2` GET/ADD/DELETE/EDIT panel plus `col-md-10` `UsersTable`, with the inner navbar row removed now that `App` renders the navbar globally.
+
+### Verified
+
+- `npm ci` installs `react-router` 7.18.5 with 0 vulnerabilities; `npm run build` succeeds (565ms, 272.49 kB).
+- `git diff f762785 HEAD -- react-ui` shows only the journal's own `UsersTable.jsx`; `npm run lint` reports 6 errors, all in his code (4 fresh unused imports in `App.jsx`, 2 in `Nums.jsx`).
+
 ## 0.49.0 - 2026-10-27
 
 ### Added

@@ -859,6 +859,27 @@ Commits (branch `react`): `70018cf` iterating over object array; `b816ddc` delet
 - Table columns are `Sr / Name / Username / City / Website / Company Name` with rows clickable to set `selectedId` (`table-active` highlight), the `GET / ADD / DELETE / EDIT` line and the `Tip:-  city: u.address.city` note under it, and one `#staticBackdrop` modal whose footer switches on `onAdd ? Add : Edit` - the exact shape of his course modal.
 - Verified: `npm run build` succeeds (457ms, `dist/assets/index-oFuZ8puR.js` 228.77 kB); `npm run lint` reports no errors in either `users-cs/` file (the 8 it reports are all in his code); `git status` clean apart from the three intentionally-untracked files.
 
+### 2026-10-28
+
+Commits (branch `react`): `bf70a21` Router added; `e9fa705` Reapply users case study layout for router.
+
+**Router Added** (branch `react`, mirrors his commit `f762785`)
+
+- Mirrored his commit `f762785` `Router added` (pushed 2026-10-28 10:11:12 +0530), 7 files byte-identical: `package.json` gains `"react-router": "^7.18.5"` (with the matching `package-lock.json`), `main.jsx` wraps `<App />` in `<BrowserRouter>`, `App.jsx` becomes the router shell, `Navbar.jsx` switches to Bootstrap links, and new `components/posts/PostDashBoard.jsx` is an empty placeholder component.
+- `App.jsx` returns `container-fluid` with a `row mb-4` holding `<Navbar />` over a `row mt-4` holding his `<Routes>`: `path=""` renders `<CourseList />`, `path="users"` renders `<UsersDashboard />`, `path="posts"` renders `<PostDashboard />` - his old layout comments are deleted entirely.
+- `Navbar.jsx` is now `navbar navbar-expand-lg bg-body-tertiary` with `<Link>` from `react-router` instead of `<a>`: brand `HelpDesk`, then `Home` (`to=""`, `active` with `aria-current="page"`), `Users` (`to="/users"`), and `Posts` (`to="/posts"`), following the Bootstrap 5.3 navbar markup and his React Router routing guide.
+- His change to `users-cs/Dashboard.jsx` was mirrored too, overwriting the journal's own layout from `97f306d` - the deviation from 2026-10-27 is reversed by the mirror rule; his version keeps the empty `container-fluid` and adds a placeholder `<h1>sdjfhskdfhsdkjfh</h1>`.
+- Kept exactly as written: the `<Routes>` block's odd indentation inside the `col-lg-12`, the stray blank lines in `App.jsx` and `main.jsx`, `collapse navbar-collapse` with no toggler button, and `PostDashBoard.jsx`'s misspelling (the import in `App.jsx` matches it, so it resolves).
+- Verified: `npm ci` installs `react-router` 7.18.5 (0 vulnerabilities); `npm run build` succeeds (565ms, `dist/assets/index-DFD7lxs0.js` 272.49 kB); `git diff f762785 HEAD -- react-ui` shows only the journal's own `UsersTable.jsx`.
+- Known issues: `npm run lint` now reports 6 `no-unused-vars` errors, all his - `App.jsx` `AddTicket`, `Auth`, `Nums`, `Todos` (the old layout is gone but the imports stay) plus his 2 in `Nums.jsx`; and because `collapse navbar-collapse` has no toggler, the nav links only appear at the `lg` breakpoint and up - both mirrored as-is, never edited. The earlier known issues still stand (lowercase `./components/todos` import, `main.jsx` never importing `./index.css`, `fee` staying a string).
+
+**Users Case Study Layout For Router** (branch `react`, own implementation `e9fa705`)
+
+- Re-applied the journal's own `Dashboard.jsx` layout after the mirror replaced it with his placeholder version - own work, recorded again as a deviation (the file is his; the content is ours), exactly as the `gitignore` clash and the 2026-10-27 fill were.
+- Same sketch as before - `col-md-2` side panel card `Users Case Study` with GET / ADD / DELETE / EDIT, `col-md-10` holding `UsersTable` - but the inner `<Navbar />` row is dropped: `App.jsx` now renders the navbar globally above `<Routes>`, so keeping it would have shown two navbars on `/users`.
+- `UsersTable.jsx` is untouched and still works under the router: the route renders `UsersDashboard`, which renders it.
+- Verified: `npm run build` succeeds (565ms, 272.49 kB); `npm run lint` reports no errors in the `users-cs/` files (all 6 are his); `git status` clean apart from the three intentionally-untracked files.
+
 ## Repository Information
 
 - Owner: Kishore Muruganantham
