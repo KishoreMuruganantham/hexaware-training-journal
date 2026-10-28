@@ -833,6 +833,8 @@ Commits (branch `react`): `bf70a21` Router added; `e9fa705` Reapply users case s
 
 Commits (branch `helpdesk-ui`): `b87b341` Helpdesk initial sertup with router and login'; `c042466` Update journal for helpdesk ui setup training; `0100259` Add journal commit hash to 2026-10-28 helpdesk ui setup entry.
 
+Commits (branch `main`): `e8f8812` Merge get post api and helpdesk ui journal entries into main README.
+
 **Router Added** (branch `react`, mirrors his commit `f762785`)
 
 - Mirrored his commit `f762785` `Router added` (pushed 2026-10-28 10:11:12 +0530), 7 files byte-identical: `package.json`/`package-lock.json` gain `react-router` ^7.18.5, `main.jsx` wraps `<App />` in `<BrowserRouter>`, `App.jsx` becomes the router shell, `Navbar.jsx` switches to router `Link`s, and new `components/posts/PostDashBoard.jsx` is an empty placeholder.
