@@ -1,5 +1,13 @@
 # Release Notes
 
+## 0.10.40 - 2026-10-29
+
+### Changed
+
+- Recorded his `login API+UI- e2e` (`054af35`) mirror on the `helpdesk-ui` branch in the 2026-10-29 history section: the two-step login flow (Basic token, then Bearer user-details with role switch and error display) and the matching backend (`/api/auth/user-details`, CORS for the Vite dev server, `InactiveUserException` + 412 handler).
+- Updated the `helpdesk-ui` branch guide row to `983c044` (6 new commits, dates through 2026-10-29) and extended the release history to `v0.53.0` on `helpdesk-ui` and `v0.10.40` on `main`.
+- No source code changed on `main`.
+
 ## 0.10.39 - 2026-10-28
 
 ### Changed

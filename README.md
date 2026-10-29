@@ -67,7 +67,7 @@ flowchart TD
 | `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs, plus the ticket search case study (2026-10-06/25) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4e03e6a` |
 | `JS-fundamentals` | `js-fundamentals` Node project with fundamentals, arrays, map/reduce, and the `learning-app` case study (2026-10-23/25) | `hex_fsd_sept-2026/commits/JS-fundamentals` (4 new commits) | `139e9e0` |
 | `react` | `react-ui` Vite + React 19 app: layout, forms with state, course list CRUD, users case study, React Router navigation, and the posts GET/POST API (2026-10-26/28) | `hex_fsd_sept-2026/commits/react` (13 new commits) | `96062d9` |
-| `helpdesk-ui` | `helpdesk-ui` Vite + React 19 app: router, HTTP Basic login against `helpdesk_backend`, sign up and 404 stubs (2026-10-28) | `hex_fsd_sept-2026/commits/helpdesk-ui` (3 new commits) | `0100259` |
+| `helpdesk-ui` | `helpdesk-ui` Vite + React 19 app: router, HTTP Basic login with JWT + user-details end-to-end flow, sign up and 404 stubs (2026-10-28/29) | `hex_fsd_sept-2026/commits/helpdesk-ui` (6 new commits) | `983c044` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -877,6 +877,19 @@ Commits (branch `main`): `e8f8812` Merge get post api and helpdesk ui journal en
 - Known issues: `npm run lint` reports 2 errors, both his (unused `errMsg`/`SetErrMsg` in `Login.jsx`); also recorded - mojibake password placeholder, no try/catch around `processLogin`, and `API_SERVER_URL_PROD` pointing at localhost. Mirrored as-is.
 - Code and journal live on the `helpdesk-ui` branch; only this README entry is merged here. Released as `v0.52.0` on `helpdesk-ui`.
 
+### 2026-10-29
+
+Commits (branch `helpdesk-ui`): `4299b1d` login API+UI- e2e; `09970fe` Update journal for login e2e training; `983c044` Add journal commit hash to 2026-10-29 login e2e entry.
+
+**Login API + UI End-To-End** (branch `helpdesk-ui`, mirrors his commit `054af35`)
+
+- Mirrored his commit `054af35` `login API+UI- e2e` (pushed 2026-10-29 10:22:06 +0530), 9 files byte-identical (+141/-18): `helpdesk-ui/src/components/auth/Login.jsx` plus 8 `helpdesk_backend` files - his branch carries the backend alongside the UI, ours mirrors the same scope.
+- UI: `processLogin` becomes a two-step flow inside a `try` - Step 1 HTTP Basic `GET /api/auth/login` stores `token` and `username` in `localStorage`; Step 2 `GET /api/auth/user-details` with `'Bearer ' + response.data.token` stores `role` and runs a `switch` on it with `console.log` dashboard placeholders for `CUSTOMER`/`ADMIN`/`EXECUTIVE`/`MANAGER`. New `errComment` state plus a red `errMsg` / muted `errComment` error block; the `catch` maps a body-less failure to `"Invalid Credentials"` and otherwise reads `…data?.message` / `…data?.comments` - the backend `ErrorDto` shape.
+- Backend: `AuthController` gains `@CrossOrigin(origins = "http://localhost:5173/")` and `@GetMapping("/api/auth/user-details")` returning the new `DetailsDto` record (`username`, `isActive`, `role`) from `Principal.getName()`; `SecurityConfig` adds the authenticated matcher; `UserRepository` drops the `isActive` filter from `loadUserByUsername` and adds a projection query into `DetailsDto`; `UserService.getUserDetails` throws the new `InactiveUserException("User is disabled")` for inactive users; `GlobalExceptionHandler` maps it to HTTP 412 with `"Contact ADMIN admin@helpdesk.com"`.
+- Verified: `npm run build` succeeds (951ms, 318.47 kB) and `npm run lint` exits 0 - his commit fixed the previous 2 unused-variable errors; `helpdesk_backend` `.\mvnw.cmd test` green (Tests run: 5, Failures: 0, Errors: 0 - BUILD SUCCESS); `git diff 054af35 HEAD -- helpdesk-ui helpdesk_backend` empty - all 9 blobs identical.
+- Known issues (all his, mirrored as-is): unused `Link` import; CORS origin with a trailing slash and dev-only URL; dashboard navigation still `console.log` placeholders; any body-less failure (network/CORS) reports "Invalid Credentials"; `getUserDetails` NPEs if the username isn't found. Recorded - the SonarQube MCP server was unavailable this session, so Java validation relied on the green test run.
+- Code and journal live on the `helpdesk-ui` branch; only this README entry is merged here. Released as `v0.53.0` on `helpdesk-ui`.
+
 ## Known Issues and Limits
 
 - SonarQube Cloud reports 6 open issues in the mirrored Java (`java:S2095` x3 in `CustomerDao`, `java:S2159` x2 in `EmployeeService`, `java:S2068` in `DBConnection`); trainer files are never edited, so they stay open - they are not new code and do not fail the Quality Gate.
@@ -888,7 +901,7 @@ Commits (branch `main`): `e8f8812` Merge get post api and helpdesk ui journal en
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`-`v0.10.39` on `main`, `v0.11.0` on `junit`, `v0.12.0`-`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.51.0` on `react`, `v0.52.0` on `helpdesk-ui`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`-`v0.10.40` on `main`, `v0.11.0` on `junit`, `v0.12.0`-`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.51.0` on `react`, `v0.52.0`-`v0.53.0` on `helpdesk-ui`.
 
 ## Repository Information
 
