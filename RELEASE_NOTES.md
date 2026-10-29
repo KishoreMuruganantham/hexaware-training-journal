@@ -1,5 +1,14 @@
 # Release Notes
 
+## 0.10.42 - 2026-10-29
+
+### Changed
+
+- Recorded his `Dashboard hack check` follow-up (`08f54ee`) mirror on the `helpdesk-ui` branch in the 2026-10-29 history section: `AdminDashboard.jsx` now imports `axios` and the config URL, verifies the URL token against `localStorage` via the stored `memToken`, calls `getUserDetails()` once after the `try`, and navigates to `/no-access` on token mismatch, role failure, or request error; `PageNotFound.jsx` clears `localStorage` on mount so the blocked path wipes the session.
+- Repaired the 2026-10-29 section structure (Login API entry now precedes the Dashboard Hack Check entries; removed a duplicated known-issues line) and updated the `helpdesk-ui` branch guide row to `37cdc4c` (12 new commits, dates through 2026-10-29).
+- Extended the release history to `v0.55.0` on `helpdesk-ui` and `v0.10.42` on `main`.
+- No source code changed on `main`.
+
 ## 0.10.41 - 2026-10-29
 
 ### Changed
