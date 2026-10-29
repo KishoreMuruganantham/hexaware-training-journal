@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.54.0 - 2026-10-29
+
+### Added
+
+- Mirrored his commit `9e83b76` `Dashboard hack check` byte-identical (4 files, +71/-3): `App.jsx` gains `customer/:token` and `admin/:token` routes, `Login.jsx` replaces the role-switch `console.log`s with `useNavigate()` navigation carrying the JWT in the URL, and two new dashboards appear - `CustomerDashboard` (heading + Logout clearing localStorage) and `AdminDashboard` (token-match guard against `localStorage`, role re-verification via the user-details API, Logout).
+
+### Verified
+
+- `npm run build` succeeds (2.17s, 319.27 kB); `git diff 9e83b76 HEAD -- helpdesk-ui` empty - all 4 blobs identical.
+- Live run against the backend: login navigated to `/customer/<jwt>` and rendered `CustomerDashboard`; Logout cleared storage and returned to `/`.
+- `npm run lint` went from 0 to 7 problems (6 errors, 1 warning), all his, in `AdminDashboard.jsx` (undefined `axios`/`userDetailsUrl`/`response`, mis-nested `getUserDetails()` call, empty `catch`, missing hook deps) - mirrored as-is.
+
 ## 0.53.0 - 2026-10-29
 
 ### Added

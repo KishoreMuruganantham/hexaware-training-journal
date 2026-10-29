@@ -914,7 +914,7 @@ Commits (branch `helpdesk-ui`): `b87b341` Helpdesk initial sertup with router an
 
 ### 2026-10-29
 
-Commits (branch `helpdesk-ui`): `4299b1d` login API+UI- e2e.
+Commits (branch `helpdesk-ui`): `4299b1d` login API+UI- e2e; `09970fe` Update journal for login e2e training; `983c044` Add journal commit hash to 2026-10-29 login e2e entry; `a37ffe5` Dashboard hack check.
 
 **Login API + UI End-To-End** (branch `helpdesk-ui`, mirrors his commit `054af35`)
 
@@ -926,6 +926,16 @@ Commits (branch `helpdesk-ui`): `4299b1d` login API+UI- e2e.
 - `UserService.getUserDetails(loggedInUsername)` fetches the projection and throws `new InactiveUserException("User is disabled")` when `!detailsDto.isActive()`; `GlobalExceptionHandler` adds an `@ExceptionHandler(InactiveUserException.class)` replying `HttpStatus.PRECONDITION_FAILED` (412) with `new ErrorDto(e.getMessage(), "Contact ADMIN admin@helpdesk.com", Instant.now())` and his comment `//always reply the object not the string`. The inactive check moved out of the login query into this post-login check.
 - Verified: `helpdesk-ui` `npm run build` succeeds (951ms, `dist/assets/index-P1Z_4tMc.js` 318.47 kB); `npm run lint` now **exits 0** - the 2 previous `errMsg`/`SetErrMsg` errors are gone because his commit uses and renames them; `helpdesk_backend` `.\mvnw.cmd test` is green (Tests run: 5, Failures: 0, Errors: 0 - BUILD SUCCESS); `git diff 054af35 HEAD -- helpdesk-ui helpdesk_backend` is empty (all 9 blobs identical).
 - Known issues (all his, mirrored as-is): the unused `Link` import stays; the `@CrossOrigin` origin has a trailing slash and covers only the dev URL; `console.log` placeholders mean the dashboards don't actually navigate yet; the `catch` treats any response without a body as `"Invalid Credentials"` (e.g. a CORS or network failure shows the same message); `getUserDetails` NPEs if the username isn't found (the projection returns null before `isActive()` is checked). Also recorded: the SonarQube MCP server was unavailable in this session, so the Java validation relied on the green `mvnw test` run.
+
+**Dashboard Hack Check** (branch `helpdesk-ui`, mirrors his commit `9e83b76`)
+
+- Mirrored his commit `9e83b76` `Dashboard hack check` (pushed 2026-10-29 12:34:44 +0530), 4 files byte-identical, +71/-3, UI only: `App.jsx` and `Login.jsx` modified, `admin/AdminDashboard.jsx` and `customer/CustomerDashboard.jsx` added.
+- `App.jsx` imports the two dashboards and adds two parameterized routes: `customer/:token` -> `CustomerDashboard` and `admin/:token` -> `AdminDashboard` - the token rides in the URL path (his "hack check" - kept as written).
+- `Login.jsx` gains `useNavigate()`; the role switch's `CUSTOMER` and `ADMIN` cases now navigate to `` `/customer/${response.data.token}` `` and `` `/admin/${response.data.token}` `` instead of `console.log` - `EXECUTIVE`/`MANAGER` remain console placeholders.
+- `CustomerDashboard.jsx`: `<h1>CustomerDashboard</h1>` plus a `btn btn-secondary` Logout whose `logout()` does `localStorage.clear()` and `navigate("/")` - no token check yet.
+- `AdminDashboard.jsx`: the token-match guard - `useParams()` reads `urlToken`, compares with `localStorage.getItem('token')`, and `navigate("/no-access")` on mismatch with his `console.log` of the match result; then an async `getUserDetails()` re-verifies the token via the user-details API and redirects unless the role is `ADMIN`; same Logout button. Note: `/no-access` has no route in `App.jsx` yet, so the redirect lands on the `*` catch-all (`PageNotFound`).
+- Verified: `npm run build` succeeds (2.17s, `dist/assets/index-HHMPn-RS.js` 319.27 kB); `git diff 9e83b76 HEAD -- helpdesk-ui` is empty (all 4 blobs identical). Ran live against the backend (Vite :5173 + Spring Boot :8080 + MySQL): login as the test customer navigated to `/customer/<jwt>` and rendered `CustomerDashboard` with the Logout button; Logout cleared localStorage and returned to `/`.
+- Known issues (all his, mirrored as-is): `npm run lint` goes from 0 to **7 problems (6 errors, 1 warning)**, all in `AdminDashboard.jsx` - `'axios' is not defined`, `'userDetailsUrl' is not defined` and `'response' is not defined` (no-undef: the file never imports axios and references names that exist only inside `Login.jsx`, so the role re-verification would throw at runtime), `'getUserDetails' is assigned a value but never used` plus the misplaced `getUserDetails()` call nested inside the `try`, unused `'err'` + empty `catch`, and the `useEffect` missing-deps warning. Also recorded: the JWT in the URL path is visible in browser history and server logs, and `/no-access` is not a defined route yet. All mirrored as-is, never edited.
 
 ## Repository Information
 
