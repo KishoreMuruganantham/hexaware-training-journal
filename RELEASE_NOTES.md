@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.53.0 - 2026-10-29
+
+### Added
+
+- Mirrored his commit `054af35` `login API+UI- e2e` byte-identical (9 files, +141/-18): the UI login becomes a two-step end-to-end flow - HTTP Basic `GET /api/auth/login` stores the JWT, then `GET /api/auth/user-details` with `Bearer` fetches the profile, stores the role, and switches on it with dashboard placeholders; errors now render (`errMsg` + `errComment`) from the backend `ErrorDto` shape.
+- Backend: new `GET /api/auth/user-details` endpoint in `AuthController` (plus `@CrossOrigin(origins = "http://localhost:5173/")`), new `DetailsDto` record and `InactiveUserException`, `SecurityConfig` matcher for the endpoint, a `UserRepository` projection query for username/isActive/role, `UserService.getUserDetails` throwing on inactive users, and a `GlobalExceptionHandler` mapping that exception to HTTP 412 with an admin contact comment.
+
+### Verified
+
+- `helpdesk-ui` `npm run build` succeeds (951ms, 318.47 kB) and `npm run lint` exits 0 (his commit fixed the previous 2 unused-variable errors by renaming and using `setErrMsg`).
+- `helpdesk_backend` `.\mvnw.cmd test` green (Tests run: 5, Failures: 0, Errors: 0 - BUILD SUCCESS); `git diff 054af35 HEAD -- helpdesk-ui helpdesk_backend` empty - all 9 blobs identical. The SonarQube MCP server was unavailable this session, so Java validation relied on the green test run.
+
 ## 0.52.0 - 2026-10-28
 
 ### Added
