@@ -1,5 +1,17 @@
 # Release Notes
 
+## 0.55.0 - 2026-10-29
+
+### Added
+
+- Mirrored his commit `08f54ee` `Dashboard hack check` byte-identical (2 files, +17/-4): `AdminDashboard.jsx` now imports `axios` and the config URL, verifies the token from the URL against `localStorage`, calls the user-details API with the stored token, and redirects to `/no-access` on token mismatch, role failure, or request error; `PageNotFound.jsx` clears `localStorage` on mount so the blocked path wipes the session.
+
+### Verified
+
+- `npm run build` succeeds (696ms, 319.57 kB); `git diff 08f54ee HEAD -- helpdesk-ui` empty - both blobs identical.
+- Live run: ADMIN login renders `AdminDashboard` and stays; a tampered URL token redirects to `/no-access` (rendered by the `*` catch-all) with `localStorage` fully cleared.
+- `npm run lint` improved from 7 problems to 2, all his (unused `err`, hook deps warning) - mirrored as-is.
+
 ## 0.54.0 - 2026-10-29
 
 ### Added

@@ -914,7 +914,7 @@ Commits (branch `helpdesk-ui`): `b87b341` Helpdesk initial sertup with router an
 
 ### 2026-10-29
 
-Commits (branch `helpdesk-ui`): `4299b1d` login API+UI- e2e; `09970fe` Update journal for login e2e training; `983c044` Add journal commit hash to 2026-10-29 login e2e entry; `a37ffe5` Dashboard hack check; `e188e24` Update journal for dashboard hack check training.
+Commits (branch `helpdesk-ui`): `4299b1d` login API+UI- e2e; `09970fe` Update journal for login e2e training; `983c044` Add journal commit hash to 2026-10-29 login e2e entry; `a37ffe5` Dashboard hack check; `e188e24` Update journal for dashboard hack check training; `4929589` Dashboard hack check.
 
 **Login API + UI End-To-End** (branch `helpdesk-ui`, mirrors his commit `054af35`)
 
@@ -936,6 +936,14 @@ Commits (branch `helpdesk-ui`): `4299b1d` login API+UI- e2e; `09970fe` Update jo
 - `AdminDashboard.jsx`: the token-match guard - `useParams()` reads `urlToken`, compares with `localStorage.getItem('token')`, and `navigate("/no-access")` on mismatch with his `console.log` of the match result; then an async `getUserDetails()` re-verifies the token via the user-details API and redirects unless the role is `ADMIN`; same Logout button. Note: `/no-access` has no route in `App.jsx` yet, so the redirect lands on the `*` catch-all (`PageNotFound`).
 - Verified: `npm run build` succeeds (2.17s, `dist/assets/index-HHMPn-RS.js` 319.27 kB); `git diff 9e83b76 HEAD -- helpdesk-ui` is empty (all 4 blobs identical). Ran live against the backend (Vite :5173 + Spring Boot :8080 + MySQL): login as the test customer navigated to `/customer/<jwt>` and rendered `CustomerDashboard` with the Logout button; Logout cleared localStorage and returned to `/`.
 - Known issues (all his, mirrored as-is): `npm run lint` goes from 0 to **7 problems (6 errors, 1 warning)**, all in `AdminDashboard.jsx` - `'axios' is not defined`, `'userDetailsUrl' is not defined` and `'response' is not defined` (no-undef: the file never imports axios and references names that exist only inside `Login.jsx`, so the role re-verification would throw at runtime), `'getUserDetails' is assigned a value but never used` plus the misplaced `getUserDetails()` call nested inside the `try`, unused `'err'` + empty `catch`, and the `useEffect` missing-deps warning. Also recorded: the JWT in the URL path is visible in browser history and server logs, and `/no-access` is not a defined route yet. All mirrored as-is, never edited.
+
+**Dashboard Hack Check (Follow-Up)** (branch `helpdesk-ui`, mirrors his commit `08f54ee`)
+
+- Mirrored his commit `08f54ee` `Dashboard hack check` (same message as the previous one - pushed 2026-10-29 12:56:20 +0530, 22 minutes after `9e83b76`), 2 files byte-identical, +17/-4, UI only: `AdminDashboard.jsx` and `PageNotFound.jsx`.
+- `AdminDashboard.jsx` fixes every known issue recorded from the previous commit: `import axios from "axios"` and `import { API_SERVER_URL_DEV }` added, `userDetailsUrl` defined from config, the re-verification now sends `'Bearer ' + memToken` (the localStorage token) instead of the non-existent `response.data.token`, `getUserDetails()` is called once after the `try`/`catch` (it was nested inside the `try` before), the empty `catch` now navigates to `/no-access`, and the `useEffect` deps go from `[]` to `[params]`; his debug `console.log`s (`in use effect....`, `in user details Fn`, the response) are kept verbatim.
+- `PageNotFound.jsx` gains a `useEffect(() => { localStorage.clear() }, [])` - this is what makes the `/no-access` redirect meaningful: the mismatch/role-fail path lands on the `*` catch-all (`PageNotFound`), which now wipes the session.
+- Verified: `npm run build` succeeds (696ms, `dist/assets/index-DFIS8nAx.js` 319.57 kB); `git diff 08f54ee HEAD -- helpdesk-ui` is empty (both blobs identical). Ran live (Vite :5173 + Spring Boot :8080 + MySQL, test user switched to ADMIN): login navigated to `/admin/<jwt>` and `AdminDashboard` rendered and stayed (the role re-verification call no longer throws); tampering the URL token redirected to `/no-access`, `PageNotFound` rendered, and `localStorage` was fully cleared (token/role/username all null); the customer flow still lands on `CustomerDashboard` (his guard exists only in the admin dashboard).
+- Known issues (all his, mirrored as-is): `npm run lint` is down from 7 problems to 2 - the remaining `'err' is defined but never used` (34:20) in the `catch` and the `useEffect` missing-deps warning for `navigate`/`userDetailsUrl` (40:8). Also recorded: `CustomerDashboard` still has no token guard, the JWT still travels in the URL path, and `/no-access` remains an unrouted path rendered by the catch-all.
 
 ## Repository Information
 
