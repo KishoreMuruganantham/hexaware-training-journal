@@ -67,7 +67,7 @@ flowchart TD
 | `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs, plus the ticket search case study (2026-10-06/25) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4e03e6a` |
 | `JS-fundamentals` | `js-fundamentals` Node project with fundamentals, arrays, map/reduce, and the `learning-app` case study (2026-10-23/25) | `hex_fsd_sept-2026/commits/JS-fundamentals` (4 new commits) | `139e9e0` |
 | `react` | `react-ui` Vite + React 19 app: layout, forms with state, course list CRUD, users case study, React Router navigation, and the posts GET/POST API (2026-10-26/28) | `hex_fsd_sept-2026/commits/react` (13 new commits) | `96062d9` |
-| `helpdesk-ui` | `helpdesk-ui` Vite + React 19 app: router, HTTP Basic login with JWT + user-details end-to-end flow, sign up and 404 stubs (2026-10-28/29) | `hex_fsd_sept-2026/commits/helpdesk-ui` (6 new commits) | `983c044` |
+| `helpdesk-ui` | `helpdesk-ui` Vite + React 19 app: router, HTTP Basic login with JWT + user-details end-to-end flow, role-based dashboard navigation with logout, sign up and 404 stubs (2026-10-28/29) | `hex_fsd_sept-2026/commits/helpdesk-ui` (9 new commits) | `956700d` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -879,7 +879,14 @@ Commits (branch `main`): `e8f8812` Merge get post api and helpdesk ui journal en
 
 ### 2026-10-29
 
-Commits (branch `helpdesk-ui`): `4299b1d` login API+UI- e2e; `09970fe` Update journal for login e2e training; `983c044` Add journal commit hash to 2026-10-29 login e2e entry.
+**Dashboard Hack Check** (branch `helpdesk-ui`, mirrors his commit `9e83b76`)
+
+- Mirrored his commit `9e83b76` `Dashboard hack check` (pushed 2026-10-29 12:34:44 +0530), 4 files byte-identical (+71/-3), UI only: `App.jsx` gains `customer/:token` and `admin/:token` routes to new dashboards; `Login.jsx` swaps the role-switch `console.log`s for `useNavigate()` calls carrying the JWT in the URL path.
+- `CustomerDashboard` is a heading plus Logout (`localStorage.clear()` + `navigate("/")`); `AdminDashboard` adds the token-match guard (URL token vs `localStorage.getItem('token')`, mismatch -> `/no-access`, which is not routed yet so the `*` catch-all shows `PageNotFound`) and a role re-verification via the user-details API.
+- Verified: `npm run build` succeeds (2.17s, 319.27 kB); `git diff 9e83b76 HEAD -- helpdesk-ui` empty - all 4 blobs identical. Ran live (Vite :5173 + Spring Boot :8080 + MySQL): login as the test customer navigated to `/customer/<jwt>` and rendered `CustomerDashboard`; Logout cleared storage and returned to `/`.
+- Known issues (all his, mirrored as-is): `npm run lint` went from 0 to 7 problems (6 errors, 1 warning), all in `AdminDashboard.jsx` - undefined `axios`/`userDetailsUrl`/`response` (the role re-verification would throw at runtime), the `getUserDetails()` call nested inside the `try` so it never runs, unused `err` + empty `catch`, and the hook deps warning. Also recorded: the JWT in the URL path is visible in browser history and server logs.
+
+Commits (branch `helpdesk-ui`): `4299b1d` login API+UI- e2e; `09970fe` Update journal for login e2e training; `983c044` Add journal commit hash to 2026-10-29 login e2e entry; `a37ffe5` Dashboard hack check; `e188e24` Update journal for dashboard hack check training; `956700d` Add journal commit hash to 2026-10-29 dashboard hack check entry.
 
 Commits (branch `main`): `d6a4d43` Merge login e2e journal entry into main README.
 
@@ -890,7 +897,8 @@ Commits (branch `main`): `d6a4d43` Merge login e2e journal entry into main READM
 - Backend: `AuthController` gains `@CrossOrigin(origins = "http://localhost:5173/")` and `@GetMapping("/api/auth/user-details")` returning the new `DetailsDto` record (`username`, `isActive`, `role`) from `Principal.getName()`; `SecurityConfig` adds the authenticated matcher; `UserRepository` drops the `isActive` filter from `loadUserByUsername` and adds a projection query into `DetailsDto`; `UserService.getUserDetails` throws the new `InactiveUserException("User is disabled")` for inactive users; `GlobalExceptionHandler` maps it to HTTP 412 with `"Contact ADMIN admin@helpdesk.com"`.
 - Verified: `npm run build` succeeds (951ms, 318.47 kB) and `npm run lint` exits 0 - his commit fixed the previous 2 unused-variable errors; `helpdesk_backend` `.\mvnw.cmd test` green (Tests run: 5, Failures: 0, Errors: 0 - BUILD SUCCESS); `git diff 054af35 HEAD -- helpdesk-ui helpdesk_backend` empty - all 9 blobs identical.
 - Known issues (all his, mirrored as-is): unused `Link` import; CORS origin with a trailing slash and dev-only URL; dashboard navigation still `console.log` placeholders; any body-less failure (network/CORS) reports "Invalid Credentials"; `getUserDetails` NPEs if the username isn't found. Recorded - the SonarQube MCP server was unavailable this session, so Java validation relied on the green test run.
-- Code and journal live on the `helpdesk-ui` branch; only this README entry is merged here. Released as `v0.53.0` on `helpdesk-ui`.
+- Known issues (all his, mirrored as-is): `npm run lint` went from 0 to 7 problems (6 errors, 1 warning), all in `AdminDashboard.jsx` - undefined `axios`/`userDetailsUrl`/`response` (the role re-verification would throw at runtime), the `getUserDetails()` call nested inside the `try` so it never runs, unused `err` + empty `catch`, and the hook deps warning. Also recorded: the JWT in the URL path is visible in browser history and server logs.
+- Code and journal live on the `helpdesk-ui` branch; only this README entry is merged here. Released as `v0.54.0` on `helpdesk-ui`.
 
 ## Known Issues and Limits
 
@@ -903,7 +911,7 @@ Commits (branch `main`): `d6a4d43` Merge login e2e journal entry into main READM
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`-`v0.10.40` on `main`, `v0.11.0` on `junit`, `v0.12.0`-`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.51.0` on `react`, `v0.52.0`-`v0.53.0` on `helpdesk-ui`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`-`v0.10.41` on `main`, `v0.11.0` on `junit`, `v0.12.0`-`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.51.0` on `react`, `v0.52.0`-`v0.54.0` on `helpdesk-ui`.
 
 ## Repository Information
 

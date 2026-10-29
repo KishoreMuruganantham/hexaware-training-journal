@@ -1,5 +1,13 @@
 # Release Notes
 
+## 0.10.41 - 2026-10-29
+
+### Changed
+
+- Recorded his `Dashboard hack check` (`9e83b76`) mirror on the `helpdesk-ui` branch in the 2026-10-29 history section: role-based dashboard navigation with the JWT carried in the URL path (`customer/:token`, `admin/:token`), the new `CustomerDashboard`/`AdminDashboard` components, and the token-match guard + logout.
+- Updated the `helpdesk-ui` branch guide row to `956700d` (9 new commits, dates through 2026-10-29) and extended the release history to `v0.54.0` on `helpdesk-ui` and `v0.10.41` on `main`.
+- No source code changed on `main`.
+
 ## 0.10.40 - 2026-10-29
 
 ### Changed
