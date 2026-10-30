@@ -927,7 +927,7 @@ Commits (branch `main`): `d6a4d43` Merge login e2e journal entry into main READM
 
 **Whole-Repository Mirror Audit** (all 10 branches compared against his GitHub)
 
-- Fetched every branch of `imtiyaz-hirani/hex_fsd_sept-2026` and compared each tip's tree file-by-file against the journal: these 3 commits were the only unmirrored trainer content anywhere in his repository. Every remaining difference is previously classified - the `pl-sql.sql` restyle and `JavaFundamentals` 7-file trailing-newline drift, the `helpdesk.mwb`/`.bak` and PDF/IDE files the journal never stores, the journal's own work (`react` users case study layout, `spring-boot` ticket search + VIA_DTO serialization, `java-fundamentals` v0.8.7/v0.8.8), and his never-mirrored `MyJavaApp/` directory (open known issue).
+- Fetched every branch of `imtiyaz-hirani/hex_fsd_sept-2026` and compared each tip's tree file-by-file against the journal: these 3 commits were the only unmirrored trainer content anywhere in his repository. Every remaining difference is previously classified - the `pl-sql.sql` restyle and `JavaFundamentals` 7-file trailing-newline drift, the `helpdesk.mwb`/`.bak` and PDF/IDE files the journal never stores, the journal's own work (`react` users case study layout, `spring-boot` ticket search + VIA_DTO serialization, `java-fundamentals` v0.8.7/v0.8.8), and his never-mirrored `MyJavaApp/` directory (decided 2026-10-30: kept out permanently, recorded under Known Issues and Limits).
 
 Commits (branch `helpdesk-ui`): `7662747` Customer Sign-Up; `2184225` redux setup; `74a2e46` redux - get api call; `b4e06f1` Update journal for customer sign-up and redux training; `e9164db` Add journal commit hash to 2026-10-30 customer sign-up and redux entry.
 
@@ -943,10 +943,12 @@ Commits (branch `main`): `829839d` Merge customer sign-up and redux journal entr
 - `emp_name_by_department(?)` remains a placeholder in the Java code, as in the trainer's commit.
 - Maven projects (`MavenDemo`, `SpringCoreApp`, `SpringCoreHelpDesk`, `HibernateJpaApp`) need Maven with internet access plus MySQL where noted; this environment has no Maven, so their tests and runs are recorded as not run here.
 - Trainer reference PDFs (project briefs, case study) are intentionally not stored in this repository.
+- The trainer's standalone `MyJavaApp/` directory (his `CollectionsApp` exercise) exists on his repository but has never been mirrored on any branch; decided 2026-10-30 to keep it out of the journal permanently and record it here instead, alongside the trainer reference PDFs.
+- The `react` and `helpdesk-ui` branches carry older copies of `js-fundamentals/package.json` and `js-fundamentals/src/04-arrays.js` than his `react` branch does: the journal's `react` forked from our full JS-fundamentals tip while his forked from his mid-branch commit `1501911`; decided 2026-10-30 to leave both files as they are - a fork-point difference, documented rather than rewritten.
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`-`v0.10.43` on `main`, `v0.11.0` on `junit`, `v0.12.0`-`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.51.0` on `react`, `v0.52.0`-`v0.56.0` on `helpdesk-ui`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`-`v0.10.44` on `main`, `v0.11.0` on `junit`, `v0.12.0`-`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.51.0` on `react`, `v0.52.0`-`v0.56.0` on `helpdesk-ui`.
 
 ## Repository Information
 

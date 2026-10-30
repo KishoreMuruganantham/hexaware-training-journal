@@ -1,5 +1,13 @@
 # Release Notes
 
+## 0.10.44 - 2026-10-30
+
+### Changed
+
+- Documented the two pending whole-repository audit decisions under Known Issues and Limits: the trainer's standalone `MyJavaApp/` directory stays unmirrored on every branch (recorded like the trainer reference PDFs), and the 2 stale `js-fundamentals` files (`package.json`, `src/04-arrays.js`) on `react`/`helpdesk-ui` stay as they are - a fork-point difference (our `react` forked from our full JS-fundamentals tip, his from his mid-branch commit `1501911`).
+- Updated the 2026-10-30 audit block to reflect the settled `MyJavaApp/` decision and extended the release history to `v0.10.44` on `main`.
+- No source code changed on `main`.
+
 ## 0.10.43 - 2026-10-30
 
 ### Changed
