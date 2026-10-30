@@ -947,7 +947,7 @@ Commits (branch `helpdesk-ui`): `4299b1d` login API+UI- e2e; `09970fe` Update jo
 
 ### 2026-10-30
 
-Commits (branch `helpdesk-ui`): `7662747` Customer Sign-Up; `2184225` redux setup; `74a2e46` redux - get api call.
+Commits (branch `helpdesk-ui`): `7662747` Customer Sign-Up; `2184225` redux setup; `74a2e46` redux - get api call; `b4e06f1` Update journal for customer sign-up and redux training.
 
 **Customer Sign-Up** (branch `helpdesk-ui`, mirrors his commit `0047f41`)
 
