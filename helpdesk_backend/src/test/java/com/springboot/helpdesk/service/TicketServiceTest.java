@@ -105,10 +105,11 @@ import static org.junit.jupiter.api.Assertions.*;
         when(customerRepository.getByUsername(customerUsername)).thenReturn(customer);
 
         // when this save method is call, don't go to DB and save, just assume it saved and give back any ticket class
-         when(ticketRepository.save(any(Ticket.class))).thenReturn(any(Ticket.class));
+        // (echo the argument back - add() now maps the saved entity into a TicketRespDto)
+         when(ticketRepository.save(any(Ticket.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         // actual call
-        ticketService.add(customerUsername,ticketDto);
+        assertNotNull(ticketService.add(customerUsername,ticketDto));
 
         // Tip: once u mock - it won't go to db but it still make a call.
         // verify if repo calls are happening only once
