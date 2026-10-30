@@ -1,5 +1,22 @@
 # Release Notes
 
+## 0.56.2 - 2026-10-30
+
+### Added
+
+- Mirrored his commit `b9e0e29` `redux - delete api e2e` byte-identical (6 files, +45/-3): new `DELETE /api/ticket/hard/{id}` in `TicketController` (void, `Principal` from the container) guarded by `SecurityConfig`'s `.requestMatchers(HttpMethod.DELETE,"/api/ticket/hard/{id}").hasAuthority("CUSTOMER")`; `TicketService.deleteTicketHard` fetches the ticket (else `ResourceNotFoundException("Ticket if Invalid.")` - his if/is typo kept verbatim), checks `ticket.getCustomer().getUser().getUsername()` against the principal (else `InvalidCallException("Operation not allowed.")`), then deletes. This is the 22nd distinct operation his code exposes and the only role-gated delete in the API. UI side: `deleteTicket(id)` thunk in `CustomerAction.js` (axios DELETE with the Bearer token, dispatching `DELETE_TICKET`), the `DELETE_TICKET` filter case in `CustomerReducer.js`, and a `delete` button per row in `TicketList.jsx` via a new `useDispatch()` - which also resolves one of his standing lint errors.
+
+### Verified
+
+- `npm run build` succeeds (3.07s, 333.54 kB); `npm run lint` stays at 10 problems (8 errors, 2 warnings) - `useDispatch` unused is gone, `deleteTicket`'s unused `response` is new; `git diff b9e0e29 HEAD -- helpdesk-ui helpdesk_backend` differs only by the journal's own test fix from the previous round.
+- `helpdesk_backend` `.\mvnw.cmd test` green (Tests run: 5, Failures: 0, Errors: 0 - BUILD SUCCESS); the SonarQube MCP server was unavailable this session, so Java validation relied on the green test run.
+- Live HTTP against the restarted stack (old JVM on :8080 stopped first): owner CUSTOMER Basic auth on their own ticket 200 (row gone), unknown id 400 `Ticket if Invalid.`, a different logged-in CUSTOMER 400 `Operation not allowed.`, anonymous 401, ADMIN 403.
+- Postman workspace follow-up: `DELETE ticket hard` added to `HelpDesk` - now 23 items covering all 22 trainer-coded operations, pointed at ticket 14 owned by the `postman.hard.demo` customer so it runs green out of the box (a later run answers 400, as documented); a final `Tickets · Delete demo ticket (hard)` step added to the trainer's API demo collection (28 requests) so the run cleans up its own ticket and unsets `demoTicketId`, with that collection's description updated accordingly.
+
+### Known Issues
+
+- His code, mirrored as-is: the `Ticket if Invalid.` typo; the UI `deleteTicket` has no `catch`, so a failed delete rejects silently and the row stays visible; the unused `response` const is a new lint error; and the ownership check NPEs for tickets whose customer has no linked user (seeded customer 4) - probed live, `DELETE /api/ticket/hard/1` as another CUSTOMER answers 400 with the raw Java NPE message leaked in `message`, ticket intact.
+
 ## 0.56.1 - 2026-10-30
 
 ### Added
