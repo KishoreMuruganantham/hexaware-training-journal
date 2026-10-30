@@ -1,5 +1,21 @@
 # Release Notes
 
+## 0.56.0 - 2026-10-30
+
+### Added
+
+- Mirrored his commit `0047f41` `Customer Sign-Up` byte-identical (3 files, +122/-3): `SignUp.jsx` becomes a real form posting `customerDto` to `/api/customer/add` with error display and navigation to `/` on success; `SecurityConfig` permits `OPTIONS /**` preflights and `CustomerController` gains `@CrossOrigin(origins = "http://localhost:5173")`.
+- Mirrored his commit `3dc3de4` `redux setup` byte-identical (5 files, +133/-4): `@reduxjs/toolkit` ^2.13.0 and `react-redux` ^9.3.1 added, new `store.js` + `CustomerReducer.js` stub, `<Provider store={store}>` wired into `main.jsx` (his missing `Provider` import is fixed only by the next commit).
+- Mirrored his commit `ff4a2b8` `redux - get api call` byte-identical (7 files, +105/-5): thunk-style `getTickets`/`addTicket` actions against `/api/ticket/v2` and `/api/ticket/add`, the `customerTickets` reducer with `FETCH_TICKETS_CUSTOMER`/`ADD_TICKET`, new `Stat.jsx`/`TicketList.jsx`, and `CustomerDashboard` dispatching the fetch on mount.
+
+### Verified
+
+- `npm ci` clean (0 vulnerabilities); `npm run build` succeeds (947ms, 332.01 kB); `git diff ff4a2b8 HEAD -- helpdesk-ui helpdesk_backend` empty - all 12 touched files identical to his blobs.
+- `helpdesk_backend` `.\mvnw.cmd test` green (Tests run: 5, Failures: 0, Errors: 0 - BUILD SUCCESS); the SonarQube MCP server was unavailable this session, so the green test run is the Java validation.
+- Live HTTP: `OPTIONS /api/customer/add` 200 with `ACAO: http://localhost:5173`; sign-up 200 creating an active `CUSTOMER` row; login JWT 144 chars; `GET /api/ticket/v2?username=` 200 `[]` for both test users; all 7 touched modules transform 200 in Vite with a clean dev log.
+- `npm run lint` at 11 problems (8 errors, 3 warnings), all his (unused `errComment`/`setErrComment`, `Stat` setState-in-effect + missing `list` dep, `TicketList` unused imports, `addTicket` unused `ticket` param, `CustomerDashboard` missing `dispatch` dep) - mirrored as-is.
+- Whole-repository audit: every branch of his GitHub compared file-by-file against the journal; these 3 commits were the only unmirrored trainer content anywhere.
+
 ## 0.55.0 - 2026-10-29
 
 ### Added
