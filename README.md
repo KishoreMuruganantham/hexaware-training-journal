@@ -931,6 +931,8 @@ Commits (branch `main`): `d6a4d43` Merge login e2e journal entry into main READM
 
 Commits (branch `helpdesk-ui`): `7662747` Customer Sign-Up; `2184225` redux setup; `74a2e46` redux - get api call; `b4e06f1` Update journal for customer sign-up and redux training; `e9164db` Add journal commit hash to 2026-10-30 customer sign-up and redux entry.
 
+Commits (branch `main`): `829839d` Merge customer sign-up and redux journal entry into main README.
+
 - Code and journal live on the `helpdesk-ui` branch; only this README entry is merged here. Released as `v0.56.0` on `helpdesk-ui`.
 
 ## Known Issues and Limits
