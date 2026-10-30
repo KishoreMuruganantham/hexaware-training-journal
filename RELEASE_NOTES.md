@@ -1,5 +1,15 @@
 # Release Notes
 
+## 0.10.43 - 2026-10-30
+
+### Changed
+
+- Recorded his `Customer Sign-Up` (`0047f41`), `redux setup` (`3dc3de4`) and `redux - get api call` (`ff4a2b8`) mirrors on the `helpdesk-ui` branch in a new 2026-10-30 history section: the working sign-up form with CORS preflight support (`OPTIONS /**` permitAll + controller `@CrossOrigin`), the Redux store setup (`@reduxjs/toolkit` + `react-redux`, `Provider` wiring), and the ticket-fetch thunk against `GET /api/ticket/v2` with the new `Stat`/`TicketList` dashboard rendering.
+- Completed a whole-repository audit - all 10 branches of his GitHub compared file-by-file against the journal: these 3 commits were the only unmirrored trainer content anywhere; backfilled the never-listed journal-hash commits `956700d` and `37cdc4c` into the 2026-10-29 helpdesk-ui Commits line and `345dee9` into the 2026-10-29 main Commits line.
+- Updated the `helpdesk-ui` branch guide row to `e9164db` (15 new commits, dates through 2026-10-30) and extended the release history to `v0.56.0` on `helpdesk-ui` and `v0.10.43` on `main`.
+- Validation carried over from the `helpdesk-ui` branch: `npm ci` clean, build 947ms/332.01 kB, lint 11 problems (8 errors, 3 warnings) all his, `.\mvnw.cmd test` green (5/5), live HTTP sign-up/login/ticket-fetch verified. SonarQube MCP unavailable this session, so Java validation relied on the green test run.
+- No source code changed on `main`.
+
 ## 0.10.42 - 2026-10-29
 
 ### Changed

@@ -67,7 +67,7 @@ flowchart TD
 | `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs, plus the ticket search case study (2026-10-06/25) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4e03e6a` |
 | `JS-fundamentals` | `js-fundamentals` Node project with fundamentals, arrays, map/reduce, and the `learning-app` case study (2026-10-23/25) | `hex_fsd_sept-2026/commits/JS-fundamentals` (4 new commits) | `139e9e0` |
 | `react` | `react-ui` Vite + React 19 app: layout, forms with state, course list CRUD, users case study, React Router navigation, and the posts GET/POST API (2026-10-26/28) | `hex_fsd_sept-2026/commits/react` (13 new commits) | `96062d9` |
-| `helpdesk-ui` | `helpdesk-ui` Vite + React 19 app: router, HTTP Basic login with JWT + user-details end-to-end flow, role-based dashboard navigation with token guard and logout, sign up and 404 stubs (2026-10-28/29) | `hex_fsd_sept-2026/commits/helpdesk-ui` (12 new commits) | `37cdc4c` |
+| `helpdesk-ui` | `helpdesk-ui` Vite + React 19 app: router, HTTP Basic login with JWT + user-details end-to-end flow, role-based dashboard navigation with token guard and logout, customer sign-up with CORS preflight, Redux store with ticket fetch (2026-10-28/30) | `hex_fsd_sept-2026/commits/helpdesk-ui` (15 new commits) | `e9164db` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -902,9 +902,36 @@ Commits (branch `main`): `e8f8812` Merge get post api and helpdesk ui journal en
 
 Commits (branch `helpdesk-ui`): `4299b1d` login API+UI- e2e; `09970fe` Update journal for login e2e training; `983c044` Add journal commit hash to 2026-10-29 login e2e entry; `a37ffe5` Dashboard hack check; `e188e24` Update journal for dashboard hack check training; `956700d` Add journal commit hash to 2026-10-29 dashboard hack check entry; `4929589` Dashboard hack check; `d0cce0f` Update journal for dashboard hack check follow-up training; `37cdc4c` Add journal commit hash to 2026-10-29 dashboard hack check follow-up entry.
 
-Commits (branch `main`): `d6a4d43` Merge login e2e journal entry into main README; `e1868f4` Add journal commit hash to 2026-10-29 login e2e entry; `638ca33` Merge dashboard hack check journal entry into main README; `7afdae1` Add journal commit hash to 2026-10-29 dashboard hack check entry; `114d5c6` Merge dashboard hack check follow-up journal entry into main README.
+Commits (branch `main`): `d6a4d43` Merge login e2e journal entry into main README; `e1868f4` Add journal commit hash to 2026-10-29 login e2e entry; `638ca33` Merge dashboard hack check journal entry into main README; `7afdae1` Add journal commit hash to 2026-10-29 dashboard hack check entry; `114d5c6` Merge dashboard hack check follow-up journal entry into main README; `345dee9` Add journal commit hash to 2026-10-29 dashboard hack check follow-up entry.
 
 - Code and journal live on the `helpdesk-ui` branch; only this README entry is merged here. Released as `v0.53.0`, `v0.54.0` and `v0.55.0` on `helpdesk-ui`.
+
+### 2026-10-30
+
+**Customer Sign-Up** (branch `helpdesk-ui`, mirrors his commit `0047f41`)
+
+- Mirrored his commit `0047f41` `Customer Sign-Up` (pushed 2026-10-29 15:06:01 +0530), 3 files byte-identical (+122/-3): `SignUp.jsx` becomes a real Bootstrap form posting `customerDto` to `POST /api/customer/add` with red `errMsg` display and `navigate("/")` on success; `SecurityConfig` adds `requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()` so CORS preflights pass without a token, and `CustomerController` gains class-level `@CrossOrigin(origins = "http://localhost:5173")`.
+- Verified: `helpdesk_backend` `.\mvnw.cmd test` green (Tests run: 5, Failures: 0, Errors: 0 - BUILD SUCCESS); the SonarQube MCP server was unavailable this session, so the green test run is the Java validation. Live HTTP: `OPTIONS /api/customer/add` from the Vite origin answers 200 with `Access-Control-Allow-Origin: http://localhost:5173` and `Access-Control-Allow-Methods: POST`; a fresh sign-up answers 200 and lands as an active `CUSTOMER` row in `helpdesk_db.users`.
+- Known issues (all his, mirrored as-is): `errComment`/`setErrComment` declared but never used (2 new lint errors), uncontrolled inputs, no success feedback, and the origin-blind `OPTIONS` matcher.
+
+**Redux Setup** (branch `helpdesk-ui`, mirrors his commit `3dc3de4`)
+
+- Mirrored his commit `3dc3de4` `redux setup` (pushed 2026-10-30 10:08:41 +0530), 5 files byte-identical (+133/-4): `package.json`/`package-lock.json` add `@reduxjs/toolkit` ^2.13.0 and `react-redux` ^9.3.1; new `src/store/store.js` wires `configureStore({ reducer: CustomerReducer })` (loaded via a CommonJS `require`); new `src/store/reducers/CustomerReducer.js` is an empty stub; `src/main.jsx` wraps `<App/>` in `<Provider store={store}>` with his `// Store is registered for this App` comment.
+- Known issues (all his, mirrored as-is): `<Provider>` is used without importing it and the reducer returns nothing at this commit - the intermediate tree does not run as-is; both defects are repaired by the follow-up commit at the branch tip, and this commit is mirrored exactly, defects included.
+
+**Redux - Get API Call** (branch `helpdesk-ui`, mirrors his commit `ff4a2b8`)
+
+- Mirrored his commit `ff4a2b8` `redux - get api call` (pushed 2026-10-30 11:49:43 +0530), 7 files byte-identical (+105/-5): new `src/store/actions/CustomerAction.js` with hand-rolled thunks - `getTickets(username)` calling `GET /api/ticket/v2?username=` with the Bearer token from `localStorage` and dispatching `FETCH_TICKETS_CUSTOMER`, `addTicket(ticket)` targeting `/api/ticket/add`; `CustomerReducer.js` gains `initialState = { customerTickets: [] }` plus the `FETCH_TICKETS_CUSTOMER`/`ADD_TICKET` cases; `store.js` switches to an ESM `import { configureStore }`; `main.jsx` gains the missing `import { Provider } from 'react-redux'`; new `Stat.jsx` (OPEN/IN_PROCESS counts, his `Tocal` typo kept) and `TicketList.jsx` (ticket `subject` rows); `CustomerDashboard.jsx` dispatches `getTickets(localStorage.getItem('username'))` on mount and renders `<Stat/>` + `<TicketList/>`.
+- Verified: `npm ci` clean (0 vulnerabilities); `npm run build` succeeds (947ms, `dist/assets/index-DC9FmexY.js` 332.01 kB); `git diff ff4a2b8 HEAD -- helpdesk-ui helpdesk_backend` empty - all 12 files touched across the three mirrors identical to his blobs; `.\mvnw.cmd test` green (5/5). Live HTTP: login returns a 144-char JWT, `GET /api/ticket/v2?username=` answers 200 `[]` for both the new sign-up user and the seeded customer, and Vite transforms all 7 touched modules with 200 (dev log clean).
+- Known issues (all his, mirrored as-is): `Stat`'s effect uses `[]` deps while reading `list`, so both counters stay 0 (lint: sync setState in an effect + missing `list` dep); `addTicket` passes its axios `headers` config as the request body and never sends `ticket` (unused param, lint error); `TicketList` imports `useEffect`/`getTickets`/`useDispatch` without using them (3 lint errors); `CustomerDashboard` omits `dispatch` from its effect deps (lint warning); `npm run lint` stands at 11 problems (8 errors, 3 warnings), 9 new, all his.
+
+**Whole-Repository Mirror Audit** (all 10 branches compared against his GitHub)
+
+- Fetched every branch of `imtiyaz-hirani/hex_fsd_sept-2026` and compared each tip's tree file-by-file against the journal: these 3 commits were the only unmirrored trainer content anywhere in his repository. Every remaining difference is previously classified - the `pl-sql.sql` restyle and `JavaFundamentals` 7-file trailing-newline drift, the `helpdesk.mwb`/`.bak` and PDF/IDE files the journal never stores, the journal's own work (`react` users case study layout, `spring-boot` ticket search + VIA_DTO serialization, `java-fundamentals` v0.8.7/v0.8.8), and his never-mirrored `MyJavaApp/` directory (open known issue).
+
+Commits (branch `helpdesk-ui`): `7662747` Customer Sign-Up; `2184225` redux setup; `74a2e46` redux - get api call; `b4e06f1` Update journal for customer sign-up and redux training; `e9164db` Add journal commit hash to 2026-10-30 customer sign-up and redux entry.
+
+- Code and journal live on the `helpdesk-ui` branch; only this README entry is merged here. Released as `v0.56.0` on `helpdesk-ui`.
 
 ## Known Issues and Limits
 
@@ -917,7 +944,7 @@ Commits (branch `main`): `d6a4d43` Merge login e2e journal entry into main READM
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`-`v0.10.42` on `main`, `v0.11.0` on `junit`, `v0.12.0`-`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.51.0` on `react`, `v0.52.0`-`v0.55.0` on `helpdesk-ui`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`-`v0.10.43` on `main`, `v0.11.0` on `junit`, `v0.12.0`-`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.51.0` on `react`, `v0.52.0`-`v0.56.0` on `helpdesk-ui`.
 
 ## Repository Information
 
