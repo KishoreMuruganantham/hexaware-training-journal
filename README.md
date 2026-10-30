@@ -947,7 +947,7 @@ Commits (branch `helpdesk-ui`): `4299b1d` login API+UI- e2e; `09970fe` Update jo
 
 ### 2026-10-30
 
-Commits (branch `helpdesk-ui`): `7662747` Customer Sign-Up; `2184225` redux setup; `74a2e46` redux - get api call; `b4e06f1` Update journal for customer sign-up and redux training; `660b013` redux - post api call; `f5d9469` Fix TicketServiceTest.saveTest for TicketRespDto return.
+Commits (branch `helpdesk-ui`): `7662747` Customer Sign-Up; `2184225` redux setup; `74a2e46` redux - get api call; `b4e06f1` Update journal for customer sign-up and redux training; `660b013` redux - post api call; `f5d9469` Fix TicketServiceTest.saveTest for TicketRespDto return; `a5e29a5` Update journal for redux post api call.
 
 **Customer Sign-Up** (branch `helpdesk-ui`, mirrors his commit `0047f41`)
 
