@@ -1,5 +1,22 @@
 # Release Notes
 
+## 0.56.1 - 2026-10-30
+
+### Added
+
+- Mirrored his commit `7e25419` `redux - post api call` byte-identical (9 files, +81/-21): new `AddTicket.jsx` raise-ticket form wired into `CustomerDashboard` with the `addTicket` thunk now actually posting the ticket body, and `Stat.jsx` deriving its counts directly from the store (fixing the stale counters). Backend: `GET /api/ticket/v2` now requires `CUSTOMER` or `EXECUTIVE` authority, `POST /api/ticket/add` returns the created `TicketRespDto`, `TicketController` gains `@CrossOrigin(origins = "http://localhost:5173")`, and the v2 query uses `LEFT JOIN`s so unassigned tickets still appear.
+
+### Fixed
+
+- Our own `TicketServiceTest.saveTest` updated for the new `TicketRespDto` return type - the old `.thenReturn(any(Ticket.class))` stub returns null, which the previous `void` signature had silently tolerated.
+
+### Verified
+
+- `npm run build` succeeds (3.15s, 333.17 kB); `npm run lint` improves from 11 to 10 problems (8 errors, 2 warnings) - his fixes remove 3 issues while the now-unused hook imports in `Stat.jsx` add 2.
+- `helpdesk_backend` `.\mvnw.cmd test` green (Tests run: 5, Failures: 0, Errors: 0 - BUILD SUCCESS); `git diff 7e25419 HEAD -- helpdesk-ui helpdesk_backend` empty - all 9 blobs identical. The SonarQube MCP server was unavailable this session, so Java validation relied on the green test run.
+- Live HTTP against the restarted stack (the pre-mirror JVM on :8080 stopped first): anonymous `GET /api/ticket/v2` 401 under the new rule, CUSTOMER and EXECUTIVE Basic auth 200, ADMIN 403, `v1` unchanged at 200 anonymous, `POST /api/ticket/add` 200 returning the created `TicketRespDto`.
+- Postman workspace follow-up: the demo collection's v2 request now sends the customer's Basic credentials to match the new security rule; his own byte-faithful collection item keeps its no-auth setup and therefore answers 401 (his stale JSON, recorded as a known issue).
+
 ## 0.56.0 - 2026-10-30
 
 ### Added
