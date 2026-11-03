@@ -1,5 +1,32 @@
 # Release Notes
 
+## 0.57.0 - 2026-11-03
+
+### Added
+
+- Mirrored his commit `2d148dc` `upload API` byte-identical (6 files, +75/-0): new `POST /api/customer/upload` (CUSTOMER-gated, multipart `file` part, `void`) that writes `millis_originalName` into the hard-coded `D:/hex_fsd_sept_2026/helpdesk-ui/public/uploads/` directory and stores the name in the new `Customer.idUrl` field; `GlobalExceptionHandler` gains `NullPointerException` and `IOException` handlers replying 412 with the comment `File is mandatory`.
+- Mirrored his commit `1acd667` `upload UI` byte-identical (14 files, +90/-15): new `Upload.jsx` (file input + FormData POST with the Bearer token + Bootstrap toast), `CustomerDashboard` wiring, `index.html` reformat moving the bootstrap bundle to the end of `<body>`, and 11 sample JPGs under `public/uploads/`.
+- Mirrored his commit `767a834` `filter api e2e` byte-identical (10 files, +210/-45): `GET /api/ticket/filter` becomes ADMIN-gated and paginated - `FilterDto {list, paginationInfo{totalPages, totalRecords, numRecordsInPage}}` with new `page`/`size` params (defaults 0/10) - backed by a constructor-projection JPQL with LEFT JOINs; `TicketRespDto` gains `customerId/customerName/executiveId/executiveName`; the upload matcher is corrected from `DELETE` to `POST`; the admin dashboard renders the filter table with pagination and the customer ticket list becomes a table.
+- Mirrored his commit `b76f35a` `chart - donut e2e` byte-identical (10 files, +172/-14): `GET /api/ticket/status/customers/stat` becomes ADMIN-gated and answers the new `ChartDto {labels, values}` (stat query now LEFT JOINs customer, so customerless tickets count); new `DonutChart.jsx` (chart.js + react-chartjs-2 `Doughnut`) fed from the admin dashboard; `chart.js` ^4.6.1 and `react-chartjs-2` ^5.3.1 added.
+
+### Changed
+
+- Breaking: `GET /api/ticket/filter` and `GET /api/ticket/status/customers/stat` moved from `anyRequest().permitAll()` to `hasAuthority("ADMIN")` (anon 401, other roles 403) and both changed response shape (bare list -> `FilterDto`; row list -> `ChartDto`), so every pre-existing no-auth consumer breaks; `TicketRespDto`'s four new fields also change the JSON of `POST /api/ticket/add` and `GET /api/ticket/by-priority`.
+- The new412 `NullPointerException` handler changes the 2026-10-30 probe: `DELETE /api/ticket/hard/{id}` against a userless customer now answers 412 instead of 400 (the raw NPE message still leaks in `message`).
+
+### Verified
+
+- `helpdesk_backend` `.\mvnw.cmd test` green (Tests run: 5, Failures: 0, Errors: 0 - BUILD SUCCESS); scoped byte checks `git diff <his-commit> HEAD -- helpdesk-ui helpdesk_backend` differ only by the journal's own `TicketServiceTest` fix; the SonarQube MCP server was unavailable this session, so Java validation relied on the green test run.
+- `npm install` adds 3 packages (audited 185, **6 moderate severity vulnerabilities** - 0 at v0.56.0); `npm run build` succeeds (2.45s, 499.62 kB / 164.59 kB gzip); `npm run lint` stands at **18 problems (16 errors, 2 warnings)**, up from 10 - the 8 new ones are all his.
+- Live matrix against the restarted stack: filter anon 401 / CUSTOMER 403 / ADMIN 200 `FilterDto`; stat anon 401 / CUSTOMER 403 / ADMIN 200 `{"labels":["OPEN"],"values":[11]}`; upload via curl.exe CUSTOMER 200 (`id_url=1793688988181_smoke_upload.jpg`, file lands in the repo's `public/uploads`, served 200 by Vite), anon 401, ADMIN 403, empty file 412 `Please upload valid file`, extension-less filename 400 `Index 1 out of bounds for length 1`.
+- Postman workspace: `GET ticket filter` and `GET ticket status stat` in `HelpDesk` updated to ADMIN Basic auth with the new contracts, plus new `POST upload profile pic` (multipart, CUSTOMER Basic) - now 24 requests covering all 23 trainer-coded operations; the 4 broken filter/stat requests in the demo collection updated to ADMIN auth with `FilterDto`/`ChartDto` tests plus a new `Tickets · Owner uploads profile pic` step - now 29 requests; both collection descriptions updated.
+- Whole-repository audit re-run: all 109 of his commits across every branch matched by subject+date; his tips unchanged outside `helpdesk-ui` (+4 commits, now mirrored); the previously classified exclusions (PDFs, `helpdesk.mwb`/`.bak`, IDE files, `MyJavaApp/`, `pl-sql.sql` restyle) stand unchanged.
+
+### Known Issues
+
+- His hard-coded upload directory `D:/hex_fsd_sept_2026/helpdesk-ui/public/uploads/` does not exist on this machine (no `D:` drive). Recreated without touching any trainer file: `subst D: C:\hex_fsd_sept_2026` plus a junction `C:\hex_fsd_sept_2026\hex_fsd_sept_2026\helpdesk-ui` -> the repo's `helpdesk-ui`, so his exact path resolves to the repo's `public/uploads/`. The `subst` mapping does not survive a reboot - re-run it before exercising the upload API.
+- His code, mirrored as-is: the upload matcher was `DELETE` for a `POST` endpoint until `767a834`; `split("\\.")[1]` throws `ArrayIndexOutOfBoundsException` for extension-less filenames (400 with the raw message); empty files throw `NullPointerException` as control flow (412); the admin table's delete button calls an undefined `onDelete` (clicking throws, lint `no-undef`); the filter inputs are decorative; `Upload.jsx`'s toast uses `class=` and prints `Upload Success` even on failure; `TicketList` puts its delete `<button>` directly under `<tbody>`; `TicketRespDto`'s new fields serialise as `0`/`""` from the entity mapper; `npm run lint` gains 8 problems (`setSize`, `onDelete`, DonutChart's 4 unused imports, `toastTrigger`, `bootstrap` no-undef); 6 moderate npm vulnerabilities appeared with the new dependencies (0 before).
+
 ## 0.56.2 - 2026-10-30
 
 ### Added
