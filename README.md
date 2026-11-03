@@ -1025,7 +1025,7 @@ Commits (branch `helpdesk-ui`): `6a8506d` upload API; `fb6e656` upload UI; `c34f
 
 ### 2026-11-03
 
-Commits (branch `helpdesk-ui`): `47d4b36` chart - donut e2e; `dee0cc1` Update journal for upload filter and donut chart training; `79645f4` child routes config.
+Commits (branch `helpdesk-ui`): `47d4b36` chart - donut e2e; `dee0cc1` Update journal for upload filter and donut chart training; `79645f4` child routes config; `eb52b0a` Update journal for child routes training.
 
 **Chart - Donut E2E** (branch `helpdesk-ui`, mirrors his commit `b76f35a`)
 
