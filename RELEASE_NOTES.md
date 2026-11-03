@@ -1,5 +1,20 @@
 # Release Notes
 
+## 0.57.1 - 2026-11-03
+
+### Added
+
+- Mirrored his commit `15e54f4` `child routes config` byte-identical (9 files, +112/-2, UI only): nested `/executive` child routes in `App.jsx` (`ExecutiveDashboard` layout with `Home` at the index path and `customer-search` as its child), `Login.jsx` now navigates EXECUTIVE users to `/executive`, the admin ticket table gains a `view` button, and 6 new executive components (`ExecutiveDashboard`, `Navbar`, `Welcome`, `Home`, `CustomerSearch`, `ViewCustomer`).
+
+### Verified
+
+- `npm run build` succeeds (2.62s, 501.81 kB / 165.11 kB gzip - the first build to trip Vite's 500 kB chunk warning); `npm run lint` stands at **22 problems (20 errors, 2 warnings)** - 4 new, all his; `helpdesk_backend` `.\mvnw.cmd test` green (Tests run: 5, Failures: 0, Errors: 0 - BUILD SUCCESS); the byte check vs his commit differs only by the journal's own `TicketServiceTest` fix. The SonarQube MCP server was unavailable this session, so Java validation relied on the green test run.
+- Live browser E2E: the manager onboards executive `execroutes`, EXECUTIVE login lands on `/executive` (Navbar + `Welcome execroutes` + the `Home` child in the Outlet), the `Customer Search` link swaps the URL to `/executive/customer-search` and renders `The search is here...` with the layout intact, console clean.
+
+### Known Issues
+
+- His code, mirrored as-is: the `/executive` routes carry no token guard at all (no token in the URL, no localStorage check); the table's `view`/`delete` buttons call undefined `onView`/`onDelete` (clicking throws a `ReferenceError`); 3 new unused imports (CustomerSearch's `Navbar`/`Welcome`, ExecutiveDashboard's `Home`); the "Ticket Search" nav item is a dead `#` link; `ViewCustomer.jsx` is an unrouted stub; all 6 new files lack a trailing newline.
+
 ## 0.57.0 - 2026-11-03
 
 ### Added

@@ -1025,7 +1025,7 @@ Commits (branch `helpdesk-ui`): `6a8506d` upload API; `fb6e656` upload UI; `c34f
 
 ### 2026-11-03
 
-Commits (branch `helpdesk-ui`): `47d4b36` chart - donut e2e; `dee0cc1` Update journal for upload filter and donut chart training.
+Commits (branch `helpdesk-ui`): `47d4b36` chart - donut e2e; `dee0cc1` Update journal for upload filter and donut chart training; `79645f4` child routes config.
 
 **Chart - Donut E2E** (branch `helpdesk-ui`, mirrors his commit `b76f35a`)
 
@@ -1043,6 +1043,15 @@ Commits (branch `helpdesk-ui`): `47d4b36` chart - donut e2e; `dee0cc1` Update jo
 **Whole-Repository Mirror Audit (Re-Run)** (all branches compared against his GitHub)
 
 - Re-fetched every branch of `imtiyaz-hirani/hex_fsd_sept-2026` and matched all 109 of his commits by subject+date across all of our branches: the only unmirrored trainer content anywhere was the four `helpdesk-ui` commits above, now mirrored byte-identical with his exact commit dates. His tips are unchanged outside `helpdesk-ui` (main `de526bc`, spring-boot `b7598be`, react `4c40e4f`, JS-fundamentals `3d3274c`, hibernate-jpa `9e23309`, java-fundamentals `b7b5505`, junit `dfdea97`, pl-sql `f0c1845`, spring-core `1c13591`), all previously mirrored; the previously classified exclusions stand unchanged (PDFs and `projects/` docs, `helpdesk.mwb`/`.bak`, IDE files, his standalone `MyJavaApp/`, the `pl-sql.sql` case/restyle diff), and our `spring-boot` branch remains ahead with its own ticket-search/VIA_DTO work.
+
+**Child Routes Config** (branch `helpdesk-ui`, mirrors his commit `15e54f4`)
+
+- Mirrored his commit `15e54f4` `child routes config` (pushed 2026-11-03 14:38:19 +0530), 9 files byte-identical, +112/-2, UI only: `App.jsx`, `AdminDashboard.jsx`, `Login.jsx` plus 6 new components under `src/components/executive/`.
+- **Routing:** `App.jsx` imports `ExecutiveDashboard`, `CustomerSearch` and `Home` and adds nested child routes - `/executive` renders the `ExecutiveDashboard` layout, whose `""` index child renders `Home` and whose `customer-search` child renders `CustomerSearch`; `Login.jsx`'s `case 'EXECUTIVE'` finally navigates (`navigate('/executive')`) instead of `console.log` - note it passes no token in the URL, unlike the customer/admin routes.
+- **Layout components (new):** `ExecutiveDashboard.jsx` - Bootstrap grid with `Navbar` on top, a `alert alert-primary` wrapping `Welcome`, and `<Outlet/>` below; `Navbar.jsx` - bootstrap navbar with `react-router` `Link`s to `/executive` and `/executive/customer-search` plus a dead `href="#"` "Ticket Search" anchor; `Welcome.jsx` - `Welcome {localStorage.getItem('username')}`; `Home.jsx` - an `<h1>Home</h1>`; `CustomerSearch.jsx` - `<p>The search is here...</p>`; `ViewCustomer.jsx` - an empty div that is not routed anywhere yet.
+- **Admin table:** the action cell gains a `view` button calling `onView(t.ticketId)` alongside the existing delete - `onView` is undefined, exactly like `onDelete`.
+- Verified: `npm run build` succeeds (2.62s, 501.81 kB / 165.11 kB gzip - the first build to trip Vite's 500 kB chunk warning); `helpdesk_backend` `.\mvnw.cmd test` green (Tests run: 5, Failures: 0, Errors: 0 - BUILD SUCCESS); `git diff 15e54f4 HEAD -- helpdesk-ui helpdesk_backend` differs only by the journal's own `TicketServiceTest` fix. Live browser E2E against the running stack: the manager onboards a new executive (`execroutes`/`demo@123`, username capped at 15 chars), EXECUTIVE login navigates to `/executive` and renders the Navbar + `Welcome execroutes` + the `Home` child in the Outlet, expanding the navbar and clicking `Customer Search` swaps the URL to `/executive/customer-search` and renders `The search is here...` with the layout intact, and the console stays clean. Also recorded: the SonarQube MCP server was unavailable in this session, so the Java validation relied on the green `mvnw test` run.
+- Known issues (all his, mirrored as-is): the `/executive` routes have no token guard at all (no `:token` in the URL and no `localStorage` comparison, so anyone can open them - the customer/admin dashboards at least compare the URL token); the table's `view` and `delete` buttons both call undefined handlers (`onView`/`onDelete` - lint `no-undef`, clicking throws a `ReferenceError`); `CustomerSearch` imports `Navbar`/`Welcome` and `ExecutiveDashboard` imports `Home` without using them (3 new lint errors, taking `npm run lint` to **22 problems (20 errors, 2 warnings)**); the "Ticket Search" nav item is a dead `#` link; `ViewCustomer.jsx` is an unrouted stub; all 6 new files lack a trailing newline.
 
 ## Repository Information
 
