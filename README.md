@@ -1,6 +1,8 @@
 # Hexaware Training Journal
 
-Private learning repository for tracking my Hexaware full-stack development training, exercises, database work, and daily progress. It follows the Java + React FSD training plan (program started 2026-09-21): PLSQL, Core Java 21, Maven, design principles and patterns, JUnit, Spring Core, and Hibernate/JPA are done here; each module lives on its own branch as well as in the integrated `main` history.
+Private learning repository for tracking my Hexaware full-stack development training, exercises, database work, and daily progress. It follows the Java + React FSD training plan (program started 2026-09-21, **training complete 2026-11-12**): every module - PLSQL through the final demo and technical discussion - is done here; each module lives on its own branch as well as in the integrated `main` history.
+
+> **The training is over.** All **112** trainer commits across all **10** of his branches are mirrored byte-identically, the journal closes with `v0.10.45` plus the `training-complete` milestone tag, and his final commit (`f1d5440`, the UI coding challenge) is recorded in the 2026-11-12 history entry below.
 
 ## Training Path
 
@@ -31,17 +33,19 @@ Taken from the training plan workbook. Status shows where each module is in this
 | 3 | Maven | Repos, dependencies, build lifecycle, `pom.xml` | Done (`junit`) |
 | 4 | Design principles and patterns | SOLID, Singleton, Factory | Done (`main`) |
 | 5 | JUnit | Test cases, validations, exceptions, streams, DTO mapping | Done (`junit`) |
-| 6 | Mockito | Mocking database/service dependencies | Upcoming |
+| 6 | Mockito | Mocking database/service dependencies | Done (`spring-boot`) |
 | 7 | Spring Core | DI, beans, autowiring, JdbcTemplate, transactions | Done (`spring-core`) |
 | 8 | JPA, Hibernate | ORM, session factory, mappings, HQL, criteria | Done (`hibernate-jpa`) |
-| 9 | Spring MVC with Spring Boot | Controllers, views, binding, validation | Upcoming |
-| 10 | Spring Batch | Batch jobs | Upcoming |
-| 11 | Spring REST with Spring Boot | REST controllers, JSON, Postman, Swagger | Upcoming |
-| 12 | Spring Security | OAuth2, JWT | Upcoming |
-| 13 | Logging and Code Quality | Log4J, SonarQube | Upcoming |
-| 14 | Microservices | Monolith to microservices, scaling | Upcoming |
-| 15 | API Development | Backend case study | Upcoming |
-| 16 | Demo and Technical Discussion | Final review | Upcoming |
+| 9 | Spring MVC with Spring Boot | Controllers, views, binding, validation | Done (`spring-boot`) |
+| 10 | Spring Batch | Batch jobs | Done (training session) |
+| 11 | Spring REST with Spring Boot | REST controllers, JSON, Postman, Swagger | Done (`spring-boot`) |
+| 12 | Spring Security | OAuth2, JWT | Done (`spring-boot`) |
+| 13 | Logging and Code Quality | Log4J, SonarQube | Done (`main`, `spring-boot`) |
+| 14 | Microservices | Monolith to microservices, scaling | Done (training session) |
+| 15 | API Development | Backend case study | Done (`spring-boot`) |
+| 16 | Demo and Technical Discussion | Final review | Done (2026-11) |
+
+The workbook's 16 modules are all done. The program then continued past the plan with JavaScript fundamentals, React 19 (routing, forms, CRUD, API calls), the HelpDesk full-stack case study, React 18 with Redux Toolkit, and the DevOps CI/CD, Docker and AWS sessions - each mirrored on its own branch (`JS-fundamentals`, `react`, `helpdesk-ui`) and recorded in the Training History below. Training completed 2026-11-12.
 
 ## Branch Guide
 
@@ -59,7 +63,7 @@ flowchart TD
 
 | Branch | Holds | Trainer source | Tip |
 |--------|-------|----------------|-----|
-| `main` | Complete integrated journal through factory patterns | `hex_fsd_sept-2026/main` up to 2026-09-25 | `613068d` |
+| `main` | Complete integrated journal through the final UI coding challenge - training complete | `hex_fsd_sept-2026/main` up to 2026-11-09 | `0b7620d4` |
 | `pl-sql` | PLSQL procedures, JDBC app, triggers, ER model (2026-09-21/22 state) | `hex_fsd_sept-2026/commits/pl-sql` | `3d88d2c` |
 | `junit` | `MavenDemo` with JUnit tests (2026-09-28) | `hex_fsd_sept-2026/commits/junit` (5 new commits) | `165b165` |
 | `spring-core` | `SpringCoreApp` DI work and `SpringCoreHelpDesk` case study (2026-09-29/30) | `hex_fsd_sept-2026/commits/spring-core` (11 new code commits) | `d13e93d` |
@@ -67,7 +71,7 @@ flowchart TD
 | `spring-boot` | `helpdesk_backend` Boot project with ticket and plan APIs, plus the ticket search case study (2026-10-06/25) | `hex_fsd_sept-2026/commits/spring-boot` + `imtiyaz-hirani/helpdesk_backend` (35 new commits) | `4e03e6a` |
 | `JS-fundamentals` | `js-fundamentals` Node project with fundamentals, arrays, map/reduce, and the `learning-app` case study (2026-10-23/25) | `hex_fsd_sept-2026/commits/JS-fundamentals` (4 new commits) | `139e9e0` |
 | `react` | `react-ui` Vite + React 19 app: layout, forms with state, course list CRUD, users case study, React Router navigation, and the posts GET/POST API (2026-10-26/28) | `hex_fsd_sept-2026/commits/react` (13 new commits) | `96062d9` |
-| `helpdesk-ui` | `helpdesk-ui` Vite + React 19 app: router, HTTP Basic login with JWT + user-details end-to-end flow, role-based dashboard navigation with token guard and logout, customer sign-up with CORS preflight, Redux store with ticket fetch (2026-10-28/30) | `hex_fsd_sept-2026/commits/helpdesk-ui` (15 new commits) | `e9164db` |
+| `helpdesk-ui` | `helpdesk-ui` Vite + React 19 app: router, HTTP Basic login with JWT + user-details end-to-end flow, role-based dashboard navigation with token guard and logout, customer sign-up with CORS preflight, Redux store with ticket fetch, file-upload filter, donut chart and child routes (2026-10-28/11-03) | `hex_fsd_sept-2026/commits/helpdesk-ui` (27 new commits) | `da0ea3e9` |
 | `java-fundamentals` | Earlier alternate fundamentals line | Same trainer fundamentals commits | `7d39d39` |
 | `feat/quitq-ecommerce-model` | QuitQ e-commerce model and DDL | Course project material | `cd00b0e` |
 
@@ -298,7 +302,7 @@ CREATE DATABASE fsd_hex_sept_2026;
 
 ## Training History
 
-Daily training notes, schedules, exercises, and milestones will be added over time. Each meaningful learning milestone should be recorded with its date, topic, work completed, and follow-up action.
+Daily training notes, exercises, and milestones for the full program (2026-09-21 to 2026-11-12). Each meaningful learning milestone is recorded with its date, topic, work completed, and follow-up action. The journal closes with the 2026-11-12 Training Complete entry.
 
 ### 2026-09-21
 
@@ -935,6 +939,25 @@ Commits (branch `main`): `829839d` Merge customer sign-up and redux journal entr
 
 - Code and journal live on the `helpdesk-ui` branch; only this README entry is merged here. Released as `v0.56.0` on `helpdesk-ui`.
 
+### 2026-11-12
+
+**UI Coding Challenge - Final Trainer Commit** (branch `main`, mirrors his commit `f1d5440`)
+
+- Mirrored his commit `f1d5440` `UI Coding challenge` (pushed 2026-11-09 09:21:34 +0530), 1 file byte-identical (+31/-0): `UI_Coding_challenge.txt` - the closing React CRUD challenge: `App.jsx` with `components/ObjectsDashboard.jsx`, `ObjectList.jsx` and `ObjectAdd.jsx`; the dashboard pages through `GET https://api.restful-api.dev/objects` showing 10 bootstrap cards at a time (name, color, price, cpu, with null values displayed accordingly) and supports add via `POST /objects` (sample body `Google Pixel 9 Pro` with Year/Price/CPU data) and delete via `DELETE /objects/{id}`, using Bootstrap and ReactRouter where needed.
+- Verified: blob-for-blob identical - `git rev-parse f1d5440:UI_Coding_challenge.txt` and `git rev-parse HEAD:UI_Coding_challenge.txt` both return `1dfb56d9`, and no other file changed. Nothing followed it: this is the last commit on the last moving branch of his repository (re-fetched on 2026-11-12, all 10 of his tips unchanged).
+
+**Training Complete - The Training Is Over** (grand finale; program 2026-09-21 to 2026-11-12)
+
+- **Final mirror audit - 112 of 112.** All 10 branches of `imtiyaz-hirani/hex_fsd_sept-2026` compared against the journal: every one of his **112 unique commits** (`main`, `pl-sql`, `java-fundamentals`, `junit`, `spring-core`, `hibernate-jpa`, `spring-boot`, `JS-fundamentals`, `react`, `helpdesk-ui`) is mirrored - matched by subject + author date, **0 unmirrored**. The per-branch tree diffs contain only the previously classified exceptions: this journal's own README/RELEASE_NOTES, the trainer's PDFs/case studies/IDE files, the `lib/` jar, `helpdesk.mwb`/`.bak`, the permanently unmirrored `MyJavaApp/`, the `pl-sql.sql` restyle and `JavaFundamentals` newline drift, the `react`/`helpdesk-ui` fork-point differences, and this journal's own case-study work (`spring-boot` ticket search + VIA_DTO serialization, `react` users layout, `helpdesk-ui` `TicketServiceTest`).
+- **The last sprint (2026-11-03)** is recorded on the `helpdesk-ui` branch README: his upload filter and donut chart (`chart - donut e2e`) and `child routes config` mirrors, released as `v0.57.0` and `v0.57.1` (build/lint green, `.\mvnw.cmd test` 5/5, live login e2e verified) - this entry folds that branch's finale into `main`.
+- **All 16 workbook modules are Done** (see the Module Plan above), plus the program's continuation: JavaScript fundamentals, React 19 with routing/forms/CRUD/API calls, the HelpDesk full-stack case study (Spring Boot 3.5 backend with HTTP Basic + JWT security over MySQL, React 19 + Redux Toolkit UI), React 18, and the DevOps CI/CD, Docker and AWS sessions - each on its own branch, each mirrored, each journaled.
+- **The numbers**: 10 branches, 112 mirrored trainer commits, 266 journal commits, releases from `v0.1.0` through `v0.10.45` on `main` and `v0.11.0` through `v0.57.1` across the module branches - 115 tagged versions plus the `training-complete` milestone, every one with notes in `RELEASE_NOTES.md` - a SonarQube Cloud Quality Gate green on all five conditions, `mvnw test` green (5/5) on every helpdesk change, and builds/lint recorded for every mirror.
+- **Around the code**: all **6 of 6** training feedback forms submitted (HTML/CSS/JS, Spring REST, Logging/Microservices, MVC/Batch, Security, React 18/DevOps/Docker/AWS), the SonarQube MCP workflow running against SonarQube Cloud, and the AWS Agent Toolkit configured (AWS CLI v2.39.4, profile `default`, 120-skill catalog, `aws-mcp` in 4 tools) - no secrets ever committed, config kept in environment variables.
+- **Closing discipline**: trainer files were never edited for style - every mirror carries his dates with `KishoreMuruganantham` authorship, known trainer-side issues are documented under Known Issues and Limits instead of patched, and the mirror-plus-journal pattern held for the entire program.
+- **This is the last entry.** No further trainer commits are expected; tagged `v0.10.45` with the `training-complete` milestone tag, and the GitHub repository description now announces that the training is over. Training complete - 2026-11-12.
+
+Commits (branch `main`): `0b7620d4` UI Coding challenge.
+
 ## Known Issues and Limits
 
 - SonarQube Cloud reports 6 open issues in the mirrored Java (`java:S2095` x3 in `CustomerDao`, `java:S2159` x2 in `EmployeeService`, `java:S2068` in `DBConnection`); trainer files are never edited, so they stay open - they are not new code and do not fail the Quality Gate.
@@ -948,12 +971,13 @@ Commits (branch `main`): `829839d` Merge customer sign-up and redux journal entr
 
 ## Release History
 
-Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`-`v0.10.44` on `main`, `v0.11.0` on `junit`, `v0.12.0`-`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.51.0` on `react`, `v0.52.0`-`v0.56.0` on `helpdesk-ui`.
+Release notes live in `RELEASE_NOTES.md`, organized by date and version: `v0.8.9`-`v0.10.45` on `main`, `v0.11.0` on `junit`, `v0.12.0`-`v0.13.0` on `spring-core`, `v0.14.0` on `hibernate-jpa`, `v0.19.0`-`v0.44.0` on `spring-boot`, `v0.39.0`-`v0.45.0` on `JS-fundamentals`, `v0.46.0`-`v0.51.0` on `react`, `v0.52.0`-`v0.57.1` on `helpdesk-ui`, plus the `training-complete` milestone tag.
 
 ## Repository Information
 
 - Owner: Kishore Muruganantham
 - Training: Hexaware Technologies
+- Program: Java + React FSD, 2026-09-21 to 2026-11-12 (complete)
 - Language: Java
 - Java version: 21
 - Branches: `main`, `pl-sql`, `junit`, `spring-core`, `hibernate-jpa`, `spring-boot`, `JS-fundamentals`, `react`, `java-fundamentals`, `feat/quitq-ecommerce-model`
